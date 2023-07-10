@@ -10,6 +10,10 @@ import clickBot
 locationID = '46222'
 locationName = 'Huntington Beach'
 
+
+
+
+
 # Collects data at current time and adds it to the database
 def addToDatabase():
     
@@ -20,12 +24,10 @@ def addToDatabase():
     
     # Computer vision modules to obtain crowd data:
     
-    # 1. ClickBot: Makes sure the cam has not froze, will click to unfreeze if so.
-    clickBot.click_image()
-    # 2. TakeScreenshot: Takes a screenshot of the current surf cam
-    takeScreenshot.screenshot()
-    # 3. Detector: Detects the number of surfers in the water
-    result['crowd'] = detector.detect()
+    clickBot.click_image() # 1. ClickBot: Makes sure the cam has not froze, will click to unfreeze if so.
+    time.sleep(2) # 2. Sleep for 2 seconds to allow the image to unfreeze
+    takeScreenshot.screenshot()  # 3. TakeScreenshot: Takes a screenshot of the current surf cam
+    result['crowd'] = detector.detect()  # 4. Detector: Detects the number of surfers in the water
     
     
     print(result)
@@ -40,15 +42,15 @@ def addToDatabase():
 def startCollecting(): 
     schedule.every(20).seconds.do(addToDatabase)
     
-    while datetime.datetime.now().hour < 15:
+    while datetime.datetime.now().hour < 13:
         schedule.run_pending()
         time.sleep(1)
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 # Runs all the time, collecting data.
 def main():
     startCollecting()
@@ -57,5 +59,8 @@ def main():
     while True: 
         schedule.run_pending()
         time.sleep(1)
-    
+
+
+
+
 main()

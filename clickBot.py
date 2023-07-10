@@ -2,7 +2,7 @@ import pyautogui
 
 image = './assets/continue.png'
 # Locate and double-click on image
-def click_image(image):
+def click_image():
     try:
         # Get location of image
         location = pyautogui.locateOnScreen(image, confidence=0.9)
@@ -19,8 +19,9 @@ def click_image(image):
             # Doouble click on image
             pyautogui.doubleClick(center.x / 2, center.y / 2)
             print("Image clicked")
+            pyautogui.sleep(1)
         else:
-            print("Image not found")
+            print("Continue Image not found")
     except Exception as e:
         print("Error:", str(e))
 
