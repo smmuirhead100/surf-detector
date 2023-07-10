@@ -4,7 +4,7 @@ from PIL import Image
 
 def screenshot():
     # Located starting point
-    location = pyautogui.locateOnScreen('./assets/Cam1.png', grayscale=True, confidence=.7)
+    location = pyautogui.locateOnScreen('./assets/Cam1.png', grayscale=True, confidence=.4)
     
     if location is not None:
         print("Image found")

@@ -1,5 +1,6 @@
 import pyautogui
 
+image = './assets/continue.png'
 # Locate and double-click on image
 def click_image(image):
     try:
@@ -23,4 +24,4 @@ def click_image(image):
     except Exception as e:
         print("Error:", str(e))
 
-click_image('./assets/continue.png')
+
