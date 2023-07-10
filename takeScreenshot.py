@@ -4,16 +4,16 @@ from PIL import Image
 
 def screenshot():
     # Located starting point
-    location = pyautogui.locateOnScreen('./assets/surfCam.png', confidence=.6)
-    print(location)
-    im1 = pyautogui.screenshot()
-    im1.save('my_ss.png')
+    location = pyautogui.locateOnScreen('./assets/Cam1.png', grayscale=True, confidence=.7)
     
-    # Resize image using numpy
-    img = Image.open('my_ss.png')
-    img.resize((100, 100))
-    img.save('my_ss.png')
-
-    return None
+    if location is not None:
+        print("Image found")
+        print(location)
+        im1 = pyautogui.screenshot()
+        crop_area = (location.left, location.top, location.left + location.width, location.top + location.height)
+        cropped_img = im1.crop(crop_area)
+        cropped_img.save('currSurf.png')
+    else:
+        print("Image not found")
 
 screenshot()
