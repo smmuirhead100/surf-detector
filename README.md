@@ -17,5 +17,5 @@
             <li>Model that predicts crowd size based on conditions, day of the week, etc.</li>
         </ul>
     <li>
-    <li>Visualize Models (Ex. Average crowd graph for each day at particular spot)</li>
-    <li>Build front end</li>
+    <li>Visualize Models (Ex. Average crowd graph for each day at particular spot).</li>
+    <li>Build front end.</li>
