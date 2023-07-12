@@ -19,7 +19,7 @@ def addToDatabase():
     
     # Obtain Result Object 
     result = AllData.getAllData(locationID, locationName)
-    result['id'] = locationID
+    result['locationID'] = locationID
     result['Name'] = locationName
     
     # Computer vision modules to obtain crowd data:
