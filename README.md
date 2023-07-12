@@ -4,7 +4,7 @@
 <h3>These are broad goals that need to be broken down into more parts themselves</h3>
 
 <ul>
-    <li>Train object detection model to predict crowd size based on live surf cams.</li>
+    <li>Train object detection model to predict crowd size based on live surf cams. :white_check_mark:</li>
     <li>Fetch relevant swell and weather data from various APIs (NOAA, etc.).</li>
     <li>Create bot that automatically captures this data on a schedule.</li>
     <li>Add data the bot has gathered to a database. (MongoDB)</li>
