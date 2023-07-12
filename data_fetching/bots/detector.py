@@ -1,14 +1,19 @@
 from roboflow import Roboflow
+import os
+
+# Roboflow is a Python client library for the Roboflow API. This is the configuration for the API.
 rf = Roboflow(api_key="59JtXQpoU6dRc8UlfbXr")
 project = rf.workspace().project("surfer-detector-3.0")
 model = project.version(4).model
 
+# Detects current crowd based on the current surf cam image available.
 def detect():
     # infer on a local image
-    result = (model.predict("currSurf.png", confidence=30, overlap=50).json())
+    print(os.getcwd())
+    result = (model.predict("./assets/testpic.png", confidence=30, overlap=50).json())
 
     # visualize your prediction
-    model.predict("currSurf.png", confidence=30, overlap=50).save("prediction3.jpg")
+    model.predict("./assets/testpic.png", confidence=30, overlap=50).save("./assets/predictionTest.jpg")
     
     # Predicted number of surfers in
     return len(result['predictions'])

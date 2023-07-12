@@ -1,11 +1,11 @@
-import AllData
+import data_fetching.AllData as AllData
 import schedule
 import datetime
 import time
 import sqlite3
-import takeScreenshot
-import detector
-import clickBot
+import data_fetching.bots.takeScreenshot as takeScreenshot
+import data_fetching.bots.detector as detector
+import data_fetching.bots.clickBot as clickBot
 
 locationID = '46222'
 locationName = 'Huntington Beach'
@@ -14,7 +14,7 @@ locationName = 'Huntington Beach'
 
 
 
-# Collects data at current time and adds it to the database
+# Collects data at current time and adds it to the database.
 def addToDatabase():
     
     # Obtain Result Object 

@@ -1,14 +1,16 @@
 import requests
 import json
 
+# Gets all weather data from a particular location such as temperature, wind speed, etc.
+
 def getWeatherData(location):
+    # Obtain weather data from the Weather API. 
     url = "http://api.weatherapi.com/v1/current.json?key=cce1d4f16c4d4a5a9fd05549230307&q=huntington-beach&aqi=no"
     response = requests.get(url)
     
     if response.status_code == 200:
         
         # Process the response data
-
         data = response.content
         data = json.loads(data)
         

@@ -1,10 +1,11 @@
 import requests
-from Swell import getSwellData
-from Weather import getWeatherData
+from data_fetching.Swell import getSwellData
+from data_fetching.Weather import getWeatherData
 
 
 
-# Get all weather data for a given location. Location ID refers to the NOAA buoy ID. Location name refers to the name of the location (ex. Huntington Beach, CA)
+# Get all weather and swell data for a given location. Location ID refers to the NOAA buoy ID. Location name refers to the name of the location (ex. Huntington Beach, CA)
+# Ex. getAllData('46222', 'Huntington Beach')
 
 def getAllData(locationID, locationName):
    
