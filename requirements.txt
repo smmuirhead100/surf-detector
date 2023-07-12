@@ -14,3 +14,4 @@ PyGetWindow==0.0.9
 pymongo==3.6.0
 PyMsgBox==1.0.9
 roboflow==1.1.0
+dnspython==2.3.0
