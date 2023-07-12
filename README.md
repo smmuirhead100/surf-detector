@@ -19,37 +19,3 @@
     </li>
     <li>Visualize Models (Ex. Average crowd graph for each day at particular spot).</li>
     <li>Build front end.</li>
-
-
-    exec_statement(conn, """
-                        CREATE TYPE IF NOT EXISTS Swell AS (
-                            height FLOAT,
-                            period FLOAT,
-                            direction STRING, 
-                            compass FLOAT
-                        );
-                   """)
-    
-    exec_statement(conn, """
-                        CREATE TYPE IF NOT EXISTS Weather AS (
-                            time STRING,
-                            temp FLOAT,
-                            wind FLOAT,
-                            windDir STRING,
-                            precip FLOAT,
-                            currCloud FLOAT
-                        );
-                   """)
-    
-    exec_statement(conn, """
-                        CREATE TABLE testSurf (
-                            id serial PRIMARY KEY, 
-                            swell Swell,
-                            weather Weather,
-                            locationID STRING,
-                            Name STRING,
-                            crowd INTEGER
-                        );
-                   """)
-    
-    exec_statement(conn, "SHOW TYPES;")
