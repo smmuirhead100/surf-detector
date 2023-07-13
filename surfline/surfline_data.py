@@ -22,5 +22,3 @@ def getTides(spotId : str) -> list:
             tides.append((unixToHuman(tide['timestamp']), tide['height']))
 
     return tides
-
-# print(getTides('5842041f4e65fad6a7708a7a'))

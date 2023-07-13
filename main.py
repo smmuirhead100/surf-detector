@@ -7,7 +7,7 @@ import data_fetching.bots.takeScreenshot as takeScreenshot
 import data_fetching.bots.detector as detector
 import data_fetching.bots.clickBot as clickBot
 
-locationID = '46222'
+locationID = '46222' # San Pedro Weather Buoy
 locationName = 'Huntington Beach'
 
 
