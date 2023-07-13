@@ -1,14 +1,26 @@
 import requests
+from utilities.timestamp import unixToHuman
 
-# Get http response from example surf spot. 
 
-res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/?spotId=590927576a2e4300134fbed8')
 
-res = res.json()
 
-res = (res['data']['tides'])
 
-for tide in res:
-    if tide['type'] == 'HIGH' or tide['type'] == 'LOW':
-        print(tide['height'])
-        print(tide['timestamp'])
+# Returns array of tuples (timestamp, height), with high tide and low tides for the next 3 days. 
+
+def getTides(spotId : str) -> list:
+
+    res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/?spotId=' + spotId)
+
+    res = res.json()
+
+    res = (res['data']['tides'])
+
+    tides = []
+
+    for tide in res:
+        if tide['type'] == 'HIGH' or tide['type'] == 'LOW':
+            tides.append((unixToHuman(tide['timestamp']), tide['height']))
+
+    return tides
+
+print(getTides('5842041f4e65fad6a7708a7a'))
