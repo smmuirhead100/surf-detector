@@ -5,7 +5,7 @@ import datetime
 
 def unixToHuman(timestamp : int) -> str:
 
-    # Convert the timestamp to a datetime object
+    # Convert the timestamp to a datetime object.
     datetime_object = datetime.datetime.fromtimestamp(timestamp)
 
     # Format the datetime object as a string
