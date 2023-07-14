@@ -1,8 +1,9 @@
 import os
 import psycopg2
 
-# Connect to database by using the DATABASE_URL environment variable using dotenv
-
+# The database object connects to the CockroachDB instance defined in your .env file and allows you to manipulate it. 
+# Ex. postgresql://username:vr2ckLMesoF4d6WYvs-0Kg@my-instance2343.g95.cockroachlabs.cloud:26342/my_database?sslmode=verify-full
+# Some methods return true for testing purposes.
 
 class Database:
     
