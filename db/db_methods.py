@@ -53,3 +53,10 @@ class Database:
             cur.execute(query, values)
             self.conn.commit()
             return True
+    
+    # Create type with specified name and columns
+    def createType(self, typeName, columns):
+        with self.conn.cursor() as cur:
+            cur.execute("CREATE TYPE " + typeName + " AS (" + columns + ");")
+            self.conn.commit()
+            return True

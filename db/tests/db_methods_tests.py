@@ -44,6 +44,11 @@ class TestDatabaseMethods(unittest.TestCase):
         where = {"name": "John"}
         result = self.db.delete("test_table", where)
         self.assertTrue(result)
+        
+    # Test createType method
+    def testCreateType(self):
+        result = self.db.createType("test_type", "name VARCHAR(255), age INT")
+        self.assertTrue(result)
 
 if __name__ == '__main__':
     unittest.main()
