@@ -1,7 +1,7 @@
 <h1>Open Source Surf Report</h1>
 <h2>TODO</h2>
 <ul>
-    <li>Implement object detection model that can detect how many surfers are in water. :white_check_mark:<li>
+    <li>Implement object detection model that can detect how many surfers are in water. :white_check_mark:</li>
     <li>Connect to cloud db (CockroachDB). :white_check_mark:</li>
     <li>Fetch swell and weather data from NOAA and relative databases, given specific location. :white_check_mark:</li>
     <li>Define db methods. :white_check_mark:</li>
@@ -13,6 +13,6 @@
             <li>Fetch data from db and train using ML package (Ex. scikit-learn)</li>
         </ol>
     </li>
-    <li>Create visualization of crowd prediction model</li>
-    <li>Frontend</li>
+    <li>Create visualization of crowd prediction model.</li>
+    <li>Frontend implementation.</li>
 </ul>
