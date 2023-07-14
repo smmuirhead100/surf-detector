@@ -1,7 +1,7 @@
 from db_methods import Database
 
 """
-Establishes types of data for the database
+Establishes the organization needed for the database.  This includes defining types and creating tables.
 
 Example:
     db = Database()
@@ -12,7 +12,7 @@ class SurflineTypes:
     def __init__(self, db) -> None:
         self.db = db
     
-    def execute(self) -> bool:
+    def executeTypes(self) -> bool:
         
         # Tide type
         self.db.createType("Tide", """
@@ -57,4 +57,39 @@ class SurflineTypes:
                                     surf Surf,
                                     power FLOAT,
                                     swells Swell[]
-                                    """)
+                            """)
+        
+        # Wind type
+        self.db.createType("Wind", """
+                                    timestamp INT,
+                                    utcOffset INT,
+                                    speed FLOAT,
+                                    direction FLOAT,
+                                    directionType STRING,
+                                    gust FLOAT,
+                                    optimalScore INT
+                           """)
+        
+        # Weather type
+        self.db.createType("Weather", """
+                                    timestamp INT,
+                                    utcOffset INT,
+                                    temperature FLOAT,
+                                    condition STRING,
+                                    pressure FLOAT
+                           """)
+        
+        # For testing purposes
+        return True
+    
+    def executeTables(self) -> bool:
+        
+        # Create tables
+        self.db.createTable("Tides", "Tide")
+        self.db.createTable("Waves", "Wave")
+        self.db.createTable("Winds", "Wind")
+        self.db.createTable("Weather", "Weather")
+        
+        # For testing purposes
+        return True
+        
