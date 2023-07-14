@@ -79,6 +79,19 @@ class SurflineTypes:
                                     pressure FLOAT
                            """)
         
+        # SubRating type
+        self.db.createType("SubRating", """
+                                    key STRING,
+                                    value INT
+                           """)
+        
+        # Rating type
+        self.db.createType("Rating", """
+                                    timestamp INT,
+                                    utcOffset INT,
+                                    rating SubRating
+                           """)
+        
         # For testing purposes
         return True
     
@@ -89,6 +102,7 @@ class SurflineTypes:
         self.db.createTable("Waves", "Wave")
         self.db.createTable("Winds", "Wind")
         self.db.createTable("Weather", "Weather")
+        self.db.createTable("Ratings", "Rating")
         
         # For testing purposes
         return True

@@ -73,6 +73,7 @@ class SurflineData:
             
         return weather
     
+    # Returns ratings for the next 3-4 days.
     def getRating(self, spotId: str) -> int:
         res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/rating?spotId=' + spotId)
         
