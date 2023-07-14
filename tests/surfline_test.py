@@ -6,7 +6,7 @@ sys.path.append('../')
 sys.path.append('../surfline')
 
 # Import methods to test
-from surfline.surfline_data import getTides
+from surfline.surfline_data import getTides, getWaves
 
 #----------------------#
 #----- Unit Tests -----#
@@ -19,6 +19,13 @@ class TestSurflineMethods(unittest.TestCase):
         tides = (getTides('5842041f4e65fad6a7708a7a'))
         self.assertEqual(type(tides), type([]))
         self.assertGreaterEqual(len(tides), 1)
+        
+    # Test getWaves() method. Make sure it is a list, and is not empty.
+    def testGetWaves(self):
+        waves = (getWaves('5842041f4e65fad6a7708a7a'))
+        self.assertEqual(type(waves), type([]))
+        self.assertGreaterEqual(len(waves), 1)
+        
         
 if __name__ == '__main__':
     unittest.main()
