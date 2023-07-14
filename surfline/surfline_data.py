@@ -4,21 +4,86 @@ from utilities.timestamp import unixToHuman
 
 
 
+class SurflineData:
+    def __init__(self, spotId: str):
+        self.tides = self.getTides(spotId)
+        self.waves = self.getWaves(spotId)
+        self.wind = self.getWind(spotId)
+        self.weather = self.getWeather(spotId)
+        self.ratings = self.getRating(spotId)
+    
+    # Returns array of tuples (timestamp, height), with high tide and low tides for the next 3-4 days. 
+    def getTides(self, spotId: str) -> list:
 
-# Returns array of tuples (timestamp, height), with high tide and low tides for the next 3 days. 
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/?spotId=' + spotId)
 
-def getTides(spotId : str) -> list:
+        res = res.json()
 
-    res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/?spotId=' + spotId)
+        res = (res['data']['tides'])
 
-    res = res.json()
+        tides = []
 
-    res = (res['data']['tides'])
+        for tide in res:
+            if tide['type'] == 'HIGH' or tide['type'] == 'LOW':
+                tides.append((unixToHuman(tide['timestamp']), tide['height']))
 
-    tides = []
+        return tides
 
-    for tide in res:
-        if tide['type'] == 'HIGH' or tide['type'] == 'LOW':
-            tides.append((unixToHuman(tide['timestamp']), tide['height']))
+    # Returns array of dictionaries with wave data for the next 3-4 days.
+    def getWaves(self, spotId: str) -> list:
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/wave?spotId=' + spotId)
 
-    return tides
+        res = res.json()
+
+        res = (res['data']['wave'])
+
+        waves = []
+
+        for wave in res:
+            waves.append(wave)
+
+        return waves
+
+    # Returns array of dictionaries with wind data for the next 3-4 days.
+    def getWind(self,spotId: str) -> list:
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/wind?spotId=' + spotId)
+        
+        res = res.json()
+        
+        res = (res['data']['wind'])
+        
+        wind = []
+        
+        for w in res:
+            wind.append(w)
+            
+        return wind
+
+    # Returns array of dictionaries with weather data for the next 3-4 days.
+    def getWeather(self, spotId: str) -> list:
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/weather?spotId=' + spotId)
+        
+        res = res.json()
+        
+        res = (res['data']['weather'])
+        
+        weather = []
+        
+        for w in res:
+            weather.append(w)
+            
+        return weather
+    
+    def getRating(self, spotId: str) -> int:
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/rating?spotId=' + spotId)
+        
+        res = res.json()
+        
+        res = (res['data']['rating'])
+        
+        ratings = []
+        
+        for r in res:
+            ratings.append(r)
+            
+        return ratings
