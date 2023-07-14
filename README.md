@@ -7,10 +7,10 @@
     <li>Define db methods. :white_check_mark:</li>
     <li>Implement crowd prediction model: Predict crowd based on given conditions. 
         <ol>
-            <li>Define data types to be sent to db</li>
-            <li>Create new table with defined data types</li>
-            <li>Add relevant data to table (May require running server continously)</li>
-            <li>Fetch data from db and train using ML package (Ex. scikit-learn)</li>
+            <li>Define data types and tables to be sent to db.</li>
+            <li>Create new table with defined data types.</li>d
+            <li>Add relevant data to table (May require running server continously).</li>
+            <li>Fetch data from db and train using ML package (Ex. scikit-learn.)</li>
         </ol>
     </li>
     <li>Create visualization of crowd prediction model.</li>
