@@ -1,8 +1,10 @@
 from roboflow import Roboflow
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Roboflow is a Python client library for the Roboflow API. This is the configuration for the API.
-rf = Roboflow(api_key="59JtXQpoU6dRc8UlfbXr")
+rf = Roboflow(os.environ.get('ROBOFLOW_KEY'))
 project = rf.workspace().project("surfer-detector-3.0")
 model = project.version(4).model
 
