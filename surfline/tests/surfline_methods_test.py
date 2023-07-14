@@ -3,10 +3,9 @@ import unittest
 # Add directories to current path
 import sys
 sys.path.append('../')
-sys.path.append('../surfline')
 
 # Import methods to test
-from surfline.surfline_data import SurflineData
+from surfline_data import SurflineData
 
 #----------------------#
 #----- Unit Tests -----#
