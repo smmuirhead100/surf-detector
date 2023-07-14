@@ -15,7 +15,7 @@ class SurflineData:
     # Returns array of tuples (timestamp, height), with high tide and low tides for the next 3-4 days. 
     def getTides(self, spotId: str) -> list:
 
-        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/?spotId=' + spotId)
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/tides/?spotId=' + spotId)
 
         res = res.json()
 
@@ -24,8 +24,7 @@ class SurflineData:
         tides = []
 
         for tide in res:
-            if tide['type'] == 'HIGH' or tide['type'] == 'LOW':
-                tides.append((unixToHuman(tide['timestamp']), tide['height']))
+            tides.append(tide)
 
         return tides
 
