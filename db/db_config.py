@@ -6,7 +6,10 @@ Establishes the organization needed for the database.  This includes defining ty
 
 Example:
     db = Database()
-    addTypes = SurflineTypes(db)
+    surfTable = SurflineTypes(db)
+    surfTable.addTypes()
+    surfTable.addTables()
+    
 """
 
 class SurflineTypes:
@@ -14,14 +17,6 @@ class SurflineTypes:
         self.db = db
     
     def addTypes(self) -> bool:
-        
-        # Tide type
-        self.db.createType("Tide", """
-                                    timestamp INT, 
-                                    utcOffset INT,
-                                    type TEXT,
-                                    height FLOAT
-                           """)
         
         # RawSurf type
         self.db.createType("RawSurf", """
@@ -50,47 +45,10 @@ class SurflineTypes:
                                     optimalScore INT
                            """)
         
-        # Wave type
-        self.db.createType("Wave", """
-                                    timestamp INT,
-                                    probability FLOAT,
-                                    utcOffset INT,
-                                    surf Surf,
-                                    power FLOAT,
-                                    swells Swell[]
-                            """)
-        
-        # Wind type
-        self.db.createType("Wind", """
-                                    timestamp INT,
-                                    utcOffset INT,
-                                    speed FLOAT,
-                                    direction FLOAT,
-                                    directionType TEXT,
-                                    gust FLOAT,
-                                    optimalScore INT
-                           """)
-        
-        # Weather type
-        self.db.createType("Weather", """
-                                    timestamp INT,
-                                    utcOffset INT,
-                                    temperature FLOAT,
-                                    condition TEXT,
-                                    pressure FLOAT
-                           """)
-        
         # SubRating type
         self.db.createType("SubRating", """
                                     key TEXT,
                                     value INT
-                           """)
-        
-        # Rating type
-        self.db.createType("Rating", """
-                                    timestamp INT,
-                                    utcOffset INT,
-                                    rating SubRating
                            """)
         
         # For testing purposes
@@ -100,11 +58,11 @@ class SurflineTypes:
         
     
         # Create tables
-        self.db.createTable("Tides", "timestamp INT, utcOffset INT, type TEXT, height FLOAT")
-        self.db.createTable("Waves", "timestamp INT, probability FLOAT, utcOffset INT, surf Surf, power FLOAT, swells Swell[]")
-        self.db.createTable("Winds", "timestamp INT, utcOffset INT, speed FLOAT, direction FLOAT, directionType TEXT, gust FLOAT, optimalScore INT")
-        self.db.createTable("Weathers", "timestamp INT, utcOffset INT, temperature FLOAT, condition TEXT, pressure FLOAT")
-        self.db.createTable("Ratings", "timestamp INT, utcOffset INT, rating SubRating")
+        self.db.createTable("Tide", "timestamp INT, utcOffset INT, type TEXT, height FLOAT")
+        self.db.createTable("Wave", "timestamp INT, probability FLOAT, utcOffset INT, surf Surf, power FLOAT, swell Swell")
+        self.db.createTable("Wind", "timestamp INT, utcOffset INT, speed FLOAT, direction FLOAT, directionType TEXT, gust FLOAT, optimalScore INT")
+        self.db.createTable("Weather", "timestamp INT, utcOffset INT, temperature FLOAT, condition TEXT, pressure FLOAT")
+        self.db.createTable("Rating", "timestamp INT, utcOffset INT, rating SubRating")
         
         # For testing purposes
         return True

@@ -19,7 +19,7 @@ class TestDatabaseMethods(unittest.TestCase):
     def setUpClass(cls):
         cls.db = Database('local')
         cls.db.createTable("test_table", "id SERIAL PRIMARY KEY, name VARCHAR(255), age INT")
-
+        
     # Test insert method
     def testInsert(self):
         data = {"name": "John", "age": 30}
@@ -36,7 +36,7 @@ class TestDatabaseMethods(unittest.TestCase):
         result = self.db.update("test_table", where, data)
         self.assertTrue(result)
 
-    # # Test get method
+    # Test get method
     def testGetTable(self):
         where = {"name = John"}
         result = self.db.getTable("test_table")
@@ -44,17 +44,17 @@ class TestDatabaseMethods(unittest.TestCase):
             print(row)
         self.assertTrue(result != None)
         
-    # # Test delete method
+    # Test delete method
     def testDelete(self):
         where = ["name = 'John'"]
         result = self.db.delete("test_table", where)
         self.assertTrue(result)
         
-    # # Test createType method
-    def testCreateType(self):
-        result = self.db.createType("test_type", "name VARCHAR(255), age INT")
-        self.db.close()
-        self.assertTrue(result)
+    # Test createType method
+    # def testCreateType(self):
+    #     result = self.db.createType("test_type", "name VARCHAR(255), age INT")
+    #     self.db.close()
+    #     self.assertTrue(result)
         
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 import os
 import psycopg2
+import json
 
 # The database object connects to the CockroachDB instance, OR local instance defined in your .env file and allows you to manipulate it. 
 # Ex. postgresql://username:vr2ckLMesoF4d6WYvs-0Kg@my-instance2343.g95.cockroachlabs.cloud:26342/my_database?sslmode=verify-full
@@ -41,7 +42,8 @@ class Database:
             else:
                 where_clause = ' AND '.join(where)
                 cur.execute("SELECT " + columns + " FROM " + tableName + " WHERE " + where_clause + ";")
-            return cur.fetchall()
+            res = cur.fetchall()
+            return res
     
     # Insert row into table
     def insert(self, tableName, data):
@@ -51,7 +53,7 @@ class Database:
                 values = ', '.join(['%s'] * len(data))
                 query = "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values + ");"
                 dataList = self.flatten(data)
-                cur.execute(query, list(dataList))
+                cur.execute(query, dataList)
                 self.conn.commit()
                 cur.close()
                 return True
@@ -91,15 +93,46 @@ class Database:
             cur.close()
             return True
         
+    # Remove a composite type from the database
+    def dropType(self, typeName):
+        with self.conn.cursor() as cur:
+            cur.execute("DROP TYPE " + typeName + ";")
+            self.conn.commit()
+            cur.close()
+            print("Dropped type " + typeName)
+            return True
+    
+    # Remove a table from the database
+    def dropTable(self, tableName):
+        with self.conn.cursor() as cur:
+            cur.execute("DROP TABLE " + tableName + ";")
+            self.conn.commit()
+            cur.close()
+            print("Dropped table " + tableName)
+            return True
+        
+    # Custom query!
+    def customQuery(self, query):
+        with self.conn.cursor() as cur:
+            cur.execute(query)
+            self.conn.commit()
+            cur.close()
+            return True
+        
     # Helper function to flatten nested types
     def flatten(self, data: dict) -> list:
         result = []
         for value in data.values():
             if isinstance(value, dict):
                 result.append(self.flatten(value))
+            elif isinstance(value, list): # To compensate for the swells array
+                swells = ([self.flatten(arr) for arr in value])
+                result.append(swells)
             else:
                 result.append(value)
-        result = [tuple(arr) if isinstance(arr, list) else (arr,) for arr in result]
+        # Make results a tuple of tuples
+        if isinstance(result, list):
+            result = tuple(result)
         return result
     
     def close(self):
