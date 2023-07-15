@@ -8,15 +8,14 @@ import psycopg2
 class Database:
     
     def __init__(self, conn : str = ""):
-        
-        if conn == 'local':
+        if conn == 'local': # Connect to local instance
             DB_HOST = os.environ.get('DB_HOST')
             DB_NAME = os.environ.get('DB_NAME')
             DB_USER = os.environ.get('DB_USER')
             DB_PASSWORD = os.environ.get('DB_PASS')
             PORT_ID = os.environ.get('PORT_ID')
             self.conn = psycopg2.connect(host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD, port=PORT_ID)
-        else: 
+        else: # Connect to CockroachDB instance
             self.conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
     
     # Create table with specified name and columns
@@ -27,13 +26,14 @@ class Database:
     
     # Get table with specified name and columns, with optional WHERE clause
     def getTable(self, tableName, columns, where = None):
+        columns = ', '.join(columns)
         with self.conn.cursor() as cur:
             if where is None:
                 cur.execute("SELECT " + columns + " FROM " + tableName + ";")
             else:
-                where_clause = ' AND '.join([f"{key} = %s" for key in where.keys()])
-                values = list(where.values())
-                cur.execute("SELECT " + columns + " FROM " + tableName + " WHERE " + where_clause + ";", values)
+                where_clause = ' AND '.join(where)
+                print(where_clause)
+                cur.execute("SELECT " + columns + " FROM " + tableName + " WHERE " + where_clause + ";")
             return cur.fetchall()
     
     # Insert row into table
@@ -42,7 +42,9 @@ class Database:
             columns = ', '.join(data.keys())
             values = ', '.join(['%s'] * len(data))
             query = "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values + ");"
-            cur.execute(query, list(data.values()))
+            dataList = self.flatten(data)
+            print(dataList)
+            cur.execute(query, list(dataList))
             self.conn.commit()
             return True
     
@@ -70,6 +72,19 @@ class Database:
     # Create type with specified name and columns
     def createType(self, typeName, columns):
         with self.conn.cursor() as cur:
-            cur.execute("CREATE TYPE IF NOT EXISTS " + typeName + " AS (" + columns + ");")
+            cur.execute("CREATE TYPE " + typeName + " AS (" + columns + ");")
             self.conn.commit()
             return True
+        
+    # Helper function to flatten nested types
+    def flatten(self, data: dict) -> list:
+        result = []
+        for value in data.values():
+            if isinstance(value, dict):
+                result.append(self.flatten(value))
+            else:
+                result.append(value)
+        result = [tuple(arr) if isinstance(arr, list) else (arr,) for arr in result]
+        print(result)
+        return result
+    
