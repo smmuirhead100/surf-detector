@@ -17,38 +17,45 @@ class TestDatabaseMethods(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        cls.db = Database()
+        cls.db = Database('local')
         cls.db.createTable("test_table", "id SERIAL PRIMARY KEY, name VARCHAR(255), age INT")
 
     # Test insert method
     def testInsert(self):
         data = {"name": "John", "age": 30}
         result = self.db.insert("test_table", data)
+        
+        data = {"name": "Sean", "age": 31}
+        result = self.db.insert("test_table", data)
         self.assertTrue(result)
 
     # Test update method
     def testUpdate(self):
-        where = {"name": "John"}
-        data = {"age": 40}
+        where = ["name = 'John'"] # Make sure to include quotes around 'John'
+        data = {'age': 31}
         result = self.db.update("test_table", where, data)
         self.assertTrue(result)
 
-    # Test get method
+    # # Test get method
     def testGetTable(self):
-        where = {"name": "John"}
+        where = {"name = John"}
         result = self.db.getTable("test_table")
+        for row in result:
+            print(row)
         self.assertTrue(result != None)
         
-    # Test delete method
+    # # Test delete method
     def testDelete(self):
-        where = {"name": "John"}
+        where = ["name = 'John'"]
         result = self.db.delete("test_table", where)
         self.assertTrue(result)
         
-    # Test createType method
+    # # Test createType method
     def testCreateType(self):
         result = self.db.createType("test_type", "name VARCHAR(255), age INT")
+        self.db.close()
         self.assertTrue(result)
+        
 
 if __name__ == '__main__':
     unittest.main()

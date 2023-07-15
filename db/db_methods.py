@@ -18,55 +18,69 @@ class Database:
         else: # Connect to CockroachDB instance
             self.conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
     
+    # Begin postgres transaction
+    def begin(self):
+        with self.conn.cursor() as cur:
+            cur.execute("BEGIN;")
+            self.conn.commit()
+            cur.close()
+            
     # Create table with specified name and columns
     def createTable(self, tableName, columns):
         with self.conn.cursor() as cur:
             cur.execute("CREATE TABLE IF NOT EXISTS " + tableName + " (" + columns + ");")
             self.conn.commit()
+            cur.close()
     
     # Get table with specified name and columns, with optional WHERE clause
-    def getTable(self, tableName, columns, where = None):
+    def getTable(self, tableName, columns = "*", where = None):
         columns = ', '.join(columns)
         with self.conn.cursor() as cur:
             if where is None:
                 cur.execute("SELECT " + columns + " FROM " + tableName + ";")
             else:
                 where_clause = ' AND '.join(where)
-                print(where_clause)
                 cur.execute("SELECT " + columns + " FROM " + tableName + " WHERE " + where_clause + ";")
             return cur.fetchall()
     
     # Insert row into table
     def insert(self, tableName, data):
         with self.conn.cursor() as cur:
-            columns = ', '.join(data.keys())
-            values = ', '.join(['%s'] * len(data))
-            query = "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values + ");"
-            dataList = self.flatten(data)
-            print(dataList)
-            cur.execute(query, list(dataList))
-            self.conn.commit()
-            return True
+            try: 
+                columns = ', '.join(data.keys())
+                values = ', '.join(['%s'] * len(data))
+                query = "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values + ");"
+                dataList = self.flatten(data)
+                cur.execute(query, list(dataList))
+                self.conn.commit()
+                cur.close()
+                return True
+            except psycopg2.Error as e:
+                # Roll back the transaction on error
+                self.conn.rollback()
+                print("Transaction rolled back:", e)
+                return False
     
     # Update row(s) in table
     def update(self, tableName, where, data):
         with self.conn.cursor() as cur:
             set_clause = ', '.join([f"{key} = %s" for key in data.keys()])
-            where_clause = ' AND '.join([f"{key} = %s" for key in where.keys()])
-            values = list(data.values()) + list(where.values())
+            where_clause = ' AND '.join(where)
+            values = list(data.values())
             query = "UPDATE " + tableName + " SET " + set_clause + " WHERE " + where_clause + ";"
             cur.execute(query, values)
             self.conn.commit()
+            cur.close()
             return True
     
     # Delete row(s) from table
     def delete(self, tableName, where):
         with self.conn.cursor() as cur:
-            where_clause = ' AND '.join([f"{key} = %s" for key in where.keys()])
-            values = list(where.values())
+            where_clause = ' AND '.join(where)
             query = "DELETE FROM " + tableName + " WHERE " + where_clause + ";"
-            cur.execute(query, values)
+            cur.execute(query)
             self.conn.commit()
+            cur.close()
             return True
     
     # Create type with specified name and columns
@@ -74,6 +88,7 @@ class Database:
         with self.conn.cursor() as cur:
             cur.execute("CREATE TYPE " + typeName + " AS (" + columns + ");")
             self.conn.commit()
+            cur.close()
             return True
         
     # Helper function to flatten nested types
@@ -85,6 +100,9 @@ class Database:
             else:
                 result.append(value)
         result = [tuple(arr) if isinstance(arr, list) else (arr,) for arr in result]
-        print(result)
         return result
+    
+    def close(self):
+        self.conn.close()
+        return True
     
