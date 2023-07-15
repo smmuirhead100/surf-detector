@@ -12,7 +12,7 @@ class SurflineTypes:
     def __init__(self, db) -> None:
         self.db = db
     
-    def executeTypes(self) -> bool:
+    def addTypes(self) -> bool:
         
         # Tide type
         self.db.createType("Tide", """
@@ -95,15 +95,45 @@ class SurflineTypes:
         # For testing purposes
         return True
     
-    def executeTables(self) -> bool:
+    def addTables(self) -> bool:
         
         # Create tables
-        self.db.createTable("Tides", "Tide")
-        self.db.createTable("Waves", "Wave")
-        self.db.createTable("Winds", "Wind")
-        self.db.createTable("Weather", "Weather")
-        self.db.createTable("Ratings", "Rating")
+        self.db.createTable("Tides", "data Tide")
+        self.db.createTable("Waves", "data Wave")
+        self.db.createTable("Winds", "data Wind")
+        self.db.createTable("Weather", "data Weather")
+        self.db.createTable("Ratings", "data Rating")
         
         # For testing purposes
         return True
+    
+    def test_rating_type(self):
+        # Create a new Rating object
+        rating = {
+            "timestamp": 1631232000,
+            "utcOffset": -25200,
+            "rating": {
+                "key": "overall",
+                "value": 4
+            }
+        }
+
+        # Insert the Rating object into the database
+        self.db.insert("Ratings", rating)
+
+        # Retrieve the Rating object from the database
+        result = self.db.getTable("Ratings", ["timestamp", "utcOffset", "rating"], "timestamp = 1631232000")
+        print(result)
+
+        # Verify that the retrieved Rating object matches the original Rating object
+        self.assertEqual(result[0]["timestamp"], rating["timestamp"])
+        self.assertEqual(result[0]["utcOffset"], rating["utcOffset"])
+        self.assertEqual(result[0]["rating"]["key"], rating["rating"]["key"])
+        self.assertEqual(result[0]["rating"]["value"], rating["rating"]["value"])
+        
+db = Database()
+config = SurflineTypes(db)
+config.addTypes()
+config.addTables()
+config.test_rating_type()
         
