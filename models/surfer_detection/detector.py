@@ -9,13 +9,14 @@ project = rf.workspace().project("surfer-detector-3.0")
 model = project.version(4).model
 
 # Detects current crowd based on the current surf cam image available.
-def detect():
+def detect(path: str) -> int:
     # infer on a local image
-    print(os.getcwd())
-    result = (model.predict("./assets/testpic.png", confidence=30, overlap=50).json())
-
+    imagePath = path
+    result = (model.predict(path, confidence=30, overlap=50).json())
+    
     # visualize your prediction
-    model.predict("./assets/testpic.png", confidence=30, overlap=50).save("./assets/predictionTest.jpg")
+    predictionPath = "./assets/predictions/" + os.path.basename(path) + ".jpg"
+    model.predict(path, confidence=30, overlap=50).save(predictionPath)
     
     # Predicted number of surfers in
     return len(result['predictions'])
