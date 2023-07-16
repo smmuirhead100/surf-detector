@@ -13,7 +13,7 @@ import threading
 # Append directories to current path so can access assets folder
 sys.path.append('../')
 
-# This function runs the current cam for a given location. spotNames are specific to Ssurfline API.  
+# This function runs the current cam for a given location on your desktop. spotNames are specific to Surfline API.  
 # @source https://stackoverflow.com/questions/18308384/vlc-mac-python-binding-no-video-output
 # --------------------------------------------------------------------- #
 
@@ -53,5 +53,5 @@ class CamBot:
         vlcApp.quit()
         sys.exit()
     
-test = CamBot('malibu')
+test = CamBot('malibuclose')
 test.run()
