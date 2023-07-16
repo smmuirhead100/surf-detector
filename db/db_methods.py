@@ -45,24 +45,33 @@ class Database:
             res = cur.fetchall()
             return res
     
-    # Insert row into table
+    # Insert row into table if it doesn't already exist
     def insert(self, tableName, data):
         with self.conn.cursor() as cur:
-            try: 
-                columns = ', '.join(data.keys())
-                values = ', '.join(['%s'] * len(data))
-                query = "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values + ");"
-                dataList = self.flatten(data)
-                cur.execute(query, dataList)
-                self.conn.commit()
-                cur.close()
-                return True
+            try:
+                # Check if a row with the same data already exists
+                query = "SELECT EXISTS(SELECT timestamp FROM " + tableName + " WHERE " + "timestamp = " + str(data['timestamp']) + ");"
+                cur.execute(query, tuple(data.values()))
+                row_exists = cur.fetchone()[0]
+                if row_exists:
+                    print("Row already exists in table:", tableName)
+                    return True
+                else:
+                    # Insert the row if it doesn't already exist
+                    columns = ', '.join(data.keys())
+                    values = ', '.join(['%s'] * len(data))
+                    query = "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values + ");"
+                    dataList = self.flatten(data)
+                    cur.execute(query, dataList)
+                    self.conn.commit()
+                    cur.close()
+                    return True
             except psycopg2.Error as e:
                 # Roll back the transaction on error
                 self.conn.rollback()
                 print("Transaction rolled back:", e)
                 return False
-    
+        
     # Update row(s) in table
     def update(self, tableName, where, data):
         with self.conn.cursor() as cur:

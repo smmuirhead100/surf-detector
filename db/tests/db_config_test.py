@@ -21,9 +21,9 @@ class TestSurflineConfig(unittest.TestCase):
         cls.db = Database('local')
         cls.surfData = SurflineTypes(cls.db)
 
-    # def testAddTypes(self):
-    #     result = self.surfData.addTypes()
-    #     self.assertTrue(result)
+    # # def testAddTypes(self):
+    # #     result = self.surfData.addTypes()
+    # #     self.assertTrue(result)
     
     def testAddTables(self):
         result = self.surfData.addTables()
@@ -41,7 +41,7 @@ class TestSurflineConfig(unittest.TestCase):
             "min": 1, "max": 2, "optimalScore": 1, "plus": True, "humanRelation": "FAIR", "raw": {"min": 1, "max": 2}
         }
         
-        swells = [{"height": 1.2, "period": 12.3, "impact": 1.2, "power": 1.2, "direction": 1.2, "directionMin": 1.2, "optimalScore": 1}, {"height": 1.2, "period": 12.3, "impact": 1.2, "power": 1.2, "direction": 1.2, "directionMin": 1.2, "optimalScore": 1}]
+        swells = [{"height": 1.2, "period": 12.3, "impact": 1.2, "power": 1.2, "direction": 1.2, "directionMin": 1.2, "optimalScore": 1}, {"height": 1.2, "period": 12.3, "impact": 1.2, "power": 1.2, "direction": 1.2, "directionMin": 1.2, "optimalScore": 1, "spotId": "5842041f4e65fad6a7708b37"}]
         
     # Test insert wind data
     def testInsertWind(self):

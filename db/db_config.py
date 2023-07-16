@@ -1,4 +1,4 @@
-from db_methods import Database
+
 import unittest
 
 """
@@ -6,13 +6,13 @@ Establishes the organization needed for the database.  This includes defining ty
 
 Example:
     db = Database()
-    surfTable = SurflineTypes(db)
+    surfTable = SurflineConfig(db)
     surfTable.addTypes()
     surfTable.addTables()
     
 """
 
-class SurflineTypes:
+class SurflineConfig:
     def __init__(self, db) -> None:
         self.db = db
     
@@ -58,11 +58,12 @@ class SurflineTypes:
         
     
         # Create tables
-        self.db.createTable("Tide", "timestamp INT, utcOffset INT, type TEXT, height FLOAT")
-        self.db.createTable("Wave", "timestamp INT, probability FLOAT, utcOffset INT, surf Surf, power FLOAT, swell Swell")
-        self.db.createTable("Wind", "timestamp INT, utcOffset INT, speed FLOAT, direction FLOAT, directionType TEXT, gust FLOAT, optimalScore INT")
-        self.db.createTable("Weather", "timestamp INT, utcOffset INT, temperature FLOAT, condition TEXT, pressure FLOAT")
-        self.db.createTable("Rating", "timestamp INT, utcOffset INT, rating SubRating")
+        self.db.createTable("Tide", "timestamp INT, utcOffset INT, type TEXT, height FLOAT, spotId TEXT")
+        self.db.createTable("Wave", "timestamp INT, probability FLOAT, utcOffset INT, surf Surf, power FLOAT, swell Swell, spotId TEXT")
+        self.db.createTable("Wind", "timestamp INT, utcOffset INT, speed FLOAT, direction FLOAT, directionType TEXT, gust FLOAT, optimalScore INT, spotId TEXT")
+        self.db.createTable("Weather", "timestamp INT, utcOffset INT, temperature FLOAT, condition TEXT, pressure FLOAT, spotId TEXT")
+        self.db.createTable("Rating", "timestamp INT, utcOffset INT, rating SubRating, spotId TEXT")
+        self.db.createTable("Crowd", "timestamp INT, crowd INT, spotId TEXT")
         
         # For testing purposes
         return True
