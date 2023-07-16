@@ -1,16 +1,15 @@
 import requests
-from utilities.timestamp import unixToHuman
 
 
 
 
 class SurflineData:
     def __init__(self, spotId: str):
-        self.tides = self.getTides(spotId)
-        self.waves = self.getWaves(spotId)
+        self.tide = self.getTides(spotId)
+        self.wave = self.getWaves(spotId)
         self.wind = self.getWind(spotId)
         self.weather = self.getWeather(spotId)
-        self.ratings = self.getRating(spotId)
+        self.rating = self.getRating(spotId)
     
     # Returns array of tuples (timestamp, height), with high tide and low tides for the next 3-4 days. 
     def getTides(self, spotId: str) -> list:
@@ -24,6 +23,7 @@ class SurflineData:
         tides = []
 
         for tide in res:
+            tide['spotId'] = spotId
             tides.append(tide)
 
         return tides
@@ -32,7 +32,8 @@ class SurflineData:
     def getWaves(self, spotId: str) -> list:
         
         def removeSwells(wave: dict) -> dict:
-            wave.pop('swells', None)
+            if 'swells' in wave:
+                wave.pop('swells')
             return wave
         
         res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/wave?spotId=' + spotId)
@@ -40,12 +41,12 @@ class SurflineData:
         res = res.json()
 
         res = (res['data']['wave'])
-        
-        res = removeSwells(res)
 
         waves = []
 
         for wave in res:
+            removeSwells(wave)
+            wave['spotId'] = spotId
             waves.append(wave)
 
         return waves
@@ -61,6 +62,7 @@ class SurflineData:
         wind = []
         
         for w in res:
+            w['spotId'] = spotId
             wind.append(w)
             
         return wind
@@ -76,6 +78,7 @@ class SurflineData:
         weather = []
         
         for w in res:
+            w['spotId'] = spotId
             weather.append(w)
             
         return weather
@@ -91,6 +94,7 @@ class SurflineData:
         ratings = []
         
         for r in res:
+            r['spotId'] = spotId
             ratings.append(r)
             
         return ratings

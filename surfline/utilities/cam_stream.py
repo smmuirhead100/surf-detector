@@ -53,5 +53,3 @@ class CamBot:
         vlcApp.quit()
         sys.exit()
     
-test = CamBot('malibuclose')
-test.run()
