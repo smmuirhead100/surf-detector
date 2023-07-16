@@ -30,11 +30,18 @@ class SurflineData:
 
     # Returns array of dictionaries with wave data for the next 3-4 days.
     def getWaves(self, spotId: str) -> list:
+        
+        def removeSwells(wave: dict) -> dict:
+            wave.pop('swells', None)
+            return wave
+        
         res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/wave?spotId=' + spotId)
 
         res = res.json()
 
         res = (res['data']['wave'])
+        
+        res = removeSwells(res)
 
         waves = []
 
