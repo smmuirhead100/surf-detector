@@ -83,7 +83,7 @@ class SurflineConfig:
         self.db.createTable("Weather", "timestamp INT, utcOffset INT, temperature FLOAT, condition TEXT, pressure FLOAT, spotId TEXT")
         self.db.createTable("Rating", "timestamp INT, utcOffset INT, rating SubRating, spotId TEXT")
         self.db.createTable("Crowd", "timestamp INT, crowd INT, spotId TEXT")
-        self.db.createTable("noaaData", "timestamp INT, swell noaaSwell, weather noaaWeather, buoyID TEXT, spotName TEXT")
+        self.db.createTable("noaaData", "swell noaaSwell, weather noaaWeather, buoyID TEXT, spotName TEXT, timestamp INT")
         
         # For testing purposes
         return True

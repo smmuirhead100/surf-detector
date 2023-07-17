@@ -20,6 +20,7 @@ class TestSurflineConfig(unittest.TestCase):
     def setUpClass(cls):
         cls.db = Database('local')
         cls.surfData = SurflineConfig(cls.db)
+        cls.db.dropTable('noaadata')
 
     # def testAddTypes(self):
     #     result = self.surfData.addTypes()
