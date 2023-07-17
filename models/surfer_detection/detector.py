@@ -6,7 +6,7 @@ load_dotenv()
 # Roboflow is a Python client library for the Roboflow API. This is the configuration for the API.
 rf = Roboflow(os.environ.get('ROBOFLOW_KEY'))
 project = rf.workspace().project("surfer-detector-3.0")
-model = project.version(4).model
+model = project.version(6).model
 
 # Detects current crowd based on the current surf cam image available.
 def detect(path: str) -> int:
