@@ -1,5 +1,7 @@
 import sys
 import time
+import schedule
+import datetime
 
 # Add path to surfline package
 sys.path.append('../../../')
@@ -60,6 +62,23 @@ def addMalibuCrowdData():
     db.insert('noaaData', result)
     db.close()
 
-addMalibuCrowdData()
-# addMalibuSurfData()
+# Starts collecting data every 20 seconds. Should only run between hours of 05:00 and 7:00.
+def startCollecting(): 
+    addMalibuSurfData()
+    schedule.every(1).minute.do(addMalibuCrowdData)
+    
+    while datetime.datetime.now().hour < 19:
+        schedule.run_pending()
+        time.sleep(1)
 
+
+# Runs all the time, collecting data.
+def main():
+    startCollecting()
+    schedule.every().day.at('05:00').do(startCollecting)
+    
+    while True: 
+       schedule.run_pending()
+       time.sleep(1)
+
+main()
