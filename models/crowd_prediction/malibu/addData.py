@@ -48,17 +48,17 @@ def addMalibuCrowdData():
     db = Database('local') # Using local database for now
     
     # Need to make sure an instance of the surfline cam is running on desktop for Malibu.
-    # currCamPath = screenshotCam('malibu')
-    # currCrowd = detect(currCamPath)
-    # db.insert('crowd', {'timestamp': int(time.time()), 'crowd': currCrowd, 'spotId': '584204214e65fad6a7709b9f'})
-    # db.close()
+    currCamPath = screenshotCam('malibu')
+    currCrowd = detect(currCamPath)
+    db.insert('crowd', {'timestamp': int(time.time()), 'crowd': currCrowd, 'spotId': '584204214e65fad6a7709b9f'})
 
-    # Obtain Result Object 
+    # Add curr noaa data to database
     result = getAllData(buoyID, spotName)
-    result['locationID'] = buoyID
-    result['Name'] = spotName
+    result['buoyID'] = buoyID
+    result['spotName'] = spotName
     result['timestamp'] = int(time.time())
-    print(result)
+    db.insert('noaaData', result)
+    db.close()
 
 addMalibuCrowdData()
 # addMalibuSurfData()
