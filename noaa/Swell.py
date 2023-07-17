@@ -32,5 +32,3 @@ def getSwellData(location):
     else:
         # Return an error message
         print('Error: Failed to retrieve data from the NOAA API.', status=response.status_code)
-        
-print(getSwellData('46213'))

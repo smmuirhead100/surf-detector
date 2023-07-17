@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 # Gets all weather data from a particular location such as temperature, wind speed, etc.
 
@@ -16,7 +17,7 @@ def getWeatherData(location):
         
         # Add to the return dictionary
         returnDict = {}
-        returnDict['time'] = data['location']['localtime']
+        returnDict['time'] = int(time.time())
         returnDict['temp'] = data['current']['temp_f']
         returnDict['wind'] = data['current']['wind_mph']
         returnDict['windDir'] = data['current']['wind_dir']

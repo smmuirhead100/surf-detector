@@ -1,6 +1,6 @@
 import requests
-from data_fetching.Swell import getSwellData
-from data_fetching.Weather import getWeatherData
+from noaa.Swell import getSwellData
+from noaa.Weather import getWeatherData
 
 
 

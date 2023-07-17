@@ -10,7 +10,10 @@ from surfline.surfline_data import SurflineData
 from db.db_methods import Database
 from db.db_config import SurflineConfig
 from surfline.utilities.cam_screenshot import screenshotCam
+from noaa.AllData import getAllData
 
+buoyID = '46222'
+spotName = 'Malibu'
 # ----------------- Add data to database ----------------- #
 # 1. Clear and configure database
 # 2. Get Surfline data
@@ -49,6 +52,12 @@ def addMalibuCrowdData():
     currCrowd = detect(currCamPath)
     db.insert('crowd', {'timestamp': int(time.time()), 'crowd': currCrowd, 'spotId': '584204214e65fad6a7709b9f'})
     db.close()
+
+    # Obtain Result Object 
+    result = getAllData(buoyID, spotName)
+    result['locationID'] = buoyID
+    result['Name'] = spotName
+    print(result)
 
 addMalibuCrowdData()
 # addMalibuSurfData()
