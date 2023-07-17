@@ -26,8 +26,8 @@ def addToDatabase():
     
     clickBot.click_image() # 1. ClickBot: Makes sure the cam has not froze, will click to unfreeze if so.
     time.sleep(2) # 2. Sleep for 2 seconds to allow the image to unfreeze
-    takeScreenshot.screenshot()  # 3. TakeScreenshot: Takes a screenshot of the current surf cam
-    result['crowd'] = detector.detect()  # 4. Detector: Detects the number of surfers in the water
+    # takeScreenshot.screenshot()  # 3. TakeScreenshot: Takes a screenshot of the current surf cam
+    # result['crowd'] = detector.detect()  # 4. Detector: Detects the number of surfers in the water
     
     
     print(result)
@@ -53,11 +53,12 @@ def startCollecting():
 
 # Runs all the time, collecting data.
 def main():
-    startCollecting()
-    schedule.every().day.at('05:00').do(startCollecting)
+    addToDatabase()
+    # startCollecting()
+    # schedule.every().day.at('05:00').do(startCollecting)
     
-    while True: 
-        schedule.run_pending()
-        time.sleep(1)
+    # while True: 
+    #     schedule.run_pending()
+    #     time.sleep(1)
 
 main()
