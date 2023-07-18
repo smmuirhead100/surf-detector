@@ -31,6 +31,7 @@ class Database:
         with self.conn.cursor() as cur:
             cur.execute("CREATE TABLE IF NOT EXISTS " + tableName + " (" + columns + ");")
             self.conn.commit()
+            print("Created table if didn't exist: " + tableName)
             cur.close()
     
     # Get table with specified name and columns, with optional WHERE clause
@@ -95,27 +96,27 @@ class Database:
             return True
     
     # Create type with specified name and columns
-def createType(self, typeName, columns):
-    with self.conn.cursor() as cur:
-        try:
-            # Check if the type already exists
-            query = "SELECT EXISTS(SELECT 1 FROM pg_type WHERE typname = %s);"
-            cur.execute(query, (typeName,))
-            type_exists = cur.fetchone()[0]
-            if type_exists:
-                print("Type already exists:", typeName)
+    def createType(self, typeName, columns):
+        with self.conn.cursor() as cur:
+            try:
+                # Check if the type already exists
+                query = "SELECT EXISTS(SELECT 1 FROM pg_type WHERE typname = '" + typeName + "');"
+                cur.execute(query)
+                type_exists = (cur.fetchall()[0])
+                if type_exists:
+                    print("Type already exists: " + typeName)
+                    return False
+                else:
+                    # Create the type if it doesn't already exist
+                    cur.execute("CREATE TYPE " + typeName + " AS (" + columns + ");")
+                    self.conn.commit()
+                    cur.close()
+                    return True
+            except psycopg2.Error as e:
+                # Roll back the transaction on error
+                self.conn.rollback()
+                print("Transaction rolled back:", e)
                 return False
-            else:
-                # Create the type if it doesn't already exist
-                cur.execute("CREATE TYPE " + typeName + " AS (" + columns + ");")
-                self.conn.commit()
-                cur.close()
-                return True
-        except psycopg2.Error as e:
-            # Roll back the transaction on error
-            self.conn.rollback()
-            print("Transaction rolled back:", e)
-            return False
         
     # Remove a composite type from the database
     def dropType(self, typeName):
