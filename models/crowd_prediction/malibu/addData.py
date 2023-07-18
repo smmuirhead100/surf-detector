@@ -9,18 +9,19 @@ sys.path.append('../../../')
 # Import models and surfline package
 from models.surfer_detection.detector import detect
 from surfline.surfline_data import SurflineData
+from surfline.spot import Spot
 from db.db_methods import Database
-from db.db_config import SurflineConfig
+from db.schema.db_schema_01 import SurflineConfig
 from surfline.utilities.cam_screenshot import screenshotCam
 from noaa.AllData import getAllData
 
-buoyID = '46222'
-spotName = 'Malibu'
 # ----------------- Add data to database ----------------- #
 # 1. Clear and configure database
 # 2. Get Surfline data
 # 3. Get crowd data
 # 4. Add data to database
+
+malibu = Spot('Malibu', '584204214e65fad6a7709b9f', 'malibuclose', '46222')
 
 def addMalibuSurfData():
     db = Database('local') # Using local database for now
@@ -30,7 +31,7 @@ def addMalibuSurfData():
         for row in data:
             db.insert(table, row)
         
-    # MAke sure tables are configured
+    # Make sure tables are configured
     config = SurflineConfig(db)
     config.addTables()
     

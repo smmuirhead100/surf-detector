@@ -1,29 +1,27 @@
-import numpy as np
-import pyautogui
-from PIL import Image
-import sys
-import time
+import subprocess
 
-sys.path.append('../')
+# This runs the FFmpeg command to take a screenshot of the specified cam. Saves it to currCam.jpg. 
 
-# Screenshots the current surfcam and saves it under assets/currSurf.png. Returns the exact path the ss was saved to. 
-def screenshotCam(spotName: str) -> str:
-    
-    path = './assets/examples/' + spotName + '.png'
-    # Located starting point. In this case, pyautogui locates an image that looks like a surf cam on the desktop.
-    location = pyautogui.locateOnScreen(path, confidence=.6)
-    
-    # Make sure the image was found. If so, take the creenshot and save it. 
-    if location is not None:
-        print("Image found")
-        print(location)
-        im1 = pyautogui.screenshot()
-        crop_area = (location.left, location.top, location.left + location.width, location.top + location.height)
-        cropped_img = im1.crop(crop_area)
-        savePath = './assets/captures/' + spotName + str(int(time.time())) + '.png'
-        cropped_img.save(savePath)
-        return savePath
+def takeScreenshot(spotName: str):
+    savePath = spotName + '.jpg'
+    command = [
+        'ffmpeg',
+        '-i',
+        'https://cams.cdn-surfline.com/cdn-wc/wc-' + spotName + '/playlist.m3u8',
+        '-vframes',
+        '1',
+        '-q:v',
+        '2',
+        "-y", # Overwrite output file without asking
+        savePath
+    ]
+
+    try:
+        subprocess.run(command, check=True)
+        print("FFmpeg command executed successfully!")
+    except subprocess.CalledProcessError as e:
+        print("An error occurred while executing the FFmpeg command:", e)  
         
-    else:
-        print("Image not found")
-        return "error"
+    return savePath
+
+takeScreenshot('malibuclose')
