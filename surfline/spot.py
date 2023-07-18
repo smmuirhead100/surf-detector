@@ -1,8 +1,12 @@
 import time
+import sys
 
-from surfline_api import SurflineAPI
+# So it can run with root dir
+sys.path.append('../')
+
+from surfline.surfline_api import SurflineAPI
 from db.db_methods import Database
-from surfline.utilities.cam_screenshot import screenshotCam
+from surfline.utilities.cam_screenshot import takeScreenshot
 from models.surfer_detection.detector import detect
 
 # A class to define spots in Surfline's database.
@@ -16,6 +20,12 @@ class Spot:
         self.db = None
         
     def addSurflineData(self, local: bool = True):
+        
+        # Helper Function to insert data into database
+        def insert(table: str, data: list):
+            for row in data:
+                self.db.insert(table, row)
+                
         # Connect to database
         if local == True:
             self.db = Database('local')
@@ -26,11 +36,11 @@ class Spot:
         self.surflineData = SurflineAPI(self.spotId)
         
         # Insert Surfline Data
-        self.db.insert('tide', self.surflineData.tide)
-        self.db.insert('wave', self.surflineData.wave)
-        self.db.insert('wind', self.surflineData.wind)
-        self.db.insert('weather', self.surflineData.weather)
-        self.db.insert('rating', self.surflineData.rating)
+        insert('tide', self.surflineData.tide)
+        insert('wave', self.surflineData.wave)
+        insert('wind', self.surflineData.wind)
+        insert('weather', self.surflineData.weather)
+        insert('rating', self.surflineData.rating)
         
         self.db.close() # Close connection to database
         
@@ -44,11 +54,10 @@ class Spot:
             self.db = Database('remote')
         
         # Saves the current cam to /assets/captures
-        savedpath = screenshotCam(self.camName)
+        savedpath = takeScreenshot(self.camName)
         
         # Detects the number of surfers in the water
         surfersDetected = detect(savedpath)
-        print(surfersDetected)
         
         # Inserts the data into the database
         self.db.insert('crowd', {'timestamp': int(time.time()), 'crowd': surfersDetected, 'spotId': self.spotId})

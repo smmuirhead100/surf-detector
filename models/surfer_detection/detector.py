@@ -14,10 +14,6 @@ def detect(path: str) -> int:
     imagePath = path
     result = (model.predict(path, confidence=30, overlap=50).json())
     
-    # visualize your prediction
-    predictionPath = "./assets/predictions/" + os.path.basename(path) + ".jpg"
-    model.predict(path, confidence=30, overlap=50).save(predictionPath)
-    
     # Predicted number of surfers in
     return len(result['predictions'])
     

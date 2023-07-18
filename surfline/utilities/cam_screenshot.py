@@ -3,7 +3,7 @@ import subprocess
 # This runs the FFmpeg command to take a screenshot of the specified cam. Saves it to currCam.jpg. 
 
 def takeScreenshot(spotName: str):
-    savePath = spotName + '.jpg'
+    savePath = './assets/recentCaptures/' + spotName + '.jpg'
     command = [
         'ffmpeg',
         '-i',
