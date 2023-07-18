@@ -1,0 +1,15 @@
+# for production and local builds
+# > python -m venv venv --prompt="name-prompt-here"
+# > venv/Scripts/activate
+# > pip install -r requirements.txt
+# > deactivate
+numpy==1.25.0
+pillow==10.0.0
+pyautogui==0.9.54
+pyscopg2
+pyside6==6.5.1.1
+python-dotenv==1.0.0
+python-vlc==3.0.18122
+requests==2.31.0
+roboflow==1.1.1
+schedule==1.2.0
