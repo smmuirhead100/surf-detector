@@ -2,7 +2,7 @@ import requests
 
 
 
-
+# Gets all Surfline Data for a particular spot.
 class SurflineData:
     def __init__(self, spotId: str):
         self.tide = self.getTides(spotId)
