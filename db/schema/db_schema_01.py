@@ -6,13 +6,13 @@ Establishes the organization needed for the database.  This includes defining ty
 
 Example:
     db = Database()
-    surfTable = SurflineConfig(db)
+    surfTable = SurflineSchema(db)
     surfTable.addTypes()
     surfTable.addTables()
     
 """
 
-class SurflineConfig:
+class SurflineSchema:
     def __init__(self, db) -> None:
         self.db = db
     
@@ -75,7 +75,6 @@ class SurflineConfig:
     
     def addTables(self) -> bool:
         
-    
         # Create tables
         self.db.createTable("Tide", "timestamp INT, utcOffset INT, type TEXT, height FLOAT, spotId TEXT")
         self.db.createTable("Wave", "timestamp INT, probability FLOAT, utcOffset INT, surf Surf, power FLOAT, swell Swell, spotId TEXT")
@@ -87,4 +86,3 @@ class SurflineConfig:
         
         # For testing purposes
         return True
-    
