@@ -6,7 +6,7 @@
 numpy==1.25.0
 pillow==10.0.0
 pyautogui==0.9.54
-pyscopg2==2.9.6
+pyscopg2
 pyside6==6.5.1.1
 python-dotenv==1.0.0
 python-vlc==3.0.18122
