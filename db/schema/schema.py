@@ -86,3 +86,32 @@ class SurflineSchema:
         
         # For testing purposes
         return True
+
+class BuoySchema:
+    def __init__(self, db) -> None:
+        self.db = db
+        
+    def addTypes(self) -> bool:
+        # noaaSwell type
+        self.db.createType("noaaSwell", """
+                                    height FLOAT,
+                                    period FLOAT,
+                                    direction TEXT,
+                                    compass INT
+                           """)
+        
+        #noaaWeather type
+        self.db.createType("noaaWeather", """
+                                    time INT,
+                                    temp FLOAT,
+                                    wind FLOAT,
+                                    windDir TEXT,
+                                    precip FLOAT,
+                                    currCloud FLOAT
+                            """)
+        return True
+    
+    def addTables(self) -> bool:
+        self.db.createTable("buoys", "timestamp INT, buoyID TEXT, spotName TEXT, swell noaaSwell, weather noaaWeather")
+        
+        return True

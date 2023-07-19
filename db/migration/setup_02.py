@@ -1,13 +1,13 @@
 import sys
 sys.path.append('../')
 from db_methods import Database
-from schema.schema import SurflineSchema
+from schema.schema import BuoySchema
 
 # Update current DB to use current schema.
 def update(): 
     db = Database('local')
-    surfSchema = SurflineSchema(db)
-    surfSchema.addTypes()
-    surfSchema.addTables()
+    buoySchema = BuoySchema(db)
+    buoySchema.addTypes()
+    buoySchema.addTables()
     
 update()

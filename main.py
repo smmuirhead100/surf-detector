@@ -1,4 +1,4 @@
-import noaa.AllData as AllData
+import noaa.BuoyData as BuoyData
 import schedule
 import datetime
 import time
@@ -14,6 +14,8 @@ class Collect:
                 Spot('Malibu', '5842041f4e65fad6a7708817', 'malibuclose', '46222'),
                 Spot('Huntington Beach, 20th', '5842041f4e65fad6a77088ea', 'twentiethst', '46222')
                 ]
+        
+        # The buoys to collect data for. Ex. BuoyData.BuoyData(buoyId, spotName)
 
     def addCrowdData(self):
         for spot in self.spots:
