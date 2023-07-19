@@ -19,7 +19,7 @@ class Spot:
         self.surflineData = None
         self.db = None
         
-    def addSurflineData(self, local: bool = True):
+    def addSurflineData(self, key, local: bool = True):
         
         # Helper Function to insert data into database
         def insert(table: str, data: list):
@@ -33,7 +33,7 @@ class Spot:
             self.db = Database('remote')
         
         # Get Surfline Data
-        self.surflineData = SurflineAPI(self.spotId)
+        self.surflineData = SurflineAPI(self.spotId, key)
         
         # Insert Surfline Data
         insert('tide', self.surflineData.tide)

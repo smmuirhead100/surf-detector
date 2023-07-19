@@ -1,10 +1,12 @@
 import requests
-
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Gets all Surfline Data for a particular spot.
 class SurflineAPI:
-    def __init__(self, spotId: str):
+    def __init__(self, spotId: str, apiKey: str = os.getenv('SL_KEY')):
+        self.key = apiKey
         self.tide = self.getTides(spotId)
         self.wave = self.getWaves(spotId)
         self.wind = self.getWind(spotId)
@@ -14,7 +16,7 @@ class SurflineAPI:
     # Returns array of tuples (timestamp, height), with high tide and low tides for the next 3-4 days. 
     def getTides(self, spotId: str) -> list:
 
-        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/tides/?spotId=' + spotId)
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/tides/?spotId=' + spotId + '&days=17&intervalHours=1&accesstoken=' + self.key)
 
         res = res.json()
 
@@ -36,7 +38,7 @@ class SurflineAPI:
                 wave.pop('swells')
             return wave
         
-        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/wave?spotId=' + spotId)
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/wave?spotId=' + spotId + '&days=17&intervalHours=1&accesstoken=' + self.key)
 
         res = res.json()
 
@@ -53,7 +55,7 @@ class SurflineAPI:
 
     # Returns array of dictionaries with wind data for the next 3-4 days.
     def getWind(self,spotId: str) -> list:
-        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/wind?spotId=' + spotId)
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/wind?spotId=' + spotId + '&days=17&intervalHours=1&accesstoken=' + self.key)
         
         res = res.json()
         
@@ -69,7 +71,7 @@ class SurflineAPI:
 
     # Returns array of dictionaries with weather data for the next 3-4 days.
     def getWeather(self, spotId: str) -> list:
-        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/weather?spotId=' + spotId)
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/weather?spotId=' + spotId + '&days=17&intervalHours=1&accesstoken=' + self.key)
         
         res = res.json()
         
@@ -85,7 +87,7 @@ class SurflineAPI:
     
     # Returns ratings for the next 3-4 days.
     def getRating(self, spotId: str) -> int:
-        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/rating?spotId=' + spotId)
+        res = requests.get('https://services.surfline.com/kbyg/spots/forecasts/rating?spotId=' + spotId + '&days=17&intervalHours=1&accesstoken=' + self.key)
         
         res = res.json()
         
