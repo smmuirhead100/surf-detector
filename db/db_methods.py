@@ -51,8 +51,6 @@ class Database:
         with self.conn.cursor() as cur:
             try:
                 # Check if a row with the same data already exists
-                print(data)
-                print(tableName)
                 query = "SELECT EXISTS(SELECT timestamp FROM " + tableName + " WHERE " + "timestamp = " + str(data['timestamp']) + ");"
                 cur.execute(query, tuple(data.values()))
                 row_exists = cur.fetchone()[0]

@@ -5,16 +5,19 @@ import subprocess
 def takeScreenshot(spotName: str):
     savePath = './assets/recentCaptures/' + spotName + '.jpg'
     command = [
-        'ffmpeg',
-        '-i',
-        'https://cams.cdn-surfline.com/cdn-wc/wc-' + spotName + '/playlist.m3u8',
-        '-vframes',
-        '1',
-        '-q:v',
-        '2',
-        "-y", # Overwrite output file without asking
-        savePath
+    'ffmpeg',
+    '-i',
+    'https://cams.cdn-surfline.com/cdn-wc/wc-' + spotName + '/playlist.m3u8',
+    '-vframes',
+    '1',
+    '-s',
+    '1920x1080',
+    '-q:v',
+    '2',
+    '-y', # Overwrite output file without asking
+    savePath
     ]
+
 
     try:
         subprocess.run(command, check=True)
