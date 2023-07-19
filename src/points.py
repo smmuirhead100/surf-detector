@@ -7,6 +7,7 @@ spots = [
         ]
 
 buoys = [
+        # West Coast
         Buoy('46267', 'Angeles Point, WA'),
         Buoy('46211', 'Grays Harbor, WA'),
         Buoy('46243', 'Clatsop Spit, OR'),
@@ -29,5 +30,13 @@ buoys = [
         Buoy('46222', 'Huntington Beach, CA'),
         Buoy('46253', 'Newport Beach, CA'),
         Buoy('46277', 'San Clemente, CA'), 
+        Buoy('46275', 'San Onofre, CA'),
+        Buoy('46224', 'Oceanside, CA'),
+        Buoy('46274', 'Encinitas, CA'),
+        Buoy('46225', 'Torrey Pines, CA'),
+        Buoy('46254', 'La Jolla, CA'),
+        Buoy('46258', 'San Diego, CA'),
+        Buoy('46235', 'Point Loma, CA'),
+        Buoy('46232', 'Mission Bay, CA')
         ]
 
