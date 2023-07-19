@@ -1,4 +1,8 @@
-import requests
+import sys
+import time
+
+sys.path.append('../')
+
 from noaa.Swell import getSwellData
 from noaa.Weather import getWeatherData
 
@@ -17,8 +21,10 @@ def getAllData(locationID, locationName):
     
     returnDict = {}
     
+    returnDict['time'] = time.time()
     returnDict['Swell'] = swellData
     returnDict['Weather'] = weatherData
     
     return returnDict
-    
+
+print(getAllData('46244', 'New York'))

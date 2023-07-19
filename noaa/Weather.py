@@ -1,12 +1,16 @@
 import requests
 import json
-import time
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Gets all weather data from a particular location such as temperature, wind speed, etc.
 
+key = os.environ.get('WEATHER_API_KEY')
+
 def getWeatherData(location):
     # Obtain weather data from the Weather API. 
-    url = "http://api.weatherapi.com/v1/current.json?key=cce1d4f16c4d4a5a9fd05549230307&q=huntington-beach&aqi=no"
+    url = "http://api.weatherapi.com/v1/current.json?key=" + key + "&q=" + location +"&aqi=no"
     response = requests.get(url)
     
     if response.status_code == 200:
@@ -14,10 +18,9 @@ def getWeatherData(location):
         # Process the response data
         data = response.content
         data = json.loads(data)
-        
+
         # Add to the return dictionary
         returnDict = {}
-        returnDict['time'] = int(time.time())
         returnDict['temp'] = data['current']['temp_f']
         returnDict['wind'] = data['current']['wind_mph']
         returnDict['windDir'] = data['current']['wind_dir']
