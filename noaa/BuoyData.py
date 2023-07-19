@@ -21,7 +21,7 @@ def getAllData(buoyId, spotName):
     
     returnDict = {}
     
-    returnDict['time'] = time.time()
+    returnDict['timestamp'] = time.time()
     returnDict['buoyID'] = buoyId
     returnDict['spotName'] = spotName
     returnDict['Swell'] = swellData
