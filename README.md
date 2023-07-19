@@ -5,6 +5,7 @@
     <li>Connect to cloud db (CockroachDB). :white_check_mark:</li>
     <li>Fetch swell and weather data from NOAA and relative databases, given specific location. :white_check_mark:</li>
     <li>Define db methods. :white_check_mark:</li>
+    <li>Add NOAA historical buoy data to the db.</li>
     <li>Implement crowd prediction model: Predict crowd based on given conditions. 
         <ol>
             <li>Define data types and tables to be sent to db. :white_check_mark:</li>
