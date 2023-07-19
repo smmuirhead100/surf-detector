@@ -9,5 +9,6 @@ def update():
     surfSchema = SurflineSchema(db)
     surfSchema.addTypes()
     surfSchema.addTables()
+    db.close()
     
 update()
