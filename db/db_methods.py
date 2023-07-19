@@ -102,8 +102,9 @@ class Database:
                 # Check if the type already exists
                 query = "SELECT EXISTS(SELECT 1 FROM pg_type WHERE typname = '" + typeName + "');"
                 cur.execute(query)
-                type_exists = (cur.fetchall()[0])
-                if type_exists:
+                type_exists = (cur.fetchone()[0])
+                print(type_exists)
+                if type_exists == True:
                     print("Type already exists: " + typeName)
                     return False
                 else:
@@ -141,8 +142,9 @@ class Database:
         with self.conn.cursor() as cur:
             cur.execute(query)
             self.conn.commit()
+            res = cur.fetchall()
             cur.close()
-            return True
+            return res
         
     # Helper function to flatten nested types
     def flatten(self, data: dict) -> list:

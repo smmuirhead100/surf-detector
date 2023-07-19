@@ -102,16 +102,17 @@ class BuoySchema:
         
         #noaaWeather type
         self.db.createType("noaaWeather", """
-                                    time INT,
                                     temp FLOAT,
                                     wind FLOAT,
                                     windDir TEXT,
                                     precip FLOAT,
                                     currCloud FLOAT
                             """)
+        
+        # self.db.dropType("noaaWeather")
         return True
     
     def addTables(self) -> bool:
-        self.db.createTable("buoys", "timestamp INT, buoyID TEXT, spotName TEXT, swell noaaSwell, weather noaaWeather")
+        self.db.createTable("buoy", "timestamp INT, buoyID TEXT, spotName TEXT, swell noaaSwell, weather noaaWeather")
         
         return True
