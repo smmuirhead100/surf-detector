@@ -52,24 +52,6 @@ class SurflineSchema:
                                     value INT
                            """)
         
-        # noaaSwell type
-        self.db.createType("noaaSwell", """
-                                    height FLOAT,
-                                    period FLOAT,
-                                    direction TEXT,
-                                    compass INT
-                           """)
-        
-        #noaaWeather type
-        self.db.createType("noaaWeather", """
-                                    time INT,
-                                    temp FLOAT,
-                                    wind FLOAT,
-                                    windDir TEXT,
-                                    precip FLOAT,
-                                    currCloud FLOAT
-                            """)
-        
         # For testing purposes
         return True
     
@@ -81,8 +63,7 @@ class SurflineSchema:
         self.db.createTable("Wind", "timestamp INT, utcOffset INT, speed FLOAT, direction FLOAT, directionType TEXT, gust FLOAT, optimalScore INT, spotId TEXT")
         self.db.createTable("Weather", "timestamp INT, utcOffset INT, temperature FLOAT, condition TEXT, pressure FLOAT, spotId TEXT")
         self.db.createTable("Rating", "timestamp INT, utcOffset INT, rating SubRating, spotId TEXT")
-        self.db.createTable("Crowd", "timestamp INT, crowd INT, spotId TEXT")
-        self.db.createTable("noaaData", "swell noaaSwell, weather noaaWeather, buoyID TEXT, spotName TEXT, timestamp INT")
+        self.db.createTable("Crowd", "timestamp INT, crowd INT, spotId TEXT") 
         
         # For testing purposes
         return True
