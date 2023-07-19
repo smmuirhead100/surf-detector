@@ -16,5 +16,6 @@
     </li>
     <li>Create visualization of crowd prediction model.</li>
     <li>Configure data collection from bouys other than SCRIPPS.</li>
+    <li>Add the rest of the SCRIPPS buoys</li>
     <li>Frontend implementation.</li>
 </ul>

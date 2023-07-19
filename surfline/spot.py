@@ -60,7 +60,7 @@ class Spot:
         surfersDetected = detect(savedpath)
         
         # Inserts the data into the database
-        self.db.insert('crowd', {'timestamp': int(time.time()), 'crowd': surfersDetected, 'spotId': self.spotId})
+        self.db.insert('crowd', {'timestamp': int(time.time()), 'crowd': surfersDetected, 'spotId': self.spotId, 'spotName': self.commonName})
         
         self.db.close() # Close connection to database
         
