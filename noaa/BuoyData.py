@@ -28,5 +28,3 @@ def getAllData(buoyId, spotName):
     returnDict['Weather'] = weatherData
     
     return returnDict
-
-print(getAllData('46244', 'New York'))

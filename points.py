@@ -7,7 +7,27 @@ spots = [
         ]
 
 buoys = [
-        Buoy('46222', 'Huntington Beach'),
-        Buoy('46221', 'Santa Monica')
+        Buoy('46267', 'Angeles Point, WA'),
+        Buoy('46211', 'Grays Harbor, WA'),
+        Buoy('46243', 'Clatsop Spit, OR'),
+        Buoy('46248', 'Astoria Canyon, OR'),
+        Buoy('46244', 'Humboldt Bay, CA'),
+        Buoy('46213', 'Cape Mendocino, CA'),
+        Buoy('46214', 'Point Reyes, CA'),
+        Buoy('46237', 'San Francisco, CA'),
+        Buoy('46269', 'Santa Cruz, CA'),
+        Buoy('46276', 'Pajaro Beach, CA'),
+        Buoy('46240', 'Monterey Bay, CA'),
+        Buoy('46239', 'Point Sur, CA'),
+        Buoy('46215', 'Diablo Canyon, CA'),
+        Buoy('46218', 'Harvest, CA'),
+        Buoy('46215', 'Santa Cruz Basin, CA'),
+        Buoy('46219', 'San Nicolas Island, CA'),
+        Buoy('46268', 'Topanga Beach, CA'),
+        Buoy('46221', 'Santa Monica, CA'),
+        Buoy('46256', 'Long Beach, CA'),
+        Buoy('46222', 'Huntington Beach, CA'),
+        Buoy('46253', 'Newport Beach, CA'),
+        Buoy('46277', 'San Clemente, CA'), 
         ]
 
