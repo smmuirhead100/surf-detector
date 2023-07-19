@@ -46,17 +46,43 @@ class Database:
             res = cur.fetchall()
             return res
     
+    # Update table with specified name and columns, with optional WHERE clause
+    def updateTable(self, tableName, where, data):
+        with self.conn.cursor() as cur:
+            try:
+                # Construct the SET clause of the UPDATE statement
+                set_clause = ', '.join([k + '=%s' for k in data.keys()])
+
+                # Construct the WHERE clause of the UPDATE statement
+                where_clause = ' AND '.join([clause for clause in where])
+
+                # Construct the parameter list for the UPDATE statement
+                params = list(data.values())
+
+                # Execute the UPDATE statement
+                query = f"UPDATE {tableName} SET {set_clause} WHERE {where_clause};"
+                dataList = self.flatten(data)
+                cur.execute(query, dataList)
+                self.conn.commit()
+                cur.close()
+                return True
+            except psycopg2.Error as e:
+                # Roll back the transaction on error
+                self.conn.rollback()
+                print("Transaction rolled back:", e)
+                return False      
+              
     # Insert row into table if it doesn't already exist
     def insert(self, tableName, data):
         with self.conn.cursor() as cur:
             try:
-                # Check if a row with the same data already exists
+                # Check if a row with the same timestamp already exists
                 query = "SELECT EXISTS(SELECT timestamp FROM " + tableName + " WHERE " + "timestamp = " + str(data['timestamp']) + ");"
                 cur.execute(query, tuple(data.values()))
                 row_exists = cur.fetchone()[0]
                 if row_exists:
-                    print("Row already exists in table:", tableName)
-                    return True
+                    print("Updating row in table:", tableName)
+                    return self.updateTable(tableName, ['timestamp =' + str(data['timestamp'])], data)
                 else:
                     # Insert the row if it doesn't already exist
                     columns = ', '.join(data.keys())
@@ -66,6 +92,7 @@ class Database:
                     cur.execute(query, dataList)
                     self.conn.commit()
                     cur.close()
+                    print('inserted new row into table:' + tableName)
                     return True
             except psycopg2.Error as e:
                 # Roll back the transaction on error
