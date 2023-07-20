@@ -26,11 +26,13 @@ class Collect:
             spot.addCrowdData(self.local)
 
     def startCollecting(self):                              # Collects data every 10 minutes for crowd. Should only run between hours of 05:00 and 8:00.
-        for spot in self.spots:                             # Add Surfline data once a day for each spot. 
-            spot.addSurflineData(self.key, self.local)
-        
-        schedule.every(10).seconds.do(self.addCrowdData)    # Add crowd data every 30 minutes.
-        schedule.every(10).seconds.do(self.addBuoyData)     # Add buoy data every 30 minutes.
+        # for spot in self.spots:                             # Add Surfline data once a day for each spot. 
+            # spot.addSurflineData(self.key, self.local)
+        self.addBuoyData()
+        self.addCrowdData()
+        print('finished')
+        schedule.every(30).minutes.do(self.addCrowdData)    # Add crowd data every 30 minutes.
+        schedule.every(30).minutes.do(self.addBuoyData)     # Add buoy data every 30 minutes.
         
         while datetime.datetime.now().hour < 20:
             schedule.run_pending()

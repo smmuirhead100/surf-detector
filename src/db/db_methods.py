@@ -1,6 +1,7 @@
 import os
 import psycopg2
 from dotenv import load_dotenv
+import psycopg2.extras
 load_dotenv()
 
 # The database object connects to the CockroachDB instance, OR local instance defined in your .env file and allows you to manipulate it. 
@@ -138,6 +139,7 @@ class Database:
                 else:
                     # Create the type if it doesn't already exist
                     cur.execute("CREATE TYPE " + typeName + " AS (" + columns + ");")
+                    psycopg2.extras.register_composite(typeName, cur)
                     self.conn.commit()
                     cur.close()
                     return True
