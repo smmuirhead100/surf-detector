@@ -18,6 +18,9 @@ class Database:
             DB_PASSWORD = os.environ.get('DB_PASS')
             PORT_ID = os.environ.get('PORT_ID')
             self.conn = psycopg2.connect(host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD, port=PORT_ID)
+        if conn == 'vercel': # Connect to Vercel instance
+            connString = "postgres://default:" + os.environ.get('VERCEL_PASS') + "@ep-muddy-pine-849561.us-west-2.postgres.vercel-storage.com:5432/verceldb"
+            self.conn = psycopg2.connect(connString)
         else: # Connect to CockroachDB instance
             self.conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
     
