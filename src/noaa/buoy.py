@@ -9,13 +9,9 @@ class Buoy():
         self.spotName = spotName
         self.db = None
         
-    def addData(self, local: bool = True):
-        
+    def addData(self, local: str = 'local'):
         # Connect to database
-        if local == True:
-            self.db = Database('local')
-        else:
-            self.db = Database('remote')
+        self.db = Database(local)
         
         # Retrieve all data from buoy
         data =  getAllData(self.buoyId, self.spotName)

@@ -5,7 +5,7 @@ from schema.schema import SurflineSchema
 
 # Update current DB to use current schema.
 def update(): 
-    db = Database('local')
+    db = Database('vercel')
     surfSchema = SurflineSchema(db)
     surfSchema.addTypes()
     surfSchema.addTables()

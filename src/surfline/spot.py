@@ -19,7 +19,7 @@ class Spot:
         self.surflineData = None
         self.db = None
         
-    def addSurflineData(self, key, local: bool = True):
+    def addSurflineData(self, key, local: str = 'local'):
         
         # Helper Function to insert data into database
         def insert(table: str, data: list):
@@ -27,10 +27,7 @@ class Spot:
                 self.db.insert(table, row)
                 
         # Connect to database
-        if local == True:
-            self.db = Database('local')
-        else:
-            self.db = Database('remote')
+        self.db = Database(local)
         
         # Get Surfline Data
         self.surflineData = SurflineAPI(self.spotId, key)
@@ -46,12 +43,9 @@ class Spot:
         
         return True
     
-    def addCrowdData(self, local: bool = True):
+    def addCrowdData(self, local: str = 'local'):
         # Connect to database
-        if local == True:
-            self.db = Database('local')
-        else:
-            self.db = Database('remote')
+        self.db = Database(local)
         
         # Saves the current cam to /assets/captures
         savedpath = takeScreenshot(self.camName)

@@ -11,7 +11,7 @@ load_dotenv()
 
 # Run Collect(True) to collect data locally. Run Collect(False) to collect data remotely.
 class Collect:
-    def __init__(self, local: bool = True):
+    def __init__(self, local: str = 'local'):
         self.local = local
         self.spots = spots  # The spots to collect data for. Ex. Spot(common name, spotId, camName, nearestBuoyId)
         self.buoys = buoys # The buoys to collect data for. Ex. BuoyData.BuoyData(buoyId, spotName)
@@ -26,8 +26,8 @@ class Collect:
             spot.addCrowdData(self.local)
 
     def startCollecting(self):                              # Collects data every 10 minutes for crowd. Should only run between hours of 05:00 and 8:00.
-        # for spot in self.spots:                             # Add Surfline data once a day for each spot. 
-            # spot.addSurflineData(self.key, self.local)
+        for spot in self.spots:                             # Add Surfline data once a day for each spot. 
+            spot.addSurflineData(self.key, self.local)
         self.addBuoyData()
         self.addCrowdData()
         print('finished')
@@ -47,4 +47,4 @@ class Collect:
             time.sleep(1)
 
 if __name__ == '__main__':
-    Collect().run()
+    Collect('local').run()

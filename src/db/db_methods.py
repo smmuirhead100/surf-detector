@@ -12,17 +12,22 @@ class Database:
     
     def __init__(self, conn : str = ""):
         if conn == 'local': # Connect to local instance
+            print("Connecting to local instance")
             DB_HOST = os.environ.get('DB_HOST')
             DB_NAME = os.environ.get('DB_NAME')
             DB_USER = os.environ.get('DB_USER')
             DB_PASSWORD = os.environ.get('DB_PASS')
             PORT_ID = os.environ.get('PORT_ID')
             self.conn = psycopg2.connect(host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD, port=PORT_ID)
-        if conn == 'vercel': # Connect to Vercel instance
+        elif conn == 'vercel': # Connect to Vercel instance
+            print("Connecting to Vercel instance")
             connString = "postgres://default:" + os.environ.get('VERCEL_PASS') + "@ep-muddy-pine-849561.us-west-2.postgres.vercel-storage.com:5432/verceldb"
             self.conn = psycopg2.connect(connString)
-        else: # Connect to CockroachDB instance
+        elif conn == 'cockroach': # Connect to CockroachDB instance
+            print("Connecting to CockroachDB instance")
             self.conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
+        else:
+            print('Invalid string passed to Database constructor. Please pass "local", "vercel", or "cockroach"')
     
     # Begin postgres transaction
     def begin(self):
@@ -81,8 +86,12 @@ class Database:
     def insert(self, tableName, data):
         with self.conn.cursor() as cur:
             try:
-                # Check if a row with the same timestamp already exists
-                query = "SELECT EXISTS(SELECT timestamp FROM " + tableName + " WHERE " + "timestamp = " + str(data['timestamp']) + ");"
+                # Check if a row with the same timestamp and spotID already exists
+                if 'spotId' in data:
+                    print('found a spotId') 
+                    query = "SELECT EXISTS(SELECT timestamp FROM " + tableName + " WHERE " + "timestamp = " + str(data['timestamp']) + " AND spotId = '" + str(data['spotId']) + "');"
+                else: 
+                    query = "SELECT EXISTS(SELECT timestamp FROM " + tableName + " WHERE " + "timestamp = " + str(data['timestamp']) + ");"
                 cur.execute(query, tuple(data.values()))
                 row_exists = cur.fetchone()[0]
                 if row_exists:
