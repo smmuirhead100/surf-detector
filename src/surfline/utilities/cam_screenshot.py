@@ -4,7 +4,7 @@ import time
 # This runs the FFmpeg command to take a screenshot of the specified cam. Saves it to currCam.jpg. 
 
 def takeScreenshot(spotName: str):
-    savePath = './assets/recentCaptures/' + spotName + str(int(time.time())) + '.jpg'
+    savePath = './assets/recentCaptures/' + spotName + '.jpg'
     command = [
     'ffmpeg',
     '-i',
