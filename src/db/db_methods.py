@@ -25,7 +25,10 @@ class Database:
             self.conn = psycopg2.connect(connString)
         elif conn == 'cockroach': # Connect to CockroachDB instance
             print("Connecting to CockroachDB instance")
-            self.conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
+            self.conn = psycopg2.connect(os.environ.get('COCKROACH_URL'))
+        elif conn == 'supabase': # Connect to Supabase instance
+            print("Connecting to Supabase instance")
+            self.conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
         else:
             print('Invalid string passed to Database constructor. Please pass "local", "vercel", or "cockroach"')
     
