@@ -26,4 +26,4 @@ class Collect:
         self.addCrowdData()
 
 if __name__ == '__main__':
-    Collect('vercel').run()
+    Collect('supabase').run()
