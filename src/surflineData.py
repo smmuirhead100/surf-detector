@@ -9,7 +9,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-# Run Collect(True) to collect data locally. Run Collect(False) to collect data remotely.
+# This adds surfline data to the database.
 class Collect:
     def __init__(self, local: str = 'local'):
         self.local = local
