@@ -1,0 +1,1 @@
+This directory contains code for collecting relevant data from various API's and storing it in a database.
