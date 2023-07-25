@@ -182,3 +182,9 @@ def get_buoy_data():
     json_result = json.dumps(tide_data)
     
     return json_result
+
+if __name__ == "__main__":
+    # Setting debug to True enables debug output. This line should be
+    # removed before deploying a production app.
+    app.debug = True
+    app.run()
