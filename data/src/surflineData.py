@@ -23,4 +23,4 @@ class Collect:
         print('finished')
 
 if __name__ == '__main__':
-    Collect('supabase').run()
+    Collect('vercel').run()

@@ -6,6 +6,6 @@ from db_methods import Database
 def update(): 
     db = Database('vercel')
     # Add name spotName to crowd table
-    db.customQuery('ALTER TABLE crowd ADD COLUMN spotName VARCHAR(255);')
+    db.customQuery('ALTER TABLE tide ADD COLUMN spotid VARCHAR(255);')
     db.close()
 update()

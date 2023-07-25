@@ -5,7 +5,7 @@ from schema.schema import BuoySchema
 
 # Update current DB to use current schema.
 def update(): 
-    db = Database('supabase')
+    db = Database('vercel')
     buoySchema = BuoySchema(db)
     buoySchema.addTypes()
     buoySchema.addTables()

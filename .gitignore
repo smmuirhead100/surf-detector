@@ -4,4 +4,4 @@ env/
 env
 venv/
 recentCaptures/
-django_env/
+flask_env/
