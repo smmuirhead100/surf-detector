@@ -69,3 +69,61 @@ def waves():
     json_result = json.dumps(wave_data)
 
     return json_result
+
+
+@app.route("/wind")
+def get_wind_data():
+    print("Connecting to Supabase instance")
+    clause = "SELECT * FROM wind WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+    conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
+    with conn.cursor() as cur:
+        cur.execute(clause)
+        result = cur.fetchall()
+        conn.commit()
+        cur.close()
+    
+    tide_data = [{"timestamp": row[0], "utcoffset": row[1], "speed": row[2], "direction": row[3], "directiontype": row[4], "gust": row[5], "optimalscore": row[6], "spotid": row[7]} for row in result]
+    
+    # Convert the result into JSON format
+    json_result = json.dumps(tide_data)
+    
+    return json_result
+
+@app.route("/weather")
+def get_weather_data():
+    print("Connecting to Supabase instance")
+    clause = "SELECT * FROM weather WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+    conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
+    with conn.cursor() as cur:
+        cur.execute(clause)
+        result = cur.fetchall()
+        conn.commit()
+        cur.close()
+    
+    tide_data = [{"timestamp": row[0], "utcoffset": row[1], "temperature": row[2], "condtion": row[3], "pressure": row[4], "spotid": row[5]} for row in result]
+    
+    # Convert the result into JSON format
+    json_result = json.dumps(tide_data)
+    
+    return json_result
+
+
+@app.route("/rating")
+def get_rating_data():
+    print("Connecting to Supabase instance")
+    clause = "SELECT * FROM rating WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+    conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
+    with conn.cursor() as cur:
+        cur.execute(clause)
+        result = cur.fetchall()
+        conn.commit()
+        cur.close()
+    
+    tide_data = [{"timestamp": row[0], "utcoffset": row[1], "rating": {"description": row[2].strip("(").split(",")[0], "value": int(row[2].strip("(").split(",")[1].strip(')'))}, "spotid": row[3]} for row in result]
+    
+    # Convert the result into JSON format
+    json_result = json.dumps(tide_data)
+    
+    return json_result
+
+
