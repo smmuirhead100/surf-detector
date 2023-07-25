@@ -126,4 +126,59 @@ def get_rating_data():
     
     return json_result
 
+@app.route("/crowd")
+def get_crowd_data():
+    print("Connecting to Supabase instance")
+    clause = "SELECT * FROM crowd ORDER BY timestamp;"
+    conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
+    with conn.cursor() as cur:
+        cur.execute(clause)
+        result = cur.fetchall()
+        conn.commit()
+        cur.close()
+    
+    tide_data = [{"timestamp": row[0], "crowd": row[1], "spotid": row[2], "spotname": row[3]} for row in result]
+    
+    # Convert the result into JSON format
+    json_result = json.dumps(tide_data)
+    
+    return json_result
 
+@app.route("/buoy")
+def get_buoy_data():
+    def parseSwell(swell_str: str):
+        row = swell_str.strip("()").split(',')
+        obj = {
+            "height": float(row[0]),
+            "period": float(row[1]),
+            "direction": row[2],
+            "compass": int(row[3])
+        }
+        return obj
+    
+    def parseWeather(weather_str: str):
+        row = weather_str.strip("()").split(',')
+        obj = {
+            "temp": float(row[0]),
+            "wind": float(row[1]),
+            "winddir": row[2],
+            "precip": float(row[3]),
+            "currClouds": float(row[4])
+        }
+        return obj
+    
+    print("Connecting to Supabase instance")
+    clause = "SELECT * FROM buoy ORDER BY timestamp;"
+    conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
+    with conn.cursor() as cur:
+        cur.execute(clause)
+        result = cur.fetchall()
+        conn.commit()
+        cur.close()
+    
+    tide_data = [{"timestamp": row[0], "buoyid": row[1], "spotname": row[2], "swell": parseSwell(row[3]), "weather": parseWeather(row[4])} for row in result]
+    
+    # Convert the result into JSON format
+    json_result = json.dumps(tide_data)
+    
+    return json_result
