@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route("/tide")
+@application.route("/tide")
 def get_tide_data():
     print("Connecting to Supabase instance")
     clause = "SELECT * FROM tide WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
@@ -27,7 +27,7 @@ def get_tide_data():
     
     return json_result
 
-@app.route("/wave")
+@application.route("/wave")
 def waves():
    
     # Helper function to parse the swell string into a dictionary
@@ -71,7 +71,7 @@ def waves():
     return json_result
 
 
-@app.route("/wind")
+@application.route("/wind")
 def get_wind_data():
     print("Connecting to Supabase instance")
     clause = "SELECT * FROM wind WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
@@ -89,7 +89,7 @@ def get_wind_data():
     
     return json_result
 
-@app.route("/weather")
+@application.route("/weather")
 def get_weather_data():
     print("Connecting to Supabase instance")
     clause = "SELECT * FROM weather WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
@@ -108,7 +108,7 @@ def get_weather_data():
     return json_result
 
 
-@app.route("/rating")
+@application.route("/rating")
 def get_rating_data():
     print("Connecting to Supabase instance")
     clause = "SELECT * FROM rating WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
@@ -126,7 +126,7 @@ def get_rating_data():
     
     return json_result
 
-@app.route("/crowd")
+@application.route("/crowd")
 def get_crowd_data():
     print("Connecting to Supabase instance")
     clause = "SELECT * FROM crowd ORDER BY timestamp;"
@@ -144,7 +144,7 @@ def get_crowd_data():
     
     return json_result
 
-@app.route("/buoy")
+@application.route("/buoy")
 def get_buoy_data():
     def parseSwell(swell_str: str):
         row = swell_str.strip("()").split(',')
@@ -186,5 +186,5 @@ def get_buoy_data():
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    app.debug = True
-    app.run()
+    application.debug = True
+    application.run()
