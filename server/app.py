@@ -7,7 +7,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-application = Flask(__name__)
+app = Flask(__name__)
+application = app
+
+@app.route('/')
+def hello_world():
+    return 'Hello Imposter!'
 
 @application.route("/tide")
 def get_tide_data():
