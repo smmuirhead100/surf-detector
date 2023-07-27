@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, request
 import psycopg2
 import os
 import time
@@ -10,14 +10,25 @@ load_dotenv()
 app = Flask(__name__)
 application = app
 
+spotDict = {
+    'malibu': '5842041f4e65fad6a7708817',
+    'huntingtonbeach': '5842041f4e65fad6a77088ea'
+}
+
 @app.route('/')
 def hello_world():
     return 'Hello Imposter!'
 
-@application.route("/tide")
+@application.route("/tide", methods=['GET'])
 def get_tide_data():
+    if 'spot' in request.args:
+        spot_id = spotDict[str(request.args['spot'])]
+        print(spot_id)
+        print(type(spot_id))
+        clause = "SELECT * FROM tide WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+    else: 
+        clause = "SELECT * FROM tide WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
     print("Connecting to Supabase instance")
-    clause = "SELECT * FROM tide WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
     with conn.cursor() as cur:
         cur.execute(clause)
@@ -30,9 +41,10 @@ def get_tide_data():
     # Convert the result into JSON format
     json_result = json.dumps(tide_data)
     
+    print('Done Executing')
     return json_result
 
-@application.route("/wave")
+@application.route("/wave", methods=['GET'])
 def waves():
    
     # Helper function to parse the swell string into a dictionary
@@ -59,8 +71,16 @@ def waves():
             "rawSurf": {"rawMin": float(rawMin[0]), "rawMax": float(rawMax[0])}
         }
         
+    if 'spot' in request.args:
+        spot_id = spotDict[str(request.args['spot'])]
+        print(spot_id)
+        print(type(spot_id))
+        clause = "SELECT * FROM wave WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        
+    else: 
+        clause = "SELECT * FROM wave WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+    
     print("Connecting to Supabase instance")
-    clause = "SELECT * FROM wave WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
     with conn.cursor() as cur:
         cur.execute(clause)
@@ -76,10 +96,19 @@ def waves():
     return json_result
 
 
-@application.route("/wind")
+@application.route("/wind", methods=['GET'])
 def get_wind_data():
+    
+    if 'spot' in request.args:
+        spot_id = spotDict[str(request.args['spot'])]
+        print(spot_id)
+        print(type(spot_id))
+        clause = "SELECT * FROM wind WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        
+    else: 
+        clause = "SELECT * FROM wind WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+    
     print("Connecting to Supabase instance")
-    clause = "SELECT * FROM wind WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
     with conn.cursor() as cur:
         cur.execute(clause)
@@ -94,10 +123,18 @@ def get_wind_data():
     
     return json_result
 
-@application.route("/weather")
+@application.route("/weather", methods=['GET'])
 def get_weather_data():
+    if 'spot' in request.args:
+        spot_id = spotDict[str(request.args['spot'])]
+        print(spot_id)
+        print(type(spot_id))
+        clause = "SELECT * FROM weather WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        
+    else: 
+        clause = "SELECT * FROM weather WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+    
     print("Connecting to Supabase instance")
-    clause = "SELECT * FROM weather WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
     with conn.cursor() as cur:
         cur.execute(clause)
@@ -113,10 +150,18 @@ def get_weather_data():
     return json_result
 
 
-@application.route("/rating")
+@application.route("/rating", methods=['GET'])
 def get_rating_data():
+    if 'spot' in request.args:
+        spot_id = spotDict[str(request.args['spot'])]
+        print(spot_id)
+        print(type(spot_id))
+        clause = "SELECT * FROM rating WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        
+    else: 
+        clause = "SELECT * FROM rating WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+    
     print("Connecting to Supabase instance")
-    clause = "SELECT * FROM rating WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
     with conn.cursor() as cur:
         cur.execute(clause)
@@ -131,10 +176,18 @@ def get_rating_data():
     
     return json_result
 
-@application.route("/crowd")
+@application.route("/crowd", methods=['GET'])
 def get_crowd_data():
+    if 'spot' in request.args:
+        spot_id = spotDict[str(request.args['spot'])]
+        print(spot_id)
+        print(type(spot_id))
+        clause = "SELECT * FROM crowd WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        
+    else: 
+        clause = "SELECT * FROM crowd WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+    
     print("Connecting to Supabase instance")
-    clause = "SELECT * FROM crowd ORDER BY timestamp;"
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
     with conn.cursor() as cur:
         cur.execute(clause)
@@ -149,7 +202,7 @@ def get_crowd_data():
     
     return json_result
 
-@application.route("/buoy")
+@application.route("/buoy", methods=['GET'])
 def get_buoy_data():
     def parseSwell(swell_str: str):
         row = swell_str.strip("()").split(',')
