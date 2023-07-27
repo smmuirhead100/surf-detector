@@ -7,6 +7,10 @@ export default function swellChart(props: any) {
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const chartRef = useRef(null);
 
+  interface Data {
+    time: any, 
+    height: any
+  }
   // Converts unix time to formatted time: month/day, hour:minute
   function unixToTime(unixTime: number) {
     const date = new Date(unixTime * 1000);
@@ -55,7 +59,7 @@ export default function swellChart(props: any) {
 
       const y = d3.scaleLinear()
         .range([height, 0])
-        .domain([0, d3.max(data, d => d.height)]);
+        .domain([0, d3.max(data, (d: { height: any; }) => d.height)]);
 
       // Define the chart
       const svg = d3.select(chartRef.current)
@@ -70,7 +74,7 @@ export default function swellChart(props: any) {
         .data(data)
         .enter().append('rect')
         .attr('class', 'bar')
-        .attr('x', d => x(d.time))
+        .attr('x', (d: Data ) => x(d.time))
         .attr('width', x.bandwidth())
         .attr('y', height) // Set initial y position of bars to the bottom of the chart
         .attr('height', 0) // Set initial height of bars to 0
@@ -80,9 +84,9 @@ export default function swellChart(props: any) {
     const waveTransition = (bar:any) => {
         bar.transition()
         .duration(1000) // Set the duration of each transition to 1 second
-        .delay((d, i) => i * 50) // Add a delay to each bar based on its index
-        .attr('y', d => y(d.height)) // Set the y attribute to the height of the bar
-        .attr('height', d => height - y(d.height)) // Set the height of the bar
+        .delay((d: any, i: number) => i * 50) // Add a delay to each bar based on its index
+        .attr('y', (d: { height: any; }) => y(d.height)) // Set the y attribute to the height of the bar
+        .attr('height', (d: { height: any; }) => height - y(d.height)) // Set the height of the bar
      };
 
   // Call the waveTransition function to animate the bars
