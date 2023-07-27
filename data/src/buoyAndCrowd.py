@@ -18,8 +18,7 @@ class Collect:
             buoy.addData(self.local)
             
     def addCrowdData(self):
-        for spot in self.spots:
-            spot.addCrowdData(self.local)
+        spots[0].addCrowdData(self.local)
             
     def run(self):
         self.addBuoyData()
