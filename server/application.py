@@ -182,10 +182,10 @@ def get_crowd_data():
         spot_id = spotDict[str(request.args['spot'])]
         print(spot_id)
         print(type(spot_id))
-        clause = "SELECT * FROM crowd WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        clause = "SELECT * FROM crowd WHERE spotid = '" + spot_id + "'ORDER BY timestamp;"
         
     else: 
-        clause = "SELECT * FROM crowd WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+        clause = "SELECT * FROM crowd ORDER BY timestamp;"
     
     print("Connecting to Supabase instance")
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
