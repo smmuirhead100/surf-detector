@@ -1,12 +1,9 @@
-import './App.css'
+import SwellChart from "./components/swellChart"
 
-function App() {
-
+export default function App() {
   return (
-    <>
-      <h1>React App</h1>test
-    </>
+    <div>
+      <SwellChart spot='malibu' />
+    </div>
   )
 }
-
-export default App
