@@ -43,7 +43,7 @@ export default function swellChart(props: any) {
       }
 
       // Define the dimensions of the chart
-      const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+      const margin = { top: 20, right: 50, bottom: 30, left: 40 };
       const width = 6000 - margin.left - margin.right;
       const height = 400 - margin.top - margin.bottom;
 
@@ -66,15 +66,27 @@ export default function swellChart(props: any) {
         .attr('transform', `translate(${margin.left + 50},${margin.top})`);
 
       // Add the bars
-      svg.selectAll('.bar')
+      const bars = svg.selectAll('.bar')
         .data(data)
         .enter().append('rect')
         .attr('class', 'bar')
         .attr('x', d => x(d.time))
         .attr('width', x.bandwidth())
-        .attr('y', d => y(d.height))
-        .attr('height', d => height - y(d.height))
+        .attr('y', height) // Set initial y position of bars to the bottom of the chart
+        .attr('height', 0) // Set initial height of bars to 0
         .attr('fill', 'steelblue')
+
+    // Define a function for the wave transition
+    const waveTransition = (bar:any) => {
+        bar.transition()
+        .duration(1000) // Set the duration of each transition to 1 second
+        .delay((d, i) => i * 50) // Add a delay to each bar based on its index
+        .attr('y', d => y(d.height)) // Set the y attribute to the height of the bar
+        .attr('height', d => height - y(d.height)) // Set the height of the bar
+     };
+
+  // Call the waveTransition function to animate the bars
+  waveTransition(bars);
 
       // Add the x-axis
       svg.append('g')
