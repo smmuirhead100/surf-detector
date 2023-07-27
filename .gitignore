@@ -6,3 +6,4 @@ venv/
 recentCaptures/
 flask_env/
 *.pyc
+frontend_env/

@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      test
+      <h1>React App</h1>test
     </>
   )
 }
