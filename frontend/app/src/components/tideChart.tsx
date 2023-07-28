@@ -34,6 +34,11 @@ const TideChart = (props: any) => {
   }, [props.spot]);
   
   useEffect(() => {
+    interface DataPoint {
+        x: { index: number, value: string};
+        y: number;
+      }
+    
     if (!isLoading && tideData.length > 0) {
         let data = tideData
         let height = 300;
@@ -64,7 +69,7 @@ const TideChart = (props: any) => {
         .range([innerHeight, 0]);
 
         // Create the line generator
-        const line = d3.line()
+        const line = d3.line<DataPoint>()
         .x(d => x(d.x.index))
         .y(d => y(d.y))
         .curve(d3.curveMonotoneX);
@@ -91,7 +96,7 @@ const TideChart = (props: any) => {
         // Add event handlers to highlight nearest point on hover
         svg.on('mousemove', function (event) {
             const [mouseX] = d3.pointer(event);
-            const bisect = d3.bisector(d => d.x.index).left;
+            const bisect = (d3.bisector((d: any) => (d.x as { index: number }).index)).left;
             const x0 = x.invert(mouseX);
             const index = bisect(data, x0, 1);
         
@@ -118,7 +123,8 @@ const TideChart = (props: any) => {
        // Var to store the x-axis label
         const xAxisLabel = d3.axisBottom(x)
             .ticks(data.length / 4)
-            .tickFormat(d => data[d]?.x.value || 'error');
+            .tickFormat(d => data[d.valueOf()].x.value || 'error');
+
 
         // Add the x-axis
         g.append('g')
