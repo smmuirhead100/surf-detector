@@ -99,7 +99,7 @@ const TideChart = (props: any) => {
             if (index === 0) {
             nearestDataPoint = data[index];
             } else {
-            const d0 = data[index - 1];
+            const d0 = data[index - 3]; // Not sure why the -3 was necessary but it made everything more accurate. Figure this out. 
             const d1 = data[index];
             nearestDataPoint =
                 x0 - d0.x > d1.x - x0 ? d1 : d0;
@@ -108,7 +108,7 @@ const TideChart = (props: any) => {
             circles.attr('r', d => (d === nearestDataPoint ? 5 : 0));
 
             // Display y-value of nearest data point
-            props.handleTide(nearestDataPoint.y);
+            props.handleTide(nearestDataPoint.y, nearestDataPoint.x.value);
         }).on('mouseout', function () {
 
         // Clear y-value display on mouseout

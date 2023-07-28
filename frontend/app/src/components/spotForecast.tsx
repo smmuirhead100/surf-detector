@@ -6,9 +6,11 @@ import { useState } from 'react'
 
 export default function SpotForecast(props: any) {
     const [tide, setTide] = useState(null)
+    const [tideTime, setTideTime] = useState(null)
     
-    function handleTide(val: number) {
-        setTide(val)
+    function handleTide(tide: number, time: string) {
+        setTide(tide)
+        setTideTime(time)
     }
     return (
         <div className="spot--forecast--wrapper">
@@ -27,7 +29,10 @@ export default function SpotForecast(props: any) {
                     <div className='spot--forecast--chart'>
                         <TideChart spot={props.spot} handleTide={handleTide}/>
                     </div>
-                    <h3>{tide}</h3>
+                    <div className="tide--display">
+                        <p>{tide}</p>
+                        <p>{tideTime}</p>
+                    </div>
                 </div>
             </div>
         </div>
