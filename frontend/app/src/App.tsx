@@ -1,9 +1,9 @@
-import SwellChart from "./components/swellChart"
+import SpotForecast from "./components/spotForecast"
 
 export default function App() {
   return (
     <div>
-      <SwellChart spot='malibu' />
+      <SpotForecast spot='malibu' />
     </div>
   )
 }

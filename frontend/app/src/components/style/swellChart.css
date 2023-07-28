@@ -1,4 +1,26 @@
 .swellChart {
     width: 100%;
-    overflow: scroll;
+    overflow: hidden;
+}
+
+.loadingChartWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+}
+
+.loadingChart { 
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    border: solid;
+}
+
+.loadingChart img {
+    width: 3rem;
 }

@@ -1,6 +1,7 @@
 import './style/swellChart.css'
 import * as d3 from "d3";
 import {useRef, useEffect, useState} from "react";
+import loading from '../assets/loading.gif'
 
 export default function swellChart(props: any) {
   const [waveData, setWaveData] = useState([]); // Data to be used for chart. 
@@ -47,9 +48,9 @@ export default function swellChart(props: any) {
       }
 
       // Define the dimensions of the chart
-      const margin = { top: 20, right: 50, bottom: 30, left: 40 };
+      const margin = { top: 20, right: 50, bottom: 30, left: 0 };
       const width = 6000 - margin.left - margin.right;
-      const height = 400 - margin.top - margin.bottom;
+      const height = 300 - margin.top - margin.bottom;
 
       // Define the scales
       const x = d3.scaleBand()
@@ -78,7 +79,7 @@ export default function swellChart(props: any) {
         .attr('width', x.bandwidth())
         .attr('y', height) // Set initial y position of bars to the bottom of the chart
         .attr('height', 0) // Set initial height of bars to 0
-        .attr('fill', 'steelblue')
+        .attr('fill', '#257CFF')
 
     // Define a function for the wave transition
     const waveTransition = (bar:any) => {
@@ -102,23 +103,21 @@ export default function swellChart(props: any) {
       svg.append('g')
         .attr('class', 'y-axis')
         .call(d3.axisLeft(y));
-
-      // Add the y-axis label
-      svg.append('text')
-        .attr('transform', 'rotate(-90)')
-        .attr('y', 0 - margin.left)
-        .attr('x', 0 - (height / 2))
-        .attr('dy', '0em')
-        .style('text-anchor', 'middle')
-        .text('Height (ft)');
     }
   }, [isLoading, waveData]);
 
   return (
     <div>
-      {isLoading ? <p>Loading...</p> : 
-        <div className='swellChart'>
-            <div ref={chartRef}></div>
+      {isLoading ? 
+          <div className='loadingChartWrapper'>
+            <div className='loadingChart'>
+                <img src={loading}/>
+                <h2>Loading</h2>
+            </div> 
+          </div>
+          : 
+          <div className='swellChart'>
+              <div ref={chartRef}></div>
           </div>}
     </div>
   );

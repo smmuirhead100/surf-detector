@@ -1,0 +1,35 @@
+.spot--forecast--wrapper {
+    display: flex;
+}
+
+.spot--forecast--content {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 2rem;
+    overflow: hidden;
+    min-width: 0px;
+    width: 100%;
+}
+.spot--forecast--swell--chart--wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 2rem;
+    overflow: hidden;
+    min-width: 0px;
+    background-color: white;
+    border-radius: 2rem;
+}
+
+.spot--forecast--swell--chart--wrapper h3 {
+    margin-left: 2rem;
+}
+
+.spot--forecast--swell--chart {
+    display: flex;
+    background-color: white;
+    border-radius: 2rem;
+    overflow: scroll;
+    width: 100%;
+}
