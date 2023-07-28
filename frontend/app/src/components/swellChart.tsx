@@ -2,6 +2,7 @@ import './style/swellChart.css'
 import * as d3 from "d3";
 import {useRef, useEffect, useState} from "react";
 import loading from '../assets/loading.gif'
+import unixToTime from '../utils/unixToTime'
 
 export default function swellChart(props: any) {
   const [waveData, setWaveData] = useState([]); // Data to be used for chart. 
@@ -11,16 +12,6 @@ export default function swellChart(props: any) {
   interface Data {
     time: any, 
     height: any
-  }
-  // Converts unix time to formatted time: month/day, hour:minute
-  function unixToTime(unixTime: number) {
-    const date = new Date(unixTime * 1000);
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = "0" + date.getMinutes();
-    const formattedTime = `${month}/${day} ${hours}:${minutes.substr(-2)}`;
-    return formattedTime;
   }
 
   useEffect(() => {

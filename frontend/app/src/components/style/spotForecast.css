@@ -11,7 +11,7 @@
     min-width: 0px;
     width: 100%;
 }
-.spot--forecast--swell--chart--wrapper {
+.spot--forecast--chart--wrapper {
     display: flex;
     flex-direction: column;
     max-width: 100%;
@@ -20,16 +20,29 @@
     min-width: 0px;
     background-color: white;
     border-radius: 2rem;
+    padding: 2rem;
+    padding-top: 1rem;
 }
 
 .spot--forecast--swell--chart--wrapper h3 {
     margin-left: 2rem;
 }
 
-.spot--forecast--swell--chart {
+.spot--forecast--chart {
     display: flex;
     background-color: white;
     border-radius: 2rem;
     overflow: scroll;
     width: 100%;
+}
+
+.spot--forecast--swell--chart::after {
+    /* Create a pseudo-element after .spot--forecast--swell--chart to create the gradient */
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3rem; /* The width of the gradient fading effect */
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white); /* Change the color stops as needed */
 }
