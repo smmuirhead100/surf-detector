@@ -75,8 +75,8 @@ const TideChart = (props: any) => {
         .attr('class', 'line')
         .attr('d', line)
         .attr('fill', 'none')
-        .attr('stroke', '#5BE2FF')
-        .attr('stroke-width', 2)
+        .attr('stroke', 'rgba(65, 0, 202, 0.60)')
+        .attr('stroke-width', 3)
 
         // Add circles for each data point
         const circles = g.selectAll('circle')
@@ -108,7 +108,7 @@ const TideChart = (props: any) => {
             circles.attr('r', d => (d === nearestDataPoint ? 5 : 0));
 
             // Display y-value of nearest data point
-            setCurrentYValue(nearestDataPoint.y);
+            props.handleTide(nearestDataPoint.y);
         }).on('mouseout', function () {
 
         // Clear y-value display on mouseout
@@ -128,14 +128,13 @@ const TideChart = (props: any) => {
         // Add the y-axis
         g.append('g')
         .call(d3.axisLeft(y));
-    }
+        }
 
-}, [isLoading, tideData]);
+    }, [isLoading, tideData]);
 
   return (
     <div>
-        <div ref={chartRef} className="chart"></div>
-        <h2>{currentYValue}</h2>
+        <div ref={chartRef} className="chart"></div> 
     </div>
   );
 };
