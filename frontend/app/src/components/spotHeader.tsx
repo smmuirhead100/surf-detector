@@ -8,8 +8,14 @@ export default function SpotHeader(props: any) {
     };
 
     return (
-        <div className='spot--header'>
-        <h1>{capitalizeFirstLetter(props.spot)}</h1>
+        <div
+          className='spot--header'
+          style={{
+            backgroundImage: `url('/coverPhotos/${props.spot}.png')`
+          }}
+        >
+          <h1>{capitalizeFirstLetter(props.spot)}</h1>
         </div>
-    );
+      );
 }
+      
