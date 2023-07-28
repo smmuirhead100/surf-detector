@@ -14,12 +14,18 @@ const TideChart = (props: any) => {
     fetch(`https://goldfish-app-qsewy.ondigitalocean.app/tide?spot=${props.spot}`)
       .then(response => response.json())
       .then(data => {
-        for (let i = 0; i < data.length; i = i + 6) {
-            let obj = {
-                x: {index: i, value: unixToTime(data[i]['timestamp'])},
-                y: data[i]['height']
+        let timestamps = [];
+        let index = 0;
+        for (let i = 0; i < data.length; i++) {
+            if (! timestamps.includes(data[i]['timestamp']) && data[i]['type'] === 'NORMAL') {
+                let obj = {
+                    x: {index: index, value: unixToTime(data[i]['timestamp'])},
+                    y: data[i]['height']
+                }
+                index ++;
+                timestamps.push(data[i]['timestamp'])
+                setTideData(prevState => [...prevState, obj])
             }
-            setTideData(prevState => [...prevState, obj])
         }
         console.log(tideData)
         setIsLoading(false); // Set loading state to false
@@ -69,7 +75,8 @@ const TideChart = (props: any) => {
         .attr('class', 'line')
         .attr('d', line)
         .attr('fill', 'none')
-            .attr('stroke', 'steelblue')
+        .attr('stroke', '#5BE2FF')
+        .attr('stroke-width', 2)
 
         // Add circles for each data point
         const circles = g.selectAll('circle')
@@ -79,7 +86,7 @@ const TideChart = (props: any) => {
         .attr('cx', d => x(d.x.index))
         .attr('cy', d => y(d.y))
         .attr('r', 0)
-        .attr('fill', 'steelblue');
+        .attr('fill', '#257CFF');
 
         // Add event handlers to highlight nearest point on hover
         svg.on('mousemove', function (event) {
@@ -108,10 +115,15 @@ const TideChart = (props: any) => {
         setCurrentYValue('');
         });
 
+       // Var to store the x-axis label
+        const xAxisLabel = d3.axisBottom(x)
+            .ticks(data.length / 4)
+            .tickFormat(d => data[d]?.x.value || 'error');
+
         // Add the x-axis
         g.append('g')
         .attr('transform', `translate(0, ${innerHeight})`)
-        .call(d3.axisBottom(x).tickFormat(d => data[d]?.x.value || 'error'));
+        .call(xAxisLabel)
 
         // Add the y-axis
         g.append('g')
