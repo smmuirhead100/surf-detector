@@ -22,6 +22,7 @@ export default function swellChart(props: any) {
       .then(data => {
         setWaveData(data);
         setIsLoading(false); // Set loading state to false
+        props.handleLoading()
       })
       .catch(error => console.log(error))
   }, []);

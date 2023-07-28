@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import unixToTime from '../utils/unixToTime';
+import loading from '../assets/loading.gif'
 
 const TideChart = (props: any) => {
   const chartRef = useRef(null);
-  const [currentYValue, setCurrentYValue] = useState('');
   const [tideData, setTideData] = useState([]); // Data to be used for chart.
   const [isLoading, setIsLoading] = useState(true); // Loading state
 
@@ -28,6 +28,7 @@ const TideChart = (props: any) => {
             }
         }
         console.log(tideData)
+        props.handleLoading()
         setIsLoading(false); // Set loading state to false
       })
       .catch(error => console.log(error))
@@ -115,9 +116,6 @@ const TideChart = (props: any) => {
             // Display y-value of nearest data point
             props.handleTide(nearestDataPoint.y, nearestDataPoint.x.value);
         }).on('mouseout', function () {
-
-        // Clear y-value display on mouseout
-        setCurrentYValue('');
         });
 
        // Var to store the x-axis label
@@ -140,7 +138,17 @@ const TideChart = (props: any) => {
 
   return (
     <div>
-        <div ref={chartRef} className="chart"></div> 
+      {isLoading ? 
+          <div className='loadingChartWrapper'>
+            <div className='loadingChart'>
+                <img src={loading}/>
+                <h2>Loading</h2>
+            </div> 
+          </div>
+          : 
+          <div className='swellChart'>
+              <div ref={chartRef}></div>
+          </div>}
     </div>
   );
 };

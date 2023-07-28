@@ -24,16 +24,30 @@
     padding-top: 1rem;
 }
 
-.spot--forecast--swell--chart--wrapper h3 {
-    margin-left: 2rem;
-}
-
-.spot--forecast--chart {
+.spot--forecast--swell--chart {
     display: flex;
     background-color: white;
     border-radius: 2rem;
     overflow: scroll;
     width: 100%;
+    justify-content: flex-start;
+}
+
+.spot--forecast--tide--chart {
+    display: flex;
+    background-color: white;
+    border-radius: 2rem;
+    overflow: scroll;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.spot--forecast--tide--chart--loading {
+    justify-content: center;
+}
+
+.spot--forecast--swell--chart--loading {
+    justify-content: center;
 }
 
 .spot--forecast--swell--chart::after {
