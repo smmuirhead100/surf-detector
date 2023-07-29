@@ -1,0 +1,12 @@
+.profile--header {
+    display: flex;
+    height: 10rem;
+    border-radius: 2rem;
+    margin-right: 2rem;
+    background-position-y: bottom;
+    align-items: center;
+    background-color: white;
+    width: fit-content;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}

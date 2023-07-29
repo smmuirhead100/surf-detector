@@ -3,6 +3,7 @@ import SwellChart from './swellChart'
 import GeneralNavbar from './generalNavbar'
 import TideChart from './tideChart'
 import SpotHeader from './spotHeader'
+import ProfileHeader from './profileHeader'
 import { useState } from 'react'
 
 export default function SpotForecast(props: any) {
@@ -24,16 +25,17 @@ export default function SpotForecast(props: any) {
         setTideChartLoading(false)
     }
    
-
-
     return (
         <div className="spot--forecast--wrapper">
+            
             <GeneralNavbar />
+            
             <div className="spot--forecast--content">
                 
                 {/**Spot Title */}
                 <div className='spot--forecast--header--wrapper'>
                     <SpotHeader spot={props.spot} />
+                    <ProfileHeader />
                 </div>
 
                 {/**Swell Chart */}

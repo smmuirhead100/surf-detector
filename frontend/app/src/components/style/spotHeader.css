@@ -1,6 +1,5 @@
 .spot--header {
     display: flex;
-    background-image: url('../../assets/coverPhotos/malibu.png');
     background-repeat: no-repeat;
     background-size: cover;
     height: 10rem;
@@ -10,6 +9,7 @@
     background-position-y: bottom;
     color: white;
     align-items: center;
+    width: 100%;
 }
 
 .spot--header h1 {

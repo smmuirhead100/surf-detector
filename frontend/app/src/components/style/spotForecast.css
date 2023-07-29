@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.spot--forecast--header--wrapper {
+    display: flex; 
+}
+
 .spot--forecast--content {
     display: flex;
     flex-direction: column;
