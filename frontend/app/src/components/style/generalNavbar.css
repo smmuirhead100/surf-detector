@@ -10,8 +10,11 @@
     justify-content: center;
     align-items: center;
     padding-left: 1rem;
+    padding: 1rem;
 }
+
 .navbar--wrapper ul {
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 4rem;
