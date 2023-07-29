@@ -1,11 +1,11 @@
-.navbar--wrapper {
+.general--navbar {
     background-color: white;
     margin: 0px;
     width: 20rem;
     height: 100vh;
 }
 
-.navbar--logo {
+.general--navbar--logo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,11 +13,17 @@
     padding: 1rem;
 }
 
-.navbar--wrapper ul {
+.general--navbar ul {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 4rem;
     font-weight: bold;
     font-size: 1.25rem;
+}
+
+.general--navbar li:hover {
+    cursor: default;
+    transition: .1s linear;
+    transform: translate(2px);
 }
