@@ -14,7 +14,7 @@ application = app
 
 spotDict = {
     'malibu': '5842041f4e65fad6a7708817',
-    'huntingtonbeach': '5842041f4e65fad6a77088ea'
+    'huntington_beach': '5842041f4e65fad6a77088ea'
 }
 
 @app.route('/')
@@ -240,6 +240,26 @@ def get_buoy_data():
     
     # Convert the result into JSON format
     json_result = json.dumps(tide_data)
+    
+    return json_result
+
+@application.route("/spots", methods=['GET'])
+def get_spots():
+    
+    clause = "SELECT DISTINCT spotid FROM wave;"
+    
+    print("Connecting to Supabase instance")
+    conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
+    with conn.cursor() as cur:
+        cur.execute(clause)
+        result = cur.fetchall()
+        conn.commit()
+        cur.close()
+    
+    spots = [row[0] for row in result]
+    
+    # Convert the result into JSON format
+    json_result = json.dumps(spots)
     
     return json_result
 
