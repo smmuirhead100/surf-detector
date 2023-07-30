@@ -17,13 +17,39 @@
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
     font-weight: bold;
     font-size: 1.25rem;
 }
 
+.general--navbar li {
+    display: flex; 
+    align-items: center;
+    gap: .5rem;
+    margin-top: 3rem;
+}
+
+.general--navbar li img {
+    width: 12px;
+}
 .general--navbar li:hover {
     cursor: default;
     transition: .1s linear;
     transform: translate(2px);
+}
+
+.navbar--dropdown {
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 0px;
+    padding: 1rem;
+    padding-bottom: 0px;
+
+}
+
+.navbar--dropdown li{
+    margin: 1px;
+    
 }
