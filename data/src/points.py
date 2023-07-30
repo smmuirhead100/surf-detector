@@ -2,8 +2,12 @@ from surfline.spot import Spot
 from noaa.buoy import Buoy
 
 spots = [
+        # West Coast
         Spot('Malibu', '5842041f4e65fad6a7708817', 'malibuclose', '46222'),
-        Spot('Huntington Beach, 20th', '5842041f4e65fad6a77088ea', 'twentiethst', '46222')
+        Spot('Huntington Beach, 20th', '5842041f4e65fad6a77088ea', 'twentiethst', '46222'), 
+        Spot('Newport Beach, 56th', '5842041f4e65fad6a7708e54', 'fiftysixnewport', '46222'), 
+        Spot('Salt Creek', '5842041f4e65fad6a770882e', 'saltcreek', '46277'),
+        Spot('San Onofre', '5842041f4e65fad6a7708831', 'sanonofre', '46275')
         ]
 
 buoys = [
