@@ -28,7 +28,9 @@ export default function SpotForecast(props: any) {
     return (
         <div className="spot--forecast--wrapper">
             
-            <GeneralNavbar />
+            <div className="general--navbar--wrapper">
+                <GeneralNavbar />
+            </div>
             
             <div className="spot--forecast--content">
                 

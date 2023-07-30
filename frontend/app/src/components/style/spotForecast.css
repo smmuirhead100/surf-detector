@@ -3,7 +3,13 @@
 }
 
 .spot--forecast--header--wrapper {
-    display: flex; 
+    display: flex;
+}
+
+.general--navbar--wrapper {
+    top: 0;
+    position: sticky;
+    height: fit-content;
 }
 
 .spot--forecast--content {
@@ -11,9 +17,10 @@
     flex-direction: column;
     max-width: 100%;
     margin: 2rem;
-    overflow: hidden;
+    overflow: scroll;
     min-width: 0px;
     width: 100%;
+
 }
 .spot--forecast--chart--wrapper {
     display: flex;
