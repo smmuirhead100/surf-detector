@@ -1,12 +1,20 @@
 .profile--header {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 10rem;
-    border-radius: 2rem;
     margin-right: 2rem;
-    background-position-y: bottom;
     align-items: center;
-    background-color: white;
     width: fit-content;
     padding-left: 1rem;
     padding-right: 1rem;
+    gap: 0px;
+    padding: 0px;
+}
+
+.profile--header p {
+    margin: 4px;
+    padding: 0px;
+    font-size: 14px;
+    color: #666666;
 }
