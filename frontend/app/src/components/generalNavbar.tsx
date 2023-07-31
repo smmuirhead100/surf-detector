@@ -2,12 +2,19 @@ import './style/generalNavbar.css'
 import logo from '../assets/logo.svg'
 import plus from '../assets/plus.svg'
 import minus from '../assets/minus.svg'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import getSpots from '../utils/getSpots'
 
 export default function GeneralNavbar() {
     const [spotsOpen, setSpotsOpen] = useState(false)
     const [camsOpen, setCamsOpen] = useState(false)
+    const [spots, setSpots] = useState([])
     
+    useEffect(() => {
+        getSpots()
+        .then(data => setSpots(data))
+    },[])
+
     function handleSpotsClick(){
         setSpotsOpen(prev => !prev)
     }
@@ -27,11 +34,9 @@ export default function GeneralNavbar() {
                 </li>
                 {spotsOpen ?                                        // Render Spots if is open
                     <div className='navbar--dropdown'>
-                        <li>San Diego</li>
-                        <li>Huntington Beach</li>
-                        <li>Newport Beach</li>
-                        <li>Malibu</li>
-                        <li>Ventura</li>
+                        {spots.map((spot) => (
+                        <li>{spot}</li>
+                        ))}
                     </div> : null
                 }
                 
