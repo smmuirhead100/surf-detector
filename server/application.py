@@ -17,6 +17,15 @@ spotDict = {
     'huntington_beach': '5842041f4e65fad6a77088ea'
 }
 
+nameDict = {
+    '5842041f4e65fad6a7708817': 'Malibu',
+    '5842041f4e65fad6a77088ea': 'Huntington Beach',
+    '5842041f4e65fad6a7708e54': 'Newport Beach',
+    '5842041f4e65fad6a770882e': 'Salt Creek', 
+    '5842041f4e65fad6a7708831': 'San Onofre'
+    
+}
+
 @app.route('/')
 def hello_world():
     return 'Hello Imposter!'
@@ -256,7 +265,7 @@ def get_spots():
         conn.commit()
         cur.close()
     
-    spots = [row[0] for row in result]
+    spots = [nameDict[row[0]] for row in result]
     
     # Convert the result into JSON format
     json_result = json.dumps(spots)
