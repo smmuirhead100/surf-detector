@@ -6,7 +6,9 @@ import unixToTime from '../utils/unixToTime'
 
 export default function swellChart(props: any) {
   const [waveData, setWaveData] = useState([]); // Data to be used for chart. 
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [isWaveLoading, setIsWaveLoading] = useState(true); // Loading state
+  const [isRatingLoading, setIsRatingLoading] = useState(true);
+  const [ratingData, setRatingData] = useState([]) // Rating data to be used for chart
   const chartRef = useRef(null);
 
   interface Data {
@@ -21,20 +23,35 @@ export default function swellChart(props: any) {
       .then(response => response.json())
       .then(data => {
         setWaveData(data);
-        setIsLoading(false); // Set loading state to false
-        props.handleLoading()
+        setIsWaveLoading(false); // Set loading state to false
       })
       .catch(error => console.log(error))
   }, []);
 
   useEffect(() => {
-    if (!isLoading && waveData.length > 0) { // Only render chart if data is loaded
+    // Fetch rating data from API
+    if (!isWaveLoading && waveData.length > 0) {
+      console.log('Getting rating data')
+      fetch(`https://goldfish-app-qsewy.ondigitalocean.app/rating?spot=${props.spot}`)
+        .then(response => response.json())
+        .then(data => {
+          setRatingData(data)
+          setIsRatingLoading(false)
+          props.handleLoading()
+        })
+        .catch(error => console.log(error))
+      }
+  }, [isWaveLoading, waveData])
+
+  useEffect(() => {
+    if (!isRatingLoading && ratingData.length > 0) { // Only render chart if data is loaded
       // Define the data
       const data = [];
       for (let i = 0; i < waveData.length; i = i + 6) {
           let obj = {
               time: unixToTime(waveData[i]['timestamp']),
-              height: (waveData[i]['surf']['rawSurf']['rawMin'] + waveData[i]['surf']['rawSurf']['rawMax']) / 2
+              height: (waveData[i]['surf']['rawSurf']['rawMin'] + waveData[i]['surf']['rawSurf']['rawMax']) / 2,
+              rating: (ratingData[i]['rating']['value'])
           }
           data.push(obj)
       }
@@ -67,11 +84,21 @@ export default function swellChart(props: any) {
         .data(data)
         .enter().append('rect')
         .attr('class', 'bar')
-        .attr('x', (d: Data ) => x(d.time))
+        .attr('x', (d: Data) => x(d.time))
         .attr('width', x.bandwidth())
         .attr('y', height) // Set initial y position of bars to the bottom of the chart
         .attr('height', 0) // Set initial height of bars to 0
-        .attr('fill', '#257CFF')
+        .attr('fill', (d: { rating: number }) => {
+          // Set the fill color based on the rating value
+          if (d.rating >= 0 && d.rating < 2) {
+            return '#FF8585';
+          } else if (d.rating >= 2 && d.rating < 4) {
+            return '#FFDC61';
+          } else if (d.rating >= 4) {
+            return '#71FF76';
+          }
+          return '#257CFF'; // Default fill color if rating is not within any range
+        });
 
     // Define a function for the wave transition
     const waveTransition = (bar:any) => {
@@ -96,11 +123,11 @@ export default function swellChart(props: any) {
         .attr('class', 'y-axis')
         .call(d3.axisLeft(y));
     }
-  }, [isLoading, waveData]);
+  }, [isRatingLoading, ratingData]);
 
   return (
     <div>
-      {isLoading ? 
+      {isRatingLoading ? 
           <div className='loadingChartWrapper'>
             <div className='loadingChart'>
                 <img src={loading}/>
