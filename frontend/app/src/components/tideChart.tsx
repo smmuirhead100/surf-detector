@@ -105,7 +105,7 @@ const TideChart = (props: any) => {
             if (index === 0) {
             nearestDataPoint = data[index];
             } else {
-            const d0 = data[index - 3]; // Not sure why the -3 was necessary but it made everything more accurate. Figure this out. 
+            const d0 = data[index - 2]; // Not sure why the -3 was necessary but it made everything more accurate. Figure this out. 
             const d1 = data[index];
             nearestDataPoint =
                 x0 - d0.x > d1.x - x0 ? d1 : d0;

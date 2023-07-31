@@ -13,7 +13,8 @@ export default function swellChart(props: any) {
 
   interface Data {
     time: any, 
-    height: any
+    height: any,
+    rating: any
   }
 
   useEffect(() => {
@@ -78,6 +79,12 @@ export default function swellChart(props: any) {
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
         .attr('transform', `translate(${margin.left + 50},${margin.top})`);
+      
+      // Add a tooltip
+      const tooltip = d3.select(chartRef.current)
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
 
       // Add the bars
       const bars = svg.selectAll('.bar')
@@ -98,6 +105,17 @@ export default function swellChart(props: any) {
             return '#71FF76';
           }
           return '#257CFF'; // Default fill color if rating is not within any range
+        })
+        .on("mouseover", (event, d) => {
+          // Show the tooltip on mouseover
+          tooltip.transition().duration(200).style("opacity", 0.9);
+          tooltip.html(`<strong>Height:</strong> ${d.height}<br/><strong>Rating:</strong> ${d.rating}`)
+            .style("left", `${event.pageX}px`)
+            .style("top", `${event.pageY - 28}px`);
+        })
+        .on("mouseout", () => {
+          // Hide the tooltip on mouseout
+          tooltip.transition().duration(500).style("opacity", 0);
         });
 
     // Define a function for the wave transition
