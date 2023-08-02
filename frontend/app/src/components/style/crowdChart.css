@@ -1,0 +1,48 @@
+.crowdChart {
+    width: fit-content;
+    overflow: hidden;
+    font-size: 24px;
+    font-weight: normal;
+    display: flex;
+    flex-direction: column;
+    overflow:visible;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    border: solid;
+}
+
+.crowdChart span {
+    color: #257CFF;
+    font-weight: bold;
+}
+
+.crowd--chart--updated {
+    font-size: 14px;
+    color: #787FA0;
+}
+.loadingChartWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    justify-self: stretch;
+}
+
+.loadingChart { 
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    justify-self: stretch;
+    align-self: stretch;
+}
+
+.loadingChart img {
+    width: 3rem;
+}
+

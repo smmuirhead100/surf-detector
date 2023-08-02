@@ -71,3 +71,9 @@
     height: 100%;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), white); /* Change the color stops as needed */
 }
+
+.spot--forecast--chart--wrapper--small {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}

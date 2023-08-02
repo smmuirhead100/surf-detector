@@ -4,6 +4,7 @@ import GeneralNavbar from './generalNavbar'
 import TideChart from './tideChart'
 import SpotHeader from './spotHeader'
 import ProfileHeader from './profileHeader'
+import CrowdChart from './crowdChart'
 import { useState } from 'react'
 
 export default function SpotForecast(props: any) {
@@ -11,6 +12,7 @@ export default function SpotForecast(props: any) {
     const [tideTime, setTideTime] = useState(null)
     const [swellChartLoading, setSwellChartLoading] = useState(true)
     const [tideChartLoading, setTideChartLoading] = useState(true)
+    const [crowdLoading, setCrowdLoading] = useState(true)
     
     function handleTide(tide: number, time: string) {
         setTide(tide)
@@ -23,6 +25,10 @@ export default function SpotForecast(props: any) {
 
     function handleTideChartLoading() {
         setTideChartLoading(false)
+    }
+
+    function handleCrowdChart() {
+        setCrowdLoading(false)
     }
    
     return (
@@ -59,6 +65,17 @@ export default function SpotForecast(props: any) {
                         <p>{tideTime}</p>
                     </div>
                 </div>
+
+                {/**Crowd Chart */}
+                
+                <div className='spot--forecast--chart--wrapper'>
+                    <CrowdChart spot={props.spot} handleLoading={handleCrowdLoading}/>
+                </div>
+
+                <div className='spot--forecast--chart--wrapper'>
+                    <div>test</div>
+                </div>
+             
 
 
             </div>
