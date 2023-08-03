@@ -27,7 +27,7 @@ export default function SpotForecast(props: any) {
         setTideChartLoading(false)
     }
 
-    function handleCrowdChart() {
+    function handleCrowdLoading() {
         setCrowdLoading(false)
     }
    
@@ -66,10 +66,20 @@ export default function SpotForecast(props: any) {
                     </div>
                 </div>
 
-                {/**Crowd Chart */}
                 
-                <div className='spot--forecast--chart--wrapper'>
-                    <CrowdChart spot={props.spot} handleLoading={handleCrowdLoading}/>
+                
+                <div className='spot--forecast--chart--wrapper--small'>
+                   
+                    {/**Crowd Chart */}
+                    <div className='spot--forecast--chart--wrapper'>
+                        <h3>Crowd</h3>
+                        <div className={crowdLoading ? 'spot--forecast--crowd--loading' : 'spot--forecast--crowd--wrapper'}>
+                            <CrowdChart spot={props.spot} handleLoading={handleCrowdLoading}/>
+                        </div>
+                    </div>
+
+                    {/**Extended Forecast */}
+
                 </div>
 
                 <div className='spot--forecast--chart--wrapper'>

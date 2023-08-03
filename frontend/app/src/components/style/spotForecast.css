@@ -72,6 +72,22 @@
     background: linear-gradient(to right, rgba(255, 255, 255, 0), white); /* Change the color stops as needed */
 }
 
+.spot--forecast--crowd--wrapper {
+    display: flex;
+    width: fit-content;
+    margin: 2rem;
+    overflow: hidden;
+    min-width: 0px;
+    background-color: white;
+    border-radius: 2rem;
+    padding: 2rem;
+    padding-top: 1rem;
+    justify-content: center;
+}
+
+.spot--forecast--crowd--loading {
+    width: 10rem;
+}
 .spot--forecast--chart--wrapper--small {
     display: flex;
     justify-content: space-evenly;

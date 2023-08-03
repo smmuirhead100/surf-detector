@@ -18,6 +18,7 @@ export default function CrowdChart(props: any) {
             return res
         });
         setIsLoading(false); // Set loading state to false
+        props.handleLoading()
       })
       .catch(error => console.log(error))
   }, []);
