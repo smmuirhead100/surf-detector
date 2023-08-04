@@ -7,10 +7,27 @@
 3. Enter correct directory: 
     ```cd surf-detector```
 4. Choose what to work on: 
-   ```cd data``` or ```cd models``` or ```cd server```
+   ```cd data``` OR ```cd models``` OR ```cd server```
+5. Follow instructions below depending on what section your working on. 
 
 ### Data
-5. 
+6. Create a virtual environment: 
+    ```python -m venv env```
+7. Install Requirements: 
+    ```pip install -r requirements.txt```
+8. cd into source directory and run: 
+    ```cd src``` AND ```python main.py```
+
+### Models 
+6. No developer setup needed yet. 
+
+### Server
+6. Create a virtual environment: 
+    ```python -m venv env```
+7. Install Requirements: 
+    ```pip install -r requirements.txt```
+8. Run locally: 
+    ```flask run```
 
 
 ## Developer Setup (Frontend)
