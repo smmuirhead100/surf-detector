@@ -1,4 +1,21 @@
-### Open Source Surf Report
+# Open Source Surf Report
+
+## Developer Setup (Backend)
+1. Fork the repo.
+2. Clone the forked repo:
+    ```git clone git@github.com:<your_github_username>/surf-detector.git```
+3. Enter correct directory: 
+    ```cd surf-detector```
+4. Choose what to work on: 
+   ```cd data``` or ```cd models``` or ```cd server```
+
+### Data
+5. 
+
+
+## Developer Setup (Frontend)
+
+## Developer Setup (Full Stack)
 
 ## TODO (Backend)
 - [x] Implement object detection model that can detect how many surfers are in water.
