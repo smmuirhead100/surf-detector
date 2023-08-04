@@ -26,15 +26,14 @@
     align-items: center;
     gap: .5rem;
     margin-top: 3rem;
+    padding: 1rem;
 }
 
-.general--navbar li img {
-    width: 12px;
-}
-.general--navbar li:hover {
+.general--navbar .navbar--unselected--item:hover {
     cursor: default;
-    transition: .1s linear;
-    transform: translate(2px);
+    background-color: #F5F6F8;
+    border-radius: 10px;
+    margin-right: 1rem;
 }
 
 .navbar--dropdown {
@@ -51,4 +50,12 @@
 
 .navbar--dropdown li{
     margin: 1px;
+}
+
+.navbar--selected--item {
+    cursor: default;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    margin-right: 1rem;
 }

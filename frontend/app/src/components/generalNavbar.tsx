@@ -1,7 +1,5 @@
 import './style/generalNavbar.css'
 import logo from '../assets/logo.svg'
-import plus from '../assets/plus.svg'
-import minus from '../assets/minus.svg'
 import { useState, useEffect } from 'react'
 import getSpots from '../utils/getSpots'
 
@@ -29,9 +27,7 @@ export default function GeneralNavbar() {
                 <img src={logo} alt="logo" />
             </div>
             <ul className="navbar--list">
-                <li onClick={handleSpotsClick}>Spots
-                    <img src={spotsOpen ? minus : plus} />
-                </li>
+                <li className={spotsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onClick={handleSpotsClick}>Spots</li>
                 {spotsOpen ?                                        // Render Spots if is open
                     <div className='navbar--dropdown'>
                         {spots.map((spot) => (
@@ -40,9 +36,7 @@ export default function GeneralNavbar() {
                     </div> : null
                 }
                 
-                <li onClick={handleCamsClick}>Cams
-                    <img src={camsOpen ? minus : plus} />
-                </li>
+                <li className={camsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onClick={handleCamsClick}>Cams</li>
                 {camsOpen ?                                        // Render Cams if is open
                     <div className='navbar--dropdown'>
                         <li>Coming soon!</li>
