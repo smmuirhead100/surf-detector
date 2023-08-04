@@ -7,6 +7,8 @@ import cameraIconWhite from '../assets/cameraIconWhite.svg'
 import contactIconBlack from '../assets/contactIconBlack.svg'
 import aboutIconBlack from '../assets/aboutIconBlack.svg'
 import githubIconBlack from '../assets/githubIcon.png'
+import navbarLine from '../assets/navbarLine.svg'
+import logoutIcon from '../assets/logoutIcon.svg'
 import { useState, useEffect } from 'react'
 import getSpots from '../utils/getSpots'
 
@@ -30,9 +32,11 @@ export default function GeneralNavbar() {
 
     return (
         <div className="general--navbar">
+            
             <div className="general--navbar--logo">
                 <img src={logo} alt="logo" />
             </div>
+
             <ul className="navbar--list">
                 <li className={spotsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onClick={handleSpotsClick}>
                     {spotsOpen ? 
@@ -42,7 +46,7 @@ export default function GeneralNavbar() {
                     Spots
                 </li>
                 {spotsOpen ?                                        // Render Spots if is open
-                    <div className='navbar--dropdown'>
+                    <div className='navbar--dropdown--spots'>
                         {spots.map((spot) => (
                         <li>{spot}</li>
                         ))}
@@ -57,7 +61,7 @@ export default function GeneralNavbar() {
                         }
                     Cams</li>
                 {camsOpen ?                                        // Render Cams if is open
-                    <div className='navbar--dropdown'>
+                    <div className='navbar--dropdown--cams'>
                         <li>Coming soon!</li>
                     </div> : null
                 }
@@ -76,7 +80,16 @@ export default function GeneralNavbar() {
                     <img src={githubIconBlack} alt='Github Icon'/>
                     Contribute
                 </li>
+
+                <div className='general--navbar--logout'>
+                    <img src={navbarLine} />
+                    <li>
+                        <img src={logoutIcon} alt='Logout Icon'/>
+                        Logout
+                    </li>
+                </div>
             </ul>
+
         </div>
     )
 }
