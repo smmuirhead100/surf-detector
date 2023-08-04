@@ -2,7 +2,7 @@
     background-color: white;
     margin: 0px;
     width: 20rem;
-    height: 100vh;
+    height: max(50rem, 100vh);
 }
 
 .general--navbar--logo {
@@ -23,6 +23,7 @@
     font-size: 1.25rem;
     gap: 0rem;
     height: 100%;
+    overflow: scroll;
 }
 
 .general--navbar li {
@@ -51,6 +52,7 @@
     padding-bottom: 0px;
     height: 10rem;
     overflow: scroll;
+    margin: 10px;
 }
 
 .navbar--dropdown--spots li{
@@ -67,6 +69,7 @@
     padding-bottom: 0px;
     height: fit-content;
     overflow: scroll;
+    margin: 10px;
 }
 
 .navbar--dropdown--cams li{
