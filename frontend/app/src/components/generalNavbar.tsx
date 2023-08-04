@@ -62,17 +62,17 @@ export default function GeneralNavbar() {
                     </div> : null
                 }
 
-                <li>
+                <li className='navbar--unselected--item'>
                     <img src={aboutIconBlack} alt='About Icon'/>
                     About
                 </li>
 
-                <li>
+                <li className='navbar--unselected--item'>
                     <img src={contactIconBlack} alt='Contact Icon'/>
                     Contact
                 </li>
 
-                <li>
+                <li className='navbar--unselected--item'>
                     <img src={githubIconBlack} alt='Github Icon'/>
                     Contribute
                 </li>
