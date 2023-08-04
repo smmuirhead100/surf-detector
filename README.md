@@ -31,8 +31,15 @@
 
 
 ## Developer Setup (Frontend)
-
-## Developer Setup (Full Stack)
+1. Fork the repo.
+2. Clone the forked repo:
+    ```git clone git@github.com:<your_github_username>/surf-detector.git```
+3. Enter correct directory: 
+    ```cd surf-detector``` AND ```cd frontend``` AND ```cd app```
+4. Install Requirements: 
+    ```npm install```
+5. Run locally: 
+    ```npm run dev```
 
 ## TODO (Backend)
 - [x] Implement object detection model that can detect how many surfers are in water.
