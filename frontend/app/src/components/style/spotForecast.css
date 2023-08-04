@@ -20,7 +20,8 @@
     overflow: scroll;
     min-width: 0px;
     width: 100%;
-
+    min-width: 30rem;
+    overflow: scroll;
 }
 .spot--forecast--chart--wrapper {
     display: flex;
@@ -59,17 +60,6 @@
 
 .spot--forecast--swell--chart--loading {
     justify-content: center;
-}
-
-.spot--forecast--swell--chart::after {
-    /* Create a pseudo-element after .spot--forecast--swell--chart to create the gradient */
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 3rem; /* The width of the gradient fading effect */
-    height: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), white); /* Change the color stops as needed */
 }
 
 .spot--forecast--crowd--wrapper {
