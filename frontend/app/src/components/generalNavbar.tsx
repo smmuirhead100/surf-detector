@@ -1,5 +1,12 @@
 import './style/generalNavbar.css'
 import logo from '../assets/logo.svg'
+import spotsIconBlack from '../assets/spotsIconBlack.svg'
+import spotsIconWhite from '../assets/spotsIconWhite.svg'
+import cameraIconBlack from '../assets/cameraIconBlack.svg'
+import cameraIconWhite from '../assets/cameraIconWhite.svg'
+import contactIconBlack from '../assets/contactIconBlack.svg'
+import aboutIconBlack from '../assets/aboutIconBlack.svg'
+import githubIconBlack from '../assets/githubIcon.png'
 import { useState, useEffect } from 'react'
 import getSpots from '../utils/getSpots'
 
@@ -27,7 +34,13 @@ export default function GeneralNavbar() {
                 <img src={logo} alt="logo" />
             </div>
             <ul className="navbar--list">
-                <li className={spotsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onClick={handleSpotsClick}>Spots</li>
+                <li className={spotsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onClick={handleSpotsClick}>
+                    {spotsOpen ? 
+                        <img src={spotsIconWhite} alt='Spots Icon'/> 
+                        : 
+                        <img src={spotsIconBlack} alt='Spots Icon'/>}
+                    Spots
+                </li>
                 {spotsOpen ?                                        // Render Spots if is open
                     <div className='navbar--dropdown'>
                         {spots.map((spot) => (
@@ -36,20 +49,32 @@ export default function GeneralNavbar() {
                     </div> : null
                 }
                 
-                <li className={camsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onClick={handleCamsClick}>Cams</li>
+                <li className={camsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onClick={handleCamsClick}>
+                    {camsOpen ? 
+                        <img src={cameraIconWhite} alt='Camera Icon'/>
+                        :
+                        <img src={cameraIconBlack} alt='Camera Icon'/>
+                        }
+                    Cams</li>
                 {camsOpen ?                                        // Render Cams if is open
                     <div className='navbar--dropdown'>
                         <li>Coming soon!</li>
                     </div> : null
                 }
 
-                <li>About
+                <li>
+                    <img src={aboutIconBlack} alt='About Icon'/>
+                    About
                 </li>
 
-                <li>Contact
+                <li>
+                    <img src={contactIconBlack} alt='Contact Icon'/>
+                    Contact
                 </li>
 
-                <li>Contribute
+                <li>
+                    <img src={githubIconBlack} alt='Github Icon'/>
+                    Contribute
                 </li>
             </ul>
         </div>

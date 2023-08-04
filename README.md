@@ -19,5 +19,5 @@
 - [x] Chart to represent tides and current crowd.
 - [ ] Add point to tide chart showing current time.
 - [ ] Style tide chart to better represent mouse hover position. 
-- [ ] Add Icons to navbar.
+- [x] Add Icons to navbar.
 - [ ] Update root README for developer setup. 
