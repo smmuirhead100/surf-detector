@@ -2,7 +2,7 @@
     background-color: white;
     margin: 0px;
     width: 20rem;
-    height: max(50rem, 100vh);
+    height: 100vh;
 }
 
 .general--navbar--logo {
