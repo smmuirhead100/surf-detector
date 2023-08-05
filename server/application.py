@@ -14,7 +14,10 @@ application = app
 
 spotDict = {
     'malibu': '5842041f4e65fad6a7708817',
-    'huntington_beach': '5842041f4e65fad6a77088ea'
+    'huntington_beach': '5842041f4e65fad6a77088ea',
+    'newport_beach': '5842041f4e65fad6a7708e54',
+    'salt_creek': '5842041f4e65fad6a770882e',
+    'San Onofre': '5842041f4e65fad6a7708831'
 }
 
 nameDict = {

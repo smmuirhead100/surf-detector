@@ -53,7 +53,7 @@
 - [ ] Configure data collection from bouys other than SCRIPPS.
 - [ ] Train crowd prediction model. 
 - [ ] Train swell prediction model. 
-- [ ] Update root README for developer setup. 
+- [x] Update root README for developer setup. 
 
 ## TODO (Frontend)
 - [x] Add chart to represent wave height.
@@ -61,4 +61,6 @@
 - [ ] Add point to tide chart showing current time.
 - [ ] Style tide chart to better represent mouse hover position. 
 - [x] Add Icons to navbar.
-- [ ] Update root README for developer setup. 
+- [x] Update root README for developer setup. 
+- [ ] Handle Mobile Web Version for spot forecast.
+- [ ] Landing Page
