@@ -11,6 +11,11 @@ export default function SignUp() {
         let path='/signin'
         navigate(path)
     }
+
+    function handleCreateAccount() {
+        let path='submitted'
+        navigate(path)
+    }
     
     return (
         <div className="signup--wrapper">
@@ -41,7 +46,7 @@ export default function SignUp() {
                             </div>
                         </div>
 
-                        <button type="submit">Create account</button>
+                        <button type="submit" onClick={handleCreateAccount}>Create account</button>
 
                     </form>
                 </div>

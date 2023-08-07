@@ -2,6 +2,7 @@ import SpotForecast from "./components/spotForecast"
 import Home from "./components/home"
 import SignUp from "./components/signup";
 import SignIn from "./components/signin";
+import SignUpSubmitted from "./components/signupSubmitted"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/signup' element={<SignUp />}></Route>
+        <Route path='/signup/submitted/' element={<SignUpSubmitted />}></Route>
         <Route path='/signin' element={<SignIn />}></Route>
         <Route path='forecast' element={<SpotForecast spot='huntington_beach'/>}></Route>
       </Routes>
