@@ -1,0 +1,62 @@
+.home--wrapper {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    height: 100vh;
+}
+
+.home--left {
+    background-image: url('./public/home.JPG');
+    background-size: cover;
+    background-repeat: none;
+    background-position: -15rem;
+    min-height: 40rem;
+    min-width: 25rem;
+}
+
+.home--right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home--right li {
+    list-style: none;
+}
+
+.home--right .navbar {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+}
+
+.navbar--contact {
+    display: flex;
+}
+
+.navbar--contact img {
+    border: solid;
+    width: 5px;
+}
+
+.home--right .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home--right img {
+    width: 10rem;
+}
+
+.home--right .getStarted {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5rem;
+}
+
+
+
+
+
