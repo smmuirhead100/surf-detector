@@ -1,21 +1,58 @@
 import './style/signup.css'
 import logo from '../assets/logoHorizontalBlack.svg'
 import GeneralFooter from './generalFooter'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { supabase } from '../utils/supabaseClient'
+import { useRef, useState } from 'react'
 
 export default function SignUp() {
     let navigate = useNavigate()
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+    const confirmPasswordRef = useRef(null);
+    const [errorMsg, setErrorMsg] = useState("");
+    const [loading, setLoading] = useState(false);
+    const register = (email, password) =>
+    supabase.auth.signUp({ email, password });
 
     function handleSignIn(){
         let path='/signin'
         navigate(path)
     }
 
-    function handleCreateAccount() {
-        let path='submitted'
-        navigate(path)
-    }
+    async function handleCreateAccount(e) {
+        e.preventDefault();
+        if (
+          !passwordRef.current?.value ||
+          !emailRef.current?.value ||
+          !confirmPasswordRef.current?.value
+        ) {
+          setErrorMsg("Please fill all the fields");
+          return;
+        }
+        if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+          setErrorMsg("Passwords don't match");
+          return;
+        }
+        try {
+          setErrorMsg("");
+          setLoading(true);
+          const { data, error } = await register(
+            emailRef.current.value,
+            passwordRef.current.value
+          );
+          if (!error && data) {
+            let path='submitted'
+            navigate(path)
+          }
+          if(error) {
+            setErrorMsg(error.message)
+          }
+        } catch (error) {
+          setErrorMsg("Error in Creating Account");
+        }
+        setLoading(false);
+  };
     
     return (
         <div className="signup--wrapper">
@@ -31,7 +68,7 @@ export default function SignUp() {
                         <p>Already have an account? <strong onClick={handleSignIn}>Sign in.</strong></p>
                     </div>
 
-                    <form className="signup--form">
+                    <form className="signup--form" onSubmit={handleCreateAccount}>
                         <div className="signup--form--fields">
                             <div className="names">
                                 
@@ -41,13 +78,14 @@ export default function SignUp() {
                             </div>
 
                             <div className="credentials">
-                                <input type='email' className='email' placeholder='EMAIL'/>
-                                <input type='password' className='password' placeholder='PASSWORD' />
+                                <input ref={emailRef} type='email' className='email' placeholder='EMAIL' required/>
+                                <input ref={passwordRef} type='password' className='password' placeholder='PASSWORD' />
+                                <input ref={confirmPasswordRef} type='password' className='password' placeholder='CONFIRM PASSWORD' />
                             </div>
                         </div>
 
-                        <button type="submit" onClick={handleCreateAccount}>Create account</button>
-
+                        <button type="submit">{loading ? 'Loading' : 'Create account'}</button>
+                        {errorMsg != '' ? <div>Error: {errorMsg}</div> : null}
                     </form>
                 </div>
             </div>
