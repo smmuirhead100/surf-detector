@@ -4,6 +4,7 @@ import contactIconBlack from '../assets/contactIconBlack.svg'
 import aboutIconBlack from '../assets/aboutIconBlack.svg'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import GeneralFooter from './generalFooter'
 
 export default function Home() {
     let navigate = useNavigate()
@@ -34,10 +35,12 @@ export default function Home() {
     }
 
     return (
+        <div>
         <div className={isMobile ? "home--wrapper--mobile" : "home--wrapper"}>
-            <div className="home--left">
-
+            
+            <div className={isMobile ? "home--left--mobile" : "home--left"}>
             </div>
+
             <div className={isMobile ? "home--right--mobile" : "home--right"}>
                 
                 <div className="navbar">
@@ -61,6 +64,10 @@ export default function Home() {
                     <div onClick={handleSignIn}>Or sign in</div>
                 </div>
             </div>
+        </div>
+        <div className='general--footer--wrapper'>
+            <GeneralFooter />
+        </div>
         </div>
     )
 }
