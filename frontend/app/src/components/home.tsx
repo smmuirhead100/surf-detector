@@ -2,14 +2,43 @@ import './style/home.css'
 import logo from '../assets/logo.svg'
 import contactIconBlack from '../assets/contactIconBlack.svg'
 import aboutIconBlack from '../assets/aboutIconBlack.svg'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
+    let navigate = useNavigate()
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const [isMobile, setIsMobile] = useState(false)
+
+    function navigateSignUp(){
+        let path = 'signup'
+        navigate(path)
+    }
+    
+    useEffect(() => {
+        function handleResize() {
+          setWindowWidth(window.innerWidth);
+        }
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+      }, [windowWidth]);
+
+
+    useEffect(() => {
+        windowWidth < 950 ? setIsMobile(true) : setIsMobile(false)
+    }, [windowWidth])
+
+    function handleSignIn(){
+        let path='/signin'
+        navigate(path)
+    }
+
     return (
-        <div className="home--wrapper">
+        <div className={isMobile ? "home--wrapper--mobile" : "home--wrapper"}>
             <div className="home--left">
 
             </div>
-            <div className="home--right">
+            <div className={isMobile ? "home--right--mobile" : "home--right"}>
                 
                 <div className="navbar">
                     <li className='navbar--item'>
@@ -20,7 +49,6 @@ export default function Home() {
                         <img src={contactIconBlack} alt='Contact Icon'/>
                         Contact
                     </li>
-        
                 </div>
 
                 <div className="content">
@@ -29,8 +57,8 @@ export default function Home() {
                 </div>
 
                 <div className="getStarted">
-                    <button>Get Started</button>
-                    <div>Or log in</div>
+                    <button onClick={navigateSignUp}>Get Started</button>
+                    <div onClick={handleSignIn}>Or sign in</div>
                 </div>
             </div>
         </div>

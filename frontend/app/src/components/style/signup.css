@@ -1,0 +1,124 @@
+.signup--wrapper {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.signup--header {
+    height: fit-content;
+    padding: 1rem;
+    border-bottom: solid;
+    border-color: #6666;
+}
+
+.signup--header img{
+    height: 3rem
+}
+
+.signup--container {
+    padding: 3rem;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.signup--container strong:hover {
+    cursor: pointer
+}
+
+.signup--subcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.signup--form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+    width: 80%;
+}
+
+.signup--form--fields {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.signup--form--fields input {
+    border: none;
+    height: 1rem;
+    padding: 5px;
+    flex-grow: 1;
+}
+
+.signup--form--fields input:focus {
+    outline: none;
+}
+
+.signup--form--fields .names {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.names .firstName {
+    border: solid;
+    padding: 1rem;
+    border-radius: 2rem;
+    flex-grow: 1;
+    display: flex;
+}
+
+.names .lastName {
+    display: flex;
+    border: solid;
+    padding: 1rem;
+    border-radius: 2rem;
+    flex-grow: 2;
+}
+
+.signup--form--fields .credentials {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.credentials .email {
+    border: solid;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+.credentials .password {
+    border: solid;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+.signup--form button {
+    border: solid;
+    width: 30%;
+    background-color: #257CFF;
+    color: white;
+    padding: 1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    min-width: 15rem;
+}
+
+.signup--form button:hover {
+    width: 30.5%;
+    transition: .1s;
+}
+
+.signup--footer {
+    padding: 1rem;
+}
