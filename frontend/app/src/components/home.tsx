@@ -1,6 +1,7 @@
 import './style/home.css'
 import logo from '../assets/logo.svg'
 import contactIconBlack from '../assets/contactIconBlack.svg'
+import aboutIconBlack from '../assets/aboutIconBlack.svg'
 
 export default function Home() {
     return (
@@ -11,11 +12,14 @@ export default function Home() {
             <div className="home--right">
                 
                 <div className="navbar">
-                    <li>About</li>
-                    <div className='navbar--contact'>
+                    <li className='navbar--item'>
+                        <img src={aboutIconBlack} alt="about icon"/>
+                        About
+                    </li>
+                    <li className='navbar--item'>
                         <img src={contactIconBlack} alt='Contact Icon'/>
-                        <h3>Contact</h3>
-                    </div>
+                        Contact
+                    </li>
         
                 </div>
 
