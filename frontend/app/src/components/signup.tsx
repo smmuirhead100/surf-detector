@@ -16,7 +16,6 @@ export default function SignUp() {
     const [errorMsg, setErrorMsg] = useState("");
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false)
-    const [accessError, setAccessError] = useState(false)
     const register = (email, password, options) =>
     supabase.auth.signUp({ email, password, options});
 
