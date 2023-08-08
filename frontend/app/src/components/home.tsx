@@ -6,12 +6,14 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GeneralFooter from './generalFooter'
 import { useAuth } from '../context/AuthProvider'
+import useProgressiveImg from '../utils/progressiveImg'
 
 export default function Home() {
     let navigate = useNavigate()
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [isMobile, setIsMobile] = useState(false)
     const auth = (useAuth()['auth'])
+    const [src, { blur }] = useProgressiveImg("homeImageBlurry.png", "homeImage.jpg")
 
     function navigateSignUp(){
         let path = '/signup'
@@ -42,7 +44,10 @@ export default function Home() {
             <div>
             <div className={isMobile ? "home--wrapper--mobile" : "home--wrapper"}>
                 
-                <div className={isMobile ? "home--left--mobile" : "home--left"}>
+                <div className={isMobile ? "home--left--mobile" : "home--left"} style={{ backgroundImage: 'url(' + src + ')', filter: blur ? "blur(20px)" : "none",
+        transition: blur ? "none" : "filter 0.3s ease-out"
+      }}>
+
                 </div>
 
                 <div className={isMobile ? "home--right--mobile" : "home--right"}>

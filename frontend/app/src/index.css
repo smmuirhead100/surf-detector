@@ -2,8 +2,25 @@ body {
     background-color: #F5F6F8;
     font-family: 'Kumbh Sans', sans-serif;
     margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 ul {
     list-style: none;
 }
+
+/* Reset some default browser styles */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+  }
+  
+  /* Apply the box sizing globally */
+  * {
+    box-sizing: border-box;
+  }
+  
