@@ -33,7 +33,7 @@ export default function SignIn() {
             error
           } = await login(emailRef.current.value, passwordRef.current.value);
           if (error) setErrorMsg(error.message);
-          if (user && session) navigate("/");
+          if (user && session) navigate("/forecast");
         } catch (error) {
           setErrorMsg("Email or Password Incorrect");
         }
