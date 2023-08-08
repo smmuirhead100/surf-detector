@@ -12,6 +12,7 @@ import logoutIcon from '../assets/logoutIcon.svg'
 import { useState, useEffect } from 'react'
 import getSpots from '../utils/getSpots'
 import { useAuth } from "../context/AuthProvider"
+import { useNavigate } from "react-router-dom"
 
 export default function GeneralNavbar() {
     const [spotsOpen, setSpotsOpen] = useState(false)
@@ -19,6 +20,7 @@ export default function GeneralNavbar() {
     const [spots, setSpots] = useState([])
     const auth = useAuth()['auth'] 
     const signOut = useAuth()['signOut']
+    const navigate = useNavigate()
     
     useEffect(() => {
         getSpots()
@@ -27,11 +29,13 @@ export default function GeneralNavbar() {
 
     const handleLogout = async (e) => {
         e.preventDefault();
+        console.log('logging out')
         try {
           const { error } = await signOut();
-          console.log(error);
+          console.log('logged out');
+          navigate('/signin'); // Navigate to the sign-in page
         } catch (error) {
-          console.log(error);
+          console.log('There was an error logging out');
         }
       };
 

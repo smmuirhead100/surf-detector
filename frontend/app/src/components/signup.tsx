@@ -23,45 +23,63 @@ export default function SignUp() {
     }
 
     async function handleCreateAccount(e) {
-        e.preventDefault();
-        if (
-          !passwordRef.current?.value ||
-          !emailRef.current?.value ||
-          !confirmPasswordRef.current?.value ||
-          !firstNameRef.current?.value ||
-          !lastNameRef.current?.value
-        ) {
-          setErrorMsg("Please fill all the fields");
-          return;
-        }
-        if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-          setErrorMsg("Passwords don't match");
-          return;
-        }
-        try {
-          setErrorMsg("");
-          setLoading(true);
-          const { data, error } = await register(
-            emailRef.current.value,
-            passwordRef.current.value,
-            { data : {
+      e.preventDefault();
+      if (
+        !passwordRef.current?.value ||
+        !emailRef.current?.value ||
+        !confirmPasswordRef.current?.value ||
+        !firstNameRef.current?.value ||
+        !lastNameRef.current?.value
+      ) {
+        setErrorMsg("Please fill all the fields");
+        return;
+      }
+      if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+        setErrorMsg("Passwords don't match");
+        return;
+      }
+      try {
+        setErrorMsg("");
+        setLoading(true);
+    
+        // Create a new user using Supabase authentication
+        const { data: userData, error: userError } = await register(
+          emailRef.current.value,
+          passwordRef.current.value,
+          {
+            data: {
               firstName: firstNameRef.current.value,
-              lastName: lastNameRef.current.value
-              }
-            }
-          );
-          if (!error && data) {
-            let path='submitted'
-            navigate(path)
+              lastName: lastNameRef.current.value,
+            },
           }
-          if(error) {
-            setErrorMsg(error.message)
+        );
+    
+        if (userData && !userError) {
+          // Insert user information into the UserAccess table
+          const { data: userAccessData, error: userAccessError } = await supabase
+            .from("UserAccess")
+            .insert([
+              {
+                user_id: userData.user.id,
+                // Add any other relevant user access data here
+              },
+            ]);
+            console.log(userData)
+          if (userAccessData && !userAccessError) {
+            let path = "submitted";
+            navigate(path);
+          } else {
+            setErrorMsg("Error adding user to UserAccess table");
           }
-        } catch (error) {
-          setErrorMsg("Error in Creating Account");
+        } else {
+          setErrorMsg(userError.message || "Error creating user");
         }
-        setLoading(false);
-  };
+      } catch (error) {
+        setErrorMsg("Error in Creating Account");
+      }
+      setLoading(false);
+    }
+    
     
     return (
         <div className="signup--wrapper">
