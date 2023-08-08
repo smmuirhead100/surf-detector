@@ -12,7 +12,7 @@ export default function Home() {
     const [isMobile, setIsMobile] = useState(false)
 
     function navigateSignUp(){
-        let path = 'signup'
+        let path = '/signup'
         navigate(path)
     }
     
