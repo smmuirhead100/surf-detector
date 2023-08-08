@@ -10,17 +10,20 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/home' element={<Home />} />
-        <Route path='/signup' element={<SignUp />}>
-          <Route path='submitted' element={<SignUpSubmitted />} />
-        </Route>
-        <Route path='/signin' element={<SignIn />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/signup' element={<SignUp />}>
+              <Route path='submitted' element={<SignUpSubmitted />} />
+          </Route>
+          <Route path='/signin' element={<SignIn />} />
+          {/* Catch-all route that redirects to /forecast */}
+          <Route path='*' element={<Navigate to='/' replace />} />
 
         <Route element={<AuthRoute />}>
-          {/* Specific routes */}
-          <Route path='/forecast' element={<SpotForecast spot='huntington_beach' />} />
-          {/* Catch-all route that redirects to /forecast */}
-          <Route path='*' element={<Navigate to='/forecast' replace />} />
+            {/* Specific routes */}
+            <Route path='/forecast' element={<SpotForecast spot='huntington_beach' />} />
+            {/* Catch-all route that redirects to /forecast */}
+            <Route path='*' element={<Navigate to='/forecast' replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

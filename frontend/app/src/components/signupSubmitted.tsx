@@ -1,8 +1,6 @@
 import './style/signup.css'
 import logo from '../assets/logoHorizontalBlack.svg'
 import GeneralFooter from './generalFooter'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 export default function SignUpSubmitted() {
     return (

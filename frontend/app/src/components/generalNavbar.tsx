@@ -28,10 +28,12 @@ export default function GeneralNavbar() {
     },[])
 
     const handleLogout = async (e) => {
+        console.log(auth)
         e.preventDefault();
         console.log('logging out')
         try {
           const { error } = await signOut();
+          console.log(error)
           console.log('logged out');
           navigate('/signin'); // Navigate to the sign-in page
         } catch (error) {

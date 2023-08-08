@@ -11,7 +11,7 @@
 }
 
 .home--wrapper .home--left {
-    background-image: url('./public/home.JPG');
+    background-image: url('/home.JPG');
     background-size: cover;
     background-repeat: none;
     background-position: -15rem;

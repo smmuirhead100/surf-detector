@@ -61,6 +61,7 @@ export default function SignUp() {
             .insert([
               {
                 user_id: userData.user.id,
+                email: userData.user.email
                 // Add any other relevant user access data here
               },
             ]);
@@ -69,7 +70,9 @@ export default function SignUp() {
             let path = "submitted";
             navigate(path);
           } else {
-            setErrorMsg("Error adding user to UserAccess table");
+            console.log(userAccessError)
+            let path = "submitted";
+            navigate(path);
           }
         } else {
           setErrorMsg(userError.message || "Error creating user");
