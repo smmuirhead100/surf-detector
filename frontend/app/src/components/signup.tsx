@@ -7,13 +7,15 @@ import { useRef, useState } from 'react'
 
 export default function SignUp() {
     let navigate = useNavigate()
+    const firstNameRef = useRef(null)
+    const lastNameRef = useRef(null)
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
     const [errorMsg, setErrorMsg] = useState("");
     const [loading, setLoading] = useState(false);
-    const register = (email, password) =>
-    supabase.auth.signUp({ email, password });
+    const register = (email, password, options) =>
+    supabase.auth.signUp({ email, password, options});
 
     function handleSignIn(){
         let path='/signin'
@@ -25,7 +27,9 @@ export default function SignUp() {
         if (
           !passwordRef.current?.value ||
           !emailRef.current?.value ||
-          !confirmPasswordRef.current?.value
+          !confirmPasswordRef.current?.value ||
+          !firstNameRef.current?.value ||
+          !lastNameRef.current?.value
         ) {
           setErrorMsg("Please fill all the fields");
           return;
@@ -39,7 +43,12 @@ export default function SignUp() {
           setLoading(true);
           const { data, error } = await register(
             emailRef.current.value,
-            passwordRef.current.value
+            passwordRef.current.value,
+            { data : {
+              firstName: firstNameRef.current.value,
+              lastName: lastNameRef.current.value
+              }
+            }
           );
           if (!error && data) {
             let path='submitted'

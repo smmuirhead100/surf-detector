@@ -10,15 +10,15 @@ export default function SignIn() {
     const passwordRef = useRef(null);
     const [errorMsg, setErrorMsg] = useState("");
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const login  = useAuth()['login'];
     
     let navigate = useNavigate()
 
     function handleSignUp() {
         let path='/signup'
         navigate(path)
-
     }
+    
     async function handleSignIn(e){
         e.preventDefault();
         try {
