@@ -1,6 +1,7 @@
 import './style/signup.css'
 import logo from '../assets/logoHorizontalBlack.svg'
 import GeneralFooter from './generalFooter'
+import SignUpSubmitted from './signupSubmitted'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../utils/supabaseClient'
 import { useRef, useState } from 'react'
@@ -14,6 +15,8 @@ export default function SignUp() {
     const confirmPasswordRef = useRef(null);
     const [errorMsg, setErrorMsg] = useState("");
     const [loading, setLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false)
+    const [accessError, setAccessError] = useState(false)
     const register = (email, password, options) =>
     supabase.auth.signUp({ email, password, options});
 
@@ -65,26 +68,29 @@ export default function SignUp() {
                 // Add any other relevant user access data here
               },
             ]);
-            console.log(userData)
           if (userAccessData && !userAccessError) {
-            let path = "submitted";
-            navigate(path);
-          } else {
-            console.log(userAccessError)
-            let path = "submitted";
-            navigate(path);
+            console.log('success signinig up')
+            setSubmitted(true)
+          } else if (userAccessError?.code === '23505') {
+            setErrorMsg('User already exists')
+          } else if (!userAccessData) {
+            console.log('no userAccessData')
+            setSubmitted(true)
           }
         } else {
           setErrorMsg(userError.message || "Error creating user");
         }
       } catch (error) {
+        console.log(error)
         setErrorMsg("Error in Creating Account");
       }
       setLoading(false);
     }
     
-    
-    return (
+    if (submitted) {
+      return <SignUpSubmitted />
+    } 
+    else { return (
         <div className="signup--wrapper">
             <div className="signup--header">
                 <img src={logo} alt="logo icon" />
@@ -124,5 +130,5 @@ export default function SignUp() {
                 <GeneralFooter />
             </div>
         </div>
-    )
+    )}
 }
