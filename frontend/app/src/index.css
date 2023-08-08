@@ -12,7 +12,7 @@ ul {
 }
 
 /* Reset some default browser styles */
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img {
+.home--wrapper {
     margin: 0;
     padding: 0;
     border: 0;
@@ -20,7 +20,7 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img {
   }
   
   /* Apply the box sizing globally */
-  * {
+  .home--wrapper {
     box-sizing: border-box;
   }
   
