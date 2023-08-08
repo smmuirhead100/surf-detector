@@ -39,7 +39,7 @@
     align-items: center;
     padding: 1rem;
     gap: 2rem;
-    width: 80%;
+    width: 100%;
 }
 
 .signup--form--fields {
@@ -69,7 +69,7 @@
 }
 
 .names .firstName {
-    border: solid;
+    border: solid 1px;
     padding: 1rem;
     border-radius: 2rem;
     flex-grow: 1;
@@ -78,7 +78,7 @@
 
 .names .lastName {
     display: flex;
-    border: solid;
+    border: solid 1px;
     padding: 1rem;
     border-radius: 2rem;
     flex-grow: 2;
@@ -92,19 +92,19 @@
 }
 
 .credentials .email {
-    border: solid;
+    border: solid 1px;
     padding: 1rem;
     border-radius: 2rem;
 }
 
 .credentials .password {
-    border: solid;
+    border: solid 1px;
     padding: 1rem;
     border-radius: 2rem;
 }
 
 .signup--form button {
-    border: solid;
+    border: none;
     width: 30%;
     background-color: #257CFF;
     color: white;
