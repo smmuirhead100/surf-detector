@@ -7,7 +7,7 @@ const AuthRoute = () => {
   const location = useLocation();
 
   return user ? (
-    <Outlet />
+    <Outlet /> // Render nested routes for authenticated user
   ) : (
     <Navigate to={"/signin"} replace state={{ path: location.pathname }} />
   );
