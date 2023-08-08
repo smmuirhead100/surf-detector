@@ -11,16 +11,29 @@ import navbarLine from '../assets/navbarLine.svg'
 import logoutIcon from '../assets/logoutIcon.svg'
 import { useState, useEffect } from 'react'
 import getSpots from '../utils/getSpots'
+import { useAuth } from "../context/AuthProvider"
 
 export default function GeneralNavbar() {
     const [spotsOpen, setSpotsOpen] = useState(false)
     const [camsOpen, setCamsOpen] = useState(false)
     const [spots, setSpots] = useState([])
+    const auth = useAuth()['auth'] 
+    const signOut = useAuth()['signOut']
     
     useEffect(() => {
         getSpots()
         .then(data => setSpots(data))
     },[])
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+          const { error } = await signOut();
+          console.log(error);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     function handleSpotsClick(){
         setSpotsOpen(prev => !prev)
@@ -83,7 +96,7 @@ export default function GeneralNavbar() {
 
                 <div className='general--navbar--logout'>
                     <img src={navbarLine} />
-                    <li>
+                    <li onClick={handleLogout}>
                         <img src={logoutIcon} alt='Logout Icon'/>
                         Logout
                     </li>

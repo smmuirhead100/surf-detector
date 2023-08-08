@@ -10,12 +10,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/signup' element={<SignUp />}></Route>
         <Route path='/signup/submitted/' element={<SignUpSubmitted />}></Route>
         <Route path='/signin' element={<SignIn />}></Route>
         <Route element={<AuthRoute />}>
+          <Route path='/' element={<SpotForecast spot='malibu' />}></Route>
           <Route path='/forecast' element={<SpotForecast spot='huntington_beach'/>}></Route>
         </Route>
       </Routes>

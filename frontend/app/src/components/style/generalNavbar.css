@@ -91,3 +91,7 @@
     bottom: 0px;
     font-weight: normal;
 }
+
+.general--navbar--logout:hover {
+    cursor: pointer;
+}

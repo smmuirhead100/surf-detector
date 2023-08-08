@@ -81,8 +81,8 @@ export default function SignUp() {
                         <div className="signup--form--fields">
                             <div className="names">
                                 
-                                <input className='firstName' placeholder='FIRST NAME'/>
-                                <input className='lastName' placeholder='LAST NAME'/>
+                                <input ref={firstNameRef} className='firstName' placeholder='FIRST NAME'/>
+                                <input ref={lastNameRef} className='lastName' placeholder='LAST NAME'/>
                             
                             </div>
 
