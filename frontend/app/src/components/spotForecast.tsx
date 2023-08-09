@@ -47,7 +47,7 @@ export default function SpotForecast() {
         <div className="spot--forecast--wrapper">
             
             <div className="general--navbar--wrapper">
-                <GeneralNavbar changeSpot={changeSpot}/>
+                <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
             </div>
             
             <div className="spot--forecast--content">

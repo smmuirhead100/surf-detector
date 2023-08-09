@@ -27,6 +27,21 @@ export default function GeneralNavbar(props) {
         .then(data => setSpots(data))
     },[])
 
+    // Just capitalizes the first letter of the spot, since they are typically lower case. 
+    const capitalizeAfterUnderscore = (str) => {
+        if (!str) return ''; // If the input string is empty or undefined, return an empty string
+      
+        const words = str.split('_'); // Split the string into words using underscores as separators
+      
+        // Capitalize the first letter of each word and concatenate them
+        const capitalizedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+      
+        // Join the capitalized words with spaces
+        const capitalizedString = capitalizedWords.join(' ');
+      
+        return capitalizedString;
+      };
+    
     const handleLogout = async (e) => {
         console.log(auth)
         e.preventDefault();
@@ -43,13 +58,10 @@ export default function GeneralNavbar(props) {
 
     const revertToUnderscore = (str) => {
         if (!str) return ''; // If the input string is empty or undefined, return an empty string
-        
         // Split the string into words using spaces as separators
         const words = str.split(' ');
-      
         // Convert each word to lowercase and join them with underscores
         const underscoredString = words.map((word) => word.toLowerCase()).join('_');
-      
         return underscoredString;
     };
       
@@ -83,7 +95,9 @@ export default function GeneralNavbar(props) {
                 {spotsOpen ?                                        // Render Spots if is open
                     <div className='navbar--dropdown--spots'>
                         {spots.map((spot) => (
-                        <li onClick={handleSpotClick}>{spot}</li>
+                            spot == capitalizeAfterUnderscore(props.currSpot) ? 
+                            <li onClick={handleSpotClick}><strong>{spot}</strong></li> :
+                            <li onClick={handleSpotClick}>{spot}</li>
                         ))}
                     </div> : null
                 }

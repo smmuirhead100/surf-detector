@@ -61,6 +61,12 @@
     margin-left: 2rem;
 }
 
+.navbar--dropdown--spots li:hover{
+    cursor: default;
+    background-color: #F5F6F8;
+    border-radius: 5px;
+}
+
 .navbar--dropdown--cams {
     display: flex;
     flex-direction: column;
