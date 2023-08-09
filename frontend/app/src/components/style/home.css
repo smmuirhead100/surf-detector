@@ -3,6 +3,7 @@
     grid-template-columns: 2fr 3fr;
     height: 100vh;
     min-height: 40rem;
+    background-color: white;
 }
 
 .home--wrapper .home--left {
@@ -105,6 +106,7 @@
 
 .home--wrapper--mobile {
     height: 100vh;
+    background-color: white;
 }
 
 .home--right--mobile {
