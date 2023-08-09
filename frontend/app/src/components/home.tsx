@@ -1,7 +1,5 @@
 import './style/home.css'
 import logo from '../assets/logo.svg'
-import contactIconBlack from '../assets/contactIconBlack.svg'
-import aboutIconBlack from '../assets/aboutIconBlack.svg'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GeneralFooter from './generalFooter'
@@ -44,24 +42,13 @@ export default function Home() {
             <div>
             <div className={isMobile ? "home--wrapper--mobile" : "home--wrapper"}>
                 
-                <div className={isMobile ? "home--left--mobile" : "home--left"} style={{ backgroundImage: 'url(' + src + ')', filter: blur ? "blur(20px)" : "none",
-        transition: blur ? "none" : "filter 0.3s ease-out"
-      }}>
-
+                <div className={isMobile ? "home--left--mobile" : "home--left"} style={{ backgroundImage: 'url(' + src + ')',  
+                                                                                            filter: blur ? "blur(20px)" : "none",
+                                                                                            transition: blur ? "none" : "filter 0.3s ease-out"
+                                                                                        }}>
                 </div>
 
                 <div className={isMobile ? "home--right--mobile" : "home--right"}>
-                    
-                    <div className="navbar">
-                        <li className='navbar--item'>
-                            <img src={aboutIconBlack} alt="about icon"/>
-                            About
-                        </li>
-                        <li className='navbar--item'>
-                            <img src={contactIconBlack} alt='Contact Icon'/>
-                            Contact
-                        </li>
-                    </div>
 
                     <div className="content">
                         <img src={logo}/>

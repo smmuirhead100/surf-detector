@@ -5,11 +5,6 @@
     min-height: 40rem;
 }
 
-.home--wrapper--mobile {
-    height: 100vh;
-    min-height: 40rem;
-}
-
 .home--wrapper .home--left {
     background-size: cover;
     background-repeat: none;
@@ -108,13 +103,17 @@
 
 /** MOBILE STYLES **/
 
+.home--wrapper--mobile {
+    height: 100vh;
+}
+
 .home--right--mobile {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    height: 100vh;
+    height: fit-content;
 }
 
 
@@ -134,27 +133,30 @@
 }
 
 .home--right--mobile img {
-    width: 7rem;
+    width: 4rem;
 }
 
 .home--right--mobile .content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem
+    gap: 0rem;
+    width: fit-content
 }
 
 .home--right--mobile .getStarted {
     display: flex;
     flex-direction: column;
     margin-bottom: 5rem;
-    width: 100%;
+    width: 90%;
     align-items: center;
-    gap: 1rem
+    gap: 1rem;
+    border: solid;
 }
 
 .home--right--mobile h2{
-    font-size: 2rem;
+    font-size: 1rem;
+    width: fit-content;
 }
 
 .home--right--mobile button {
@@ -164,7 +166,7 @@
     font-size: 1.5rem;
     color: white;
     padding: 1rem;
-    width: 50%
+    width: 50%; 
 }
 
 .home--right--mobile button:hover {
@@ -175,6 +177,7 @@
 
 .home--right--mobile .getStarted div {
     color: #666666;
+    border: solid;
 }
 
 
