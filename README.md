@@ -63,4 +63,5 @@
 - [x] Add Icons to navbar.
 - [x] Update root README for developer setup. 
 - [ ] Handle Mobile Web Version for spot forecast.
-- [ ] Landing Page
+- [x] Landing Page
+- [ ] Supabase confirmation link page.

@@ -105,7 +105,7 @@ export default function swellChart(props: any) {
     const waveTransition = (bar:any) => {
         bar.transition()
         .duration(1000) // Set the duration of each transition to 1 second
-        .delay((d: any, i: number) => {return i * 50}) // Add a delay to each bar based on its index
+        .delay((_, i: number) => i * 50) // Remove the unused 'd' parameter // Add a delay to each bar based on its index
         .attr('y', (d: { height: any; }) => y(d.height)) // Set the y attribute to the height of the bar
         .attr('height', (d: { height: any; }) => height - y(d.height)) // Set the height of the bar
      };

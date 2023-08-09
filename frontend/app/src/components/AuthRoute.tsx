@@ -1,12 +1,11 @@
 import { useAuth } from "../context/AuthProvider";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { supabase } from "../utils/supabaseClient";
 import { useState, useEffect } from 'react'
 import SignIn from "./signin";
 
 const AuthRoute = () => {
   const user = useAuth()['user'];
-  const location = useLocation();
 
   const [isApproved, setIsApproved] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
