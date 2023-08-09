@@ -2,15 +2,21 @@ import './style/signup.css'
 import logo from '../assets/logoHorizontalBlack.svg'
 import GeneralFooter from './generalFooter'
 import { useNavigate } from 'react-router-dom'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useAuth } from "../context/AuthProvider"
 
-export default function SignIn() {
+export default function SignIn(props) {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [errorMsg, setErrorMsg] = useState("");
     const [loading, setLoading] = useState(false);
     const login  = useAuth()['login'];
+    
+    useEffect(() => {
+        if (props.errorMsg) {
+            setErrorMsg(props.errorMsg)
+        }
+    }, [])
     
     let navigate = useNavigate()
 

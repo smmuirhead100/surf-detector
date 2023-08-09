@@ -49,6 +49,7 @@ export default function SignUp() {
           emailRef.current.value,
           passwordRef.current.value,
           {
+            redirect: 'https://www.twosurf.com',
             data: {
               firstName: firstNameRef.current.value,
               lastName: lastNameRef.current.value,

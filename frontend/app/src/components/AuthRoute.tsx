@@ -1,14 +1,15 @@
 import { useAuth } from "../context/AuthProvider";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { supabase } from "../utils/supabaseClient";
 import { useState, useEffect } from 'react'
+import SignIn from "./signin";
 
 const AuthRoute = () => {
   const user = useAuth()['user'];
   const location = useLocation();
 
   const [isApproved, setIsApproved] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
@@ -24,23 +25,23 @@ const AuthRoute = () => {
       .select("approved")
       .eq("user_id", userId)
       .single();
-    console.log('first' + data.approved)
     if (data) {
-      console.log('updating isApproved')
+      console.log('updating aprpoved' + data.approved)
       setIsApproved(data.approved);
     } else {
+      console.log('User has not been authenticated.')
       console.log(error)
     }
     setIsLoading(false)
   };
-
+  isApproved ? console.log('isapproved!!') : console.log('is not approved')
   return isLoading ? (
     <div>loading</div>
   ) : 
   isApproved ? (
     <Outlet /> // Render nested routes for approved user
   ) : (
-    <Navigate to={"/signin"} replace state={{ path: location.pathname }} />
+    <SignIn errorMsg="User is not authenticated"/>
   );
 };
 

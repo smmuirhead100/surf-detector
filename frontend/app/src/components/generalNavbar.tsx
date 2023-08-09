@@ -14,7 +14,7 @@ import getSpots from '../utils/getSpots'
 import { useAuth } from "../context/AuthProvider"
 import { useNavigate } from "react-router-dom"
 
-export default function GeneralNavbar() {
+export default function GeneralNavbar(props) {
     const [spotsOpen, setSpotsOpen] = useState(false)
     const [camsOpen, setCamsOpen] = useState(false)
     const [spots, setSpots] = useState([])
@@ -41,8 +41,24 @@ export default function GeneralNavbar() {
         }
       };
 
+    const revertToUnderscore = (str) => {
+        if (!str) return ''; // If the input string is empty or undefined, return an empty string
+        
+        // Split the string into words using spaces as separators
+        const words = str.split(' ');
+      
+        // Convert each word to lowercase and join them with underscores
+        const underscoredString = words.map((word) => word.toLowerCase()).join('_');
+      
+        return underscoredString;
+    };
+      
     function handleSpotsClick(){
         setSpotsOpen(prev => !prev)
+    }
+
+    function handleSpotClick(e){
+        props.changeSpot(`?spot=${revertToUnderscore(e.target.innerHTML)}`)
     }
 
     function handleCamsClick(){
@@ -67,7 +83,7 @@ export default function GeneralNavbar() {
                 {spotsOpen ?                                        // Render Spots if is open
                     <div className='navbar--dropdown--spots'>
                         {spots.map((spot) => (
-                        <li>{spot}</li>
+                        <li onClick={handleSpotClick}>{spot}</li>
                         ))}
                     </div> : null
                 }

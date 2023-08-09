@@ -21,7 +21,7 @@ export default function App() {
 
         <Route element={<AuthRoute />}>
             {/* Specific routes */}
-            <Route path='/forecast' element={<SpotForecast spot='huntington_beach' />} />
+            <Route path='/forecast' element={<SpotForecast />} />
             {/* Catch-all route that redirects to /forecast */}
             <Route path='*' element={<Navigate to='/forecast' replace />} />
         </Route>
