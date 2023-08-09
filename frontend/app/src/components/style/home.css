@@ -110,10 +110,11 @@
 .home--right--mobile {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     gap: 2rem;
     height: fit-content;
+    height: 100%;
 }
 
 
@@ -141,7 +142,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0rem;
-    width: fit-content
+    width: fit-content;
 }
 
 .home--right--mobile .getStarted {
@@ -151,11 +152,10 @@
     width: 90%;
     align-items: center;
     gap: 1rem;
-    border: solid;
 }
 
 .home--right--mobile h2{
-    font-size: 1rem;
+    font-size: 2rem;
     width: fit-content;
 }
 
@@ -177,7 +177,6 @@
 
 .home--right--mobile .getStarted div {
     color: #666666;
-    border: solid;
 }
 
 
