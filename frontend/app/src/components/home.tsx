@@ -11,8 +11,8 @@ export default function Home() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [isMobile, setIsMobile] = useState(false)
     const auth = (useAuth()['auth'])
-    const [src, { blur }] = useProgressiveImg("homeImageBlurry.png", "homeImage.jpg")
-
+    const [src, { blur }] = useProgressiveImg("homeImageLowQuality.png", "homeImage.jpg")
+    console.log(src)
     function navigateSignUp(){
         let path = '/signup'
         navigate(path)
@@ -43,7 +43,7 @@ export default function Home() {
             <div className={isMobile ? "home--wrapper--mobile" : "home--wrapper"}>
                 
                 <div className={isMobile ? "home--left--mobile" : "home--left"} style={{ backgroundImage: 'url(' + src + ')',  
-                                                                                            filter: blur ? "blur(20px)" : "none",
+                                                                                            filter: blur ? "blur 20px" : "none",
                                                                                             transition: blur ? "none" : "filter 0.3s ease-out"
                                                                                         }}>
                 </div>
