@@ -19,6 +19,9 @@ class Collect:
             
     def addCrowdData(self):
         spots[0].addCrowdData(self.local)
+        
+    def getVideo(self):
+        spots[0].getVideo(self.local)
             
     def run(self):
         self.addBuoyData()

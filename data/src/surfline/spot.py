@@ -7,6 +7,7 @@ sys.path.append('../')
 from surfline.surfline_api import SurflineAPI
 from db.db_methods import Database
 from surfline.utilities.cam_screenshot import takeScreenshot
+from surfline.utilities.cam_video import capture_video_segment
 from models.surfer_detection.detector import detect
 
 # A class to define spots in Surfline's database.
@@ -59,6 +60,9 @@ class Spot:
         self.db.close() # Close connection to database
         
         return True
+    
+    def getVideo(self, local: str = 'local'):
+        savedPath = capture_video_segment(self.camName)
         
             
             
