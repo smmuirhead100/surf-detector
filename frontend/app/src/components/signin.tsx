@@ -12,6 +12,10 @@ export default function SignIn(props) {
     const [loading, setLoading] = useState(false);
     const login  = useAuth()['login'];
     
+    function handleHomeClick() {
+        navigate('/home')
+      }
+    
     useEffect(() => {
         if (props.errorMsg) {
             setErrorMsg(props.errorMsg)
@@ -49,7 +53,7 @@ export default function SignIn(props) {
     return (
         <div className="signup--wrapper">
             <div className="signup--header">
-                <img src={logo} alt="logo icon" />
+                <img src={logo} alt="logo icon" onClick={handleHomeClick}/>
             </div>
 
             <div className="signup--container">

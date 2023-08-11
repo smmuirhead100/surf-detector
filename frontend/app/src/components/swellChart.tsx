@@ -16,6 +16,15 @@ export default function swellChart(props: any) {
     height: any,
     rating: any
   }
+  function isRestOfTodayOrTomorrow(timestamp) {
+    const currentTimestamp = Date.now();
+    const startOfTomorrow = new Date();
+    startOfTomorrow.setDate(startOfTomorrow.getDate() + 1);
+    startOfTomorrow.setHours(0, 0, 0, 0);
+
+    return timestamp >= currentTimestamp && timestamp < startOfTomorrow.getTime();
+}
+
 
   useEffect(() => {
     // Fetch wave data from API
@@ -48,7 +57,7 @@ export default function swellChart(props: any) {
     if (!isRatingLoading && ratingData.length > 0) { // Only render chart if data is loaded
       // Define the data
       const data = [];
-      for (let i = 0; i < waveData.length; i = i + 6) {
+      for (let i = 0; i < waveData.length; i = i + 1) {
           let obj = {
               time: unixToTime(waveData[i]['timestamp']),
               height: (waveData[i]['surf']['rawSurf']['rawMin'] + waveData[i]['surf']['rawSurf']['rawMax']) / 2,
@@ -99,16 +108,20 @@ export default function swellChart(props: any) {
             return '#71FF76';
           }
           return '#257CFF'; // Default fill color if rating is not within any range
-        });
+        } )
+        // Inside the loop where you append bars
+        .attr('class', (d: { time: any; }) => isRestOfTodayOrTomorrow(d.time) ? 'highlighted-bar' : 'bar');
+
 
     // Define a function for the wave transition
     const waveTransition = (bar:any) => {
-        bar.transition()
-        .duration(1000) // Set the duration of each transition to 1 second
-        .delay((_, i: number) => i * 50) // Remove the unused 'd' parameter // Add a delay to each bar based on its index
-        .attr('y', (d: { height: any; }) => y(d.height)) // Set the y attribute to the height of the bar
-        .attr('height', (d: { height: any; }) => height - y(d.height)) // Set the height of the bar
-     };
+      bar.transition()
+          .duration(1000)
+          .delay((_, i: number) => i * 2)
+          .attr('y', (d: { height: any; }) => y(d.height))
+          .attr('height', (d: { height: any; }) => height - y(d.height))
+          .attr('class', (d: { time: any; }) => isRestOfTodayOrTomorrow(d.time) ? 'highlighted-bar' : 'bar');
+      };
 
       // Call the waveTransition function to animate the bars
       waveTransition(bars);

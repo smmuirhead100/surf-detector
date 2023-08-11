@@ -27,3 +27,6 @@
     width: 3rem;
 }
 
+.highlighted-bar {
+    fill: yellow; /* Highlight color for rest of today */
+}

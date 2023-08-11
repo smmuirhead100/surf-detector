@@ -14,7 +14,7 @@ export default function SpotForecast() {
     const queryParameters = new URLSearchParams(window.location.search)
     const spot = queryParameters.get("spot")
     const navigate = useNavigate()
-    !spot ? navigate('/forecast?spot=malibu') : null
+    !spot ? navigate('/forecast?spot=salt_creek') : null
 
 
     const [tide, setTide] = useState(null)

@@ -16,6 +16,10 @@
     height: 3rem
 }
 
+.signup--header img:hover{
+    cursor: pointer;
+}
+
 .signup--container {
     padding: 3rem;
     height: 100%;

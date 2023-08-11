@@ -8,7 +8,7 @@ export default function ProfileHeader() {
     return (
         <div className="profile--header">
             <img src={circle} alt='Profile Circle'/>
-            <p>Profile</p>
+            <p>{user.firstName}</p>
         </div>
     )
 }

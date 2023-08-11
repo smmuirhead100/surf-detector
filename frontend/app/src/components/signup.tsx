@@ -24,6 +24,10 @@ export default function SignUp() {
         navigate(path)
     }
 
+    function handleHomeClick() {
+      navigate('/home')
+    }
+
     async function handleCreateAccount(e) {
       e.preventDefault();
       if (
@@ -93,7 +97,7 @@ export default function SignUp() {
     else { return (
         <div className="signup--wrapper">
             <div className="signup--header">
-                <img src={logo} alt="logo icon" />
+                <img src={logo} alt="logo icon" onClick={handleHomeClick}/>
             </div>
 
             <div className="signup--container">
