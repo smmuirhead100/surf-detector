@@ -17,7 +17,7 @@ spotDict = {
     'huntington_beach': '5842041f4e65fad6a77088ea',
     'newport_beach': '5842041f4e65fad6a7708e54',
     'salt_creek': '5842041f4e65fad6a770882e',
-    'San Onofre': '5842041f4e65fad6a7708831'
+    'san_onofre': '5842041f4e65fad6a7708831'
 }
 
 nameDict = {
@@ -26,7 +26,6 @@ nameDict = {
     '5842041f4e65fad6a7708e54': 'Newport Beach',
     '5842041f4e65fad6a770882e': 'Salt Creek', 
     '5842041f4e65fad6a7708831': 'San Onofre'
-    
 }
 
 @app.route('/')
