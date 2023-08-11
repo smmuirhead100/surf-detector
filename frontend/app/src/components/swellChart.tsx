@@ -110,14 +110,19 @@ export default function swellChart(props: any) {
         .attr('height', (d: { height: any; }) => height - y(d.height)) // Set the height of the bar
      };
 
-  // Call the waveTransition function to animate the bars
-  waveTransition(bars);
+      // Call the waveTransition function to animate the bars
+      waveTransition(bars);
 
       // Add the x-axis
       svg.append('g')
-        .attr('class', 'x-axis')
-        .attr('transform', `translate(0,${height})`)
-        .call(d3.axisBottom(x));
+      .attr('class', 'x-axis')
+      .attr('transform', `translate(0,${height})`)
+      .call(d3.axisBottom(x)
+        .ticks(Math.floor(data.length / 5)) // Set the number of ticks based on the desired interval
+        .tickSize(0) // Optional: Hide tick lines
+        .tickPadding(10) // Optional: Add padding between ticks and labels
+        .tickFormat((_, i) => (i % 5 === 0) ? data[i].time : '') // Display label for every 5th data point
+      );
 
       // Add the y-axis
       svg.append('g')

@@ -2,4 +2,9 @@
     display: flex;
     justify-content: center;
     gap: 3rem;
+    background-color: white;
+}
+
+.footer--container div:hover {
+    cursor: pointer
 }

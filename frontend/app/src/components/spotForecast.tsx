@@ -9,15 +9,20 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function SpotForecast() {
+    
+    // Make sure there is a spot
     const queryParameters = new URLSearchParams(window.location.search)
     const spot = queryParameters.get("spot")
+    const navigate = useNavigate()
+    !spot ? navigate('/forecast?spot=malibu') : null
+
+
     const [tide, setTide] = useState(null)
     const [tideTime, setTideTime] = useState(null)
     const [swellChartLoading, setSwellChartLoading] = useState(true)
     const [tideChartLoading, setTideChartLoading] = useState(true)
     const [crowdLoading, setCrowdLoading] = useState(true)
     const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to trigger component remount
-    const navigate = useNavigate()
     
     function handleTide(tide: number, time: string) {
         setTide(tide)
@@ -91,11 +96,6 @@ export default function SpotForecast() {
                     </div>
 
                     {/**Extended Forecast */}
-
-                </div>
-
-                <div className='spot--forecast--chart--wrapper'>
-                    <div>test</div>
                 </div>
              
 
