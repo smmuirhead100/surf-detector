@@ -2,6 +2,7 @@ import './style/home.css'
 import logo from '../assets/logo.svg'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import HomeInfo from './homeInfo'
 import GeneralFooter from './generalFooter'
 import { useAuth } from '../context/AuthProvider'
 import useProgressiveImg from '../utils/progressiveImg'
@@ -61,6 +62,8 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            <HomeInfo />
+
             <div className='general--footer--wrapper'>
                 <GeneralFooter />
             </div>

@@ -97,9 +97,6 @@ export default function SpotForecast() {
 
                     {/**Extended Forecast */}
                 </div>
-             
-
-
             </div>
         </div>
     )

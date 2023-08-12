@@ -1,0 +1,27 @@
+.home--info--container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.home--info--container .info1{
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.info1 div {
+    width: 40rem
+}
+
+.home--info--container img{
+    width: 50rem;
+    border: solid;
+    border-radius: 20px;
+    align-self: center;
+}
