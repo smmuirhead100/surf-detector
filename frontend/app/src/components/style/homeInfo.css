@@ -20,8 +20,21 @@
 }
 
 .home--info--container img{
-    width: 50rem;
-    border: solid;
+    width: 50%;
     border-radius: 20px;
     align-self: center;
+    align-content: center;
+    border: solid;
+}
+
+.home--info--container h3 img{
+    width: .5rem;
+    border: none;
+    transition: .2s;
+}
+
+.home--info--container h3 {
+    display: flex;
+    align-items: center;
+    gap: .3rem
 }
