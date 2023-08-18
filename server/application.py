@@ -171,7 +171,7 @@ def get_rating_data():
         spot_id = spotDict[str(request.args['spot'])]
         print(spot_id)
         print(type(spot_id))
-        clause = "SELECT * FROM rating WHERE timestamp > " + {beginning_of_today} + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        clause = "SELECT * FROM rating WHERE timestamp > " + {beginning_of_today} + " AND spotid = '" + spot_id + "' ORDER BY timestamp;"
         
     else: 
         clause = "SELECT * FROM rating WHERE timestamp > " + {beginning_of_today} + " ORDER BY timestamp;"

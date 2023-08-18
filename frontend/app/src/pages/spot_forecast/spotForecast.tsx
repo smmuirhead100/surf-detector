@@ -20,6 +20,8 @@ export default function SpotForecast() {
     // Declare state variables. 
     const [waveData, setWaveData] = useState(null)
     const [isWaveLoading, setIsWaveLoading] = useState(true)
+    const [ratingData, setRatingData] = useState(null)
+
     const [tide, setTide] = useState(null)
     const [tideTime, setTideTime] = useState(null)
     const [tideChartLoading, setTideChartLoading] = useState(true)
@@ -38,16 +40,16 @@ export default function SpotForecast() {
       }, [spot]);
       
     // Fetch rating data from API. 
-    // Fetch wave data from API.
     useEffect(() => {
-        fetch(`https://goldfish-app-qsewy.ondigitalocean.app/rating?spot=${spot}`)
+        console.log('rating data getting')
+        fetch(`https://goldfish-app-qsewy.ondigitalocean.app/ratings?spot=${spot}`)
           .then(response => response.json())
           .then(data => {
-            setWaveData(data);
-            setIsWaveLoading(false); // Set loading state to false
+            setRatingData(data);
           })
           .catch(error => console.log(error))
       }, [spot]);
+
     // Functions to handle the loading of data.
     function handleTide(tide: number, time: string) {
         setTide(tide)
@@ -86,7 +88,7 @@ export default function SpotForecast() {
                 </div>
 
                 <div className='spot--forecast--chart--wrapper'>
-                    <Forecasts waveData={waveData}/>
+                    <Forecasts waveData={waveData} ratingData={ratingData}/>
                 </div>
 
 

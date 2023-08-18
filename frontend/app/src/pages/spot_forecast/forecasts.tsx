@@ -3,8 +3,8 @@ import ParseWaveData from "../../utils/parseWaveData"
 import './style/forecasts.css'
 
 export default function Forecasts(props) {
-    console.log(props.waveData)
-    if (!props.waveData) {
+    console.log(props.ratingData)
+    if (!props.waveData || !props.ratingData) {
         return <p>Loading</p>
     }
     const forecastData = ParseWaveData(props.waveData)
