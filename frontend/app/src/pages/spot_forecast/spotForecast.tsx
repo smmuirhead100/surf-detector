@@ -6,7 +6,7 @@ import SpotHeader from './spotHeader'
 import ProfileHeader from './profileHeader'
 import CrowdChart from './crowdChart'
 import ParseWaveData from '../../utils/parseWaveData'
-import ForecastCard from './forecastCard'
+import Forecasts from './forecasts'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -36,11 +36,7 @@ export default function SpotForecast() {
             setIsWaveLoading(false); // Set loading state to false
           })
           .catch(error => console.log(error))
-      }, []);
-
-      useEffect(() => {
-        waveData ? console.log(ParseWaveData(waveData)) : null
-      }, [waveData]);
+      }, [spot]);
       
     // Functions to handle the loading of data.
     function handleTide(tide: number, time: string) {
@@ -59,24 +55,10 @@ export default function SpotForecast() {
     function changeSpot(path){
         setRefreshKey(refreshKey + 1); // Increment the refresh key
         setTideChartLoading(true)
+        setWaveData(null)
+        setIsWaveLoading(true)
         navigate(`/forecast${path}`)
     }
-
-    const exampleForecastWithoutPlus = {
-        date: {month: 'Aug', day: '18'}, // Replace with the actual date in your desired format
-        am: {
-          min: 1.5,
-          max: 2.5,
-        },
-        noon: {
-          min: 2.0,
-          max: 3.0,
-        },
-        pm: {
-          min: 1.8,
-          max: 2.8,
-        },
-      };
    
     return (
         <div className="spot--forecast--wrapper">
@@ -93,7 +75,11 @@ export default function SpotForecast() {
                     <ProfileHeader />
                 </div>
 
-                <ForecastCard data={exampleForecastWithoutPlus}/>
+                <div className='spot--forecast--chart--wrapper'>
+                    <Forecasts waveData={waveData}/>
+                </div>
+
+
                 {/**Swell Chart */}
                 <div className='spot--forecast--chart--wrapper'>
                     <h3>Wave Height</h3>

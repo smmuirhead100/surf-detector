@@ -1,0 +1,5 @@
+.forecasts {
+    display: flex;
+    gap: 1rem;
+    overflow: scroll;
+}
