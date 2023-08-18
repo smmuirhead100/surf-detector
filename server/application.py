@@ -13,6 +13,8 @@ app = Flask(__name__)
 CORS(app)
 application = app
 
+beginning_of_today = int(time.mktime(datetime.now().date().timetuple()))
+    
 spotDict = {
     'malibu': '5842041f4e65fad6a7708817',
     'huntington_beach': '5842041f4e65fad6a77088ea',
@@ -39,9 +41,10 @@ def get_tide_data():
         spot_id = spotDict[str(request.args['spot'])]
         print(spot_id)
         print(type(spot_id))
-        clause = "SELECT * FROM tide WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        clause = f"SELECT * FROM tide WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
+        
     else: 
-        clause = "SELECT * FROM tide WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+        clause = f"SELECT * FROM tide WHERE timestamp > {beginning_of_today} ORDER BY timestamp;"
     print("Connecting to Supabase instance")
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
     with conn.cursor() as cur:
@@ -117,10 +120,10 @@ def get_wind_data():
         spot_id = spotDict[str(request.args['spot'])]
         print(spot_id)
         print(type(spot_id))
-        clause = "SELECT * FROM wind WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        clause = f"SELECT * FROM wind WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
         
     else: 
-        clause = "SELECT * FROM wind WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+        clause = f"SELECT * FROM wind WHERE timestamp > {beginning_of_today} ORDER BY timestamp;"
     
     print("Connecting to Supabase instance")
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
@@ -143,10 +146,10 @@ def get_weather_data():
         spot_id = spotDict[str(request.args['spot'])]
         print(spot_id)
         print(type(spot_id))
-        clause = "SELECT * FROM weather WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        clause = f"SELECT * FROM weather WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
         
     else: 
-        clause = "SELECT * FROM weather WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+        clause = f"SELECT * FROM weather WHERE timestamp > {beginning_of_today} ORDER BY timestamp;"
     
     print("Connecting to Supabase instance")
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
@@ -171,10 +174,10 @@ def get_rating_data():
         spot_id = spotDict[str(request.args['spot'])]
         print(spot_id)
         print(type(spot_id))
-        clause = "SELECT * FROM rating WHERE timestamp > " + {beginning_of_today} + " AND spotid = '" + spot_id + "' ORDER BY timestamp;"
+        clause = f"SELECT * FROM rating WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
         
     else: 
-        clause = "SELECT * FROM rating WHERE timestamp > " + {beginning_of_today} + " ORDER BY timestamp;"
+        clause = f"SELECT * FROM rating WHERE timestamp > {beginning_of_today} ORDER BY timestamp;"
     
     print("Connecting to Supabase instance")
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
