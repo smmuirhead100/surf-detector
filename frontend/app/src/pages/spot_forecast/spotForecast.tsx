@@ -37,6 +37,17 @@ export default function SpotForecast() {
           .catch(error => console.log(error))
       }, [spot]);
       
+    // Fetch rating data from API. 
+    // Fetch wave data from API.
+    useEffect(() => {
+        fetch(`https://goldfish-app-qsewy.ondigitalocean.app/rating?spot=${spot}`)
+          .then(response => response.json())
+          .then(data => {
+            setWaveData(data);
+            setIsWaveLoading(false); // Set loading state to false
+          })
+          .catch(error => console.log(error))
+      }, [spot]);
     // Functions to handle the loading of data.
     function handleTide(tide: number, time: string) {
         setTide(tide)
