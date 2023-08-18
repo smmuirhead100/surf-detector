@@ -5,6 +5,7 @@ import os
 import time
 import json
 from dotenv import load_dotenv
+from datetime import datetime, timedelta
 
 load_dotenv()
 
@@ -59,7 +60,8 @@ def get_tide_data():
 
 @application.route("/wave", methods=['GET'])
 def waves():
-   
+    current_timestamp = int(time.time())
+    beginning_of_today = int(time.mktime(datetime.now().date().timetuple()))
     # Helper function to parse the swell string into a dictionary
     def parse_swell(swell_str: str):
         # Assuming swell_str is in the format: "(2,3,0,f,\"Thigh to waist\",\"(1.44357,2.42782)\")"
@@ -88,10 +90,10 @@ def waves():
         spot_id = spotDict[str(request.args['spot'])]
         print(spot_id)
         print(type(spot_id))
-        clause = "SELECT * FROM wave WHERE timestamp > " + str(int(time.time())) + " AND spotid = '" + spot_id + "'ORDER BY timestamp;"
+        clause = f"SELECT * FROM wave WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
         
     else: 
-        clause = "SELECT * FROM wave WHERE timestamp > " + str(int(time.time())) + " ORDER BY timestamp;"
+        clause = f"SELECT * FROM wave WHERE timestamp > {beginning_of_today} ORDER BY timestamp;"
     
     print("Connecting to Supabase instance")
     conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
