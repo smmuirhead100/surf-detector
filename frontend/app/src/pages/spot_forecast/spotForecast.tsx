@@ -5,6 +5,7 @@ import TideChart from './tideChart'
 import SpotHeader from './spotHeader'
 import ProfileHeader from './profileHeader'
 import CrowdChart from './crowdChart'
+import ForecastCard from './forecastCard'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

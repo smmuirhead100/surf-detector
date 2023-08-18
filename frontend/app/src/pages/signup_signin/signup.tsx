@@ -1,9 +1,9 @@
 import './style/signup.css'
-import logo from '../assets/logoHorizontalBlack.svg'
-import GeneralFooter from './generalFooter'
+import logo from '../../assets/logoHorizontalBlack.svg'
+import GeneralFooter from '../../components/generalFooter'
 import SignUpSubmitted from './signupSubmitted'
 import { useNavigate } from 'react-router-dom'
-import { supabase } from '../utils/supabaseClient'
+import { supabase } from '../../utils/supabaseClient'
 import { useRef, useState } from 'react'
 
 export default function SignUp() {

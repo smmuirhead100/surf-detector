@@ -2,7 +2,7 @@ import { useAuth } from "../context/AuthProvider";
 import { Outlet } from "react-router-dom";
 import { supabase } from "../utils/supabaseClient";
 import { useState, useEffect } from 'react'
-import SignIn from "./signin";
+import SignIn from "../pages/signup_signin/signin";
 
 const AuthRoute = () => {
   const user = useAuth()['user'];

@@ -1,10 +1,10 @@
-import SpotForecast from "./components/spotForecast";
-import Home from "./components/home";
-import About from "./components/about"
+import SpotForecast from "./pages/spot_forecast/spotForecast";
+import Home from "./pages/home/home";
+import About from "./pages/about/about"
 import Contact from "./components/contact"
-import SignUp from "./components/signup";
-import SignIn from "./components/signin";
-import SignUpSubmitted from "./components/signupSubmitted";
+import SignUp from "./pages/signup_signin/signup";
+import SignIn from "./pages/signup_signin/signin";
+import SignUpSubmitted from "./pages/signup_signin/signupSubmitted";
 import AuthRoute from "./components/AuthRoute";
 import { Navigate, BrowserRouter, Routes, Route } from "react-router-dom";
 

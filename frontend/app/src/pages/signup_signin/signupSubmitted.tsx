@@ -1,6 +1,6 @@
 import './style/signup.css'
-import logo from '../assets/logoHorizontalBlack.svg'
-import GeneralFooter from './generalFooter'
+import logo from '../../assets/logoHorizontalBlack.svg'
+import GeneralFooter from '../../components/generalFooter'
 
 export default function SignUpSubmitted() {
     return (

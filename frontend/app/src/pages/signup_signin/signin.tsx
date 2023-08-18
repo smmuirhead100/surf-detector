@@ -1,9 +1,9 @@
 import './style/signup.css'
-import logo from '../assets/logoHorizontalBlack.svg'
-import GeneralFooter from './generalFooter'
+import logo from '../../assets/logoHorizontalBlack.svg'
+import GeneralFooter from '../../components/generalFooter'
 import { useNavigate } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
-import { useAuth } from "../context/AuthProvider"
+import { useAuth } from "../../context/AuthProvider"
 
 export default function SignIn(props) {
     const emailRef = useRef(null);

@@ -1,7 +1,7 @@
 import './style/crowdChart.css';
 import { useEffect, useState } from "react";
-import loading from '../assets/loading.gif';
-import unixToTime from '../utils/unixToTime';
+import loading from '../../assets/loading.gif';
+import unixToTime from '../../utils/unixToTime';
 
 export default function CrowdChart(props: any) {
   const [crowdData, setCrowdData] = useState(null); // Initialize as null

@@ -1,5 +1,6 @@
 .spot--forecast--wrapper {
     display: flex;
+    background-color: #F5F6F8;
 }
 
 .spot--forecast--header--wrapper {

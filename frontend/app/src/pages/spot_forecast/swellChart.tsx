@@ -1,8 +1,8 @@
 import './style/swellChart.css'
 import * as d3 from "d3";
 import {useRef, useEffect, useState} from "react";
-import loading from '../assets/loading.gif'
-import unixToTime from '../utils/unixToTime'
+import loading from '../../assets/loading.gif'
+import unixToTime from '../../utils/unixToTime'
 
 export default function swellChart(props: any) {
   const [waveData, setWaveData] = useState([]); // Data to be used for chart. 

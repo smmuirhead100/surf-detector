@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import unixToTime from '../utils/unixToTime';
-import loading from '../assets/loading.gif'
+import unixToTime from '../../utils/unixToTime';
+import loading from '../../assets/loading.gif'
 
 const TideChart = (props: any) => {
   const chartRef = useRef(null);

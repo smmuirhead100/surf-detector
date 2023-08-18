@@ -1,17 +1,17 @@
 import './style/generalNavbar.css'
-import logo from '../assets/logo.svg'
-import spotsIconBlack from '../assets/spotsIconBlack.svg'
-import spotsIconWhite from '../assets/spotsIconWhite.svg'
-import cameraIconBlack from '../assets/cameraIconBlack.svg'
-import cameraIconWhite from '../assets/cameraIconWhite.svg'
-import contactIconBlack from '../assets/contactIconBlack.svg'
-import aboutIconBlack from '../assets/aboutIconBlack.svg'
-import githubIconBlack from '../assets/githubIcon.png'
-import navbarLine from '../assets/navbarLine.svg'
-import logoutIcon from '../assets/logoutIcon.svg'
+import logo from '../../assets/logo.svg'
+import spotsIconBlack from '../../assets/spotsIconBlack.svg'
+import spotsIconWhite from '../../assets/spotsIconWhite.svg'
+import cameraIconBlack from '../../assets/cameraIconBlack.svg'
+import cameraIconWhite from '../../assets/cameraIconWhite.svg'
+import contactIconBlack from '../../assets/contactIconBlack.svg'
+import aboutIconBlack from '../../assets/aboutIconBlack.svg'
+import githubIconBlack from '../../assets/githubIcon.png'
+import navbarLine from '../../assets/navbarLine.svg'
+import logoutIcon from '../../assets/logoutIcon.svg'
 import { useState, useEffect } from 'react'
-import getSpots from '../utils/getSpots'
-import { useAuth } from "../context/AuthProvider"
+import getSpots from '../../utils/getSpots'
+import { useAuth } from "../../context/AuthProvider"
 import { useNavigate } from "react-router-dom"
 
 export default function GeneralNavbar(props) {
