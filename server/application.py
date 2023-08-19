@@ -64,7 +64,7 @@ def get_tide_data():
 @application.route("/wave", methods=['GET'])
 def waves():
     utc_offset = -7
-    beginning_of_today_utc = int(time.mktime((datetime.now() - timedelta(hours=utc_offset)).date().timetuple()))
+    beginning_of_today= int(time.mktime((datetime.now() - timedelta(hours=utc_offset)).date().timetuple()))
     # Helper function to parse the swell string into a dictionary
     def parse_swell(swell_str: str):
         # Assuming swell_str is in the format: "(2,3,0,f,\"Thigh to waist\",\"(1.44357,2.42782)\")"
