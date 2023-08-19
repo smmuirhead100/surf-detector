@@ -7,8 +7,9 @@ export default function swellChart(props: any) {
   const waveData = props.data; // Data to be used for chart. 
   const chartRef = useRef(null);
 
+
   useEffect(() => {
-    if (waveData.length > 0) {
+    if (waveData) {
       // Define the data
       const data = [];
       for (let i = 0; i < waveData.length; i = i + 1) {
@@ -83,7 +84,10 @@ export default function swellChart(props: any) {
     }
   }, [waveData]);
   
-
+  if (!waveData) {
+    return <p>loading</p>
+  }
+  
   return (
     <div>
           <div className='swellChart'>

@@ -21,7 +21,6 @@ export default function SpotForecast() {
     const [waveData, setWaveData] = useState(null)
     const [isWaveLoading, setIsWaveLoading] = useState(true)
     const [ratingData, setRatingData] = useState(null)
-
     const [tide, setTide] = useState(null)
     const [tideTime, setTideTime] = useState(null)
     const [tideChartLoading, setTideChartLoading] = useState(true)
@@ -49,7 +48,6 @@ export default function SpotForecast() {
           .catch(error => console.log(error))
       }, [spot]);
 
-      // Fetch rating data from API. 
     // Functions to handle the loading of data.
     function handleTide(tide: number, time: string) {
         setTide(tide)
@@ -95,11 +93,8 @@ export default function SpotForecast() {
                 {/**Swell Chart */}
                 <div className='spot--forecast--chart--wrapper'>
                     <h3>Wave Height</h3>
-                    <div key={`swellChart_${refreshKey}`} className={'spot--forecast--swell--chart'}>
-                        {isWaveLoading ? 
-                            <div>Loading</div> : 
-                            <SwellChart spot={spot} data={waveData}/>
-                        }
+                    <div className={'spot--forecast--swell--chart'}>
+                        <SwellChart spot={spot} data={waveData}/>
                     </div>
                 </div>
 

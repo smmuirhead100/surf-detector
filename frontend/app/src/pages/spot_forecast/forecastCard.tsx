@@ -2,8 +2,13 @@ import './style/forecastCard.css'
 
 export default function ForecastCard(props: any) {
   const ratingDict = {0: 'red', 1: 'red', 2:'orange', 3: 'green', 4: 'green', 5: 'purple', 6: 'purple'}
+  
   function backgroundColor(val : number) {
     return ratingDict[val]
+  }
+
+  function handleClick(){
+      props.handleClick(props.data.date.month, props.data.date.day)
   }
 
   return props.isLoading ? 
@@ -33,7 +38,7 @@ export default function ForecastCard(props: any) {
     )
    :
     (
-        <div className='forecastCard'>
+        <div className='forecastCard' onClick={handleClick} style={props.selectedCard?.month == props.data.date.month && props.selectedCard?.day == props.data.date.day ? {border: 'solid black 3px'} : {border: 'solid black 1px'}}>
             
             <div className='date--container'>
               <div className='month'>{props.data.date.month}</div>

@@ -10,6 +10,10 @@
     padding: 5px;
 }
 
+.forecastCard:hover {
+    background-color: #F5F6F8;
+}
+
 .forecastCard .date--container {
     display: flex;
     flex-direction: column;
