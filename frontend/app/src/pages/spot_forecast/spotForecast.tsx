@@ -90,7 +90,7 @@ export default function SpotForecast() {
                 {/**Swell Chart */}
                 <div className='spot--forecast--chart--wrapper'>
                     <h3>Wave Height</h3>
-                    <div className={'spot--forecast--swell--chart'}>
+                    <div key={`swellChart_${refreshKey}`} className={'spot--forecast--swell--chart'}>
                         <SwellChart spot={spot} data={waveData}/>
                     </div>
                 </div>
