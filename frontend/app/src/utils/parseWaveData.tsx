@@ -43,16 +43,25 @@ export default function ParseWaveData(waveData) {
 
       return acc;
     }, {});
-  
+
     for (const key in groupedData) {
       const dayData = groupedData[key];
       const [monthStr, dayStr] = key.split('-');
       const month = parseInt(monthStr);
       const day = parseInt(dayStr);
-  
-      const amData = dayData.slice(0, 3); // First 3 entries for AM
-      const noonData = dayData.slice(3, 6); // Next 3 entries for NOON
-      const pmData = dayData.slice(6, 9); // Last 3 entries for PM
+
+      const amData = dayData.filter(entry => {
+        const hour = new Date(entry.timestamp * 1000).getHours();
+        return hour >= 4 && hour < 10;
+      });
+      const noonData = dayData.filter(entry => {
+        const hour = new Date(entry.timestamp * 1000).getHours();
+        return hour >= 10 && hour < 14;
+      });
+      const pmData = dayData.filter(entry => {
+        const hour = new Date(entry.timestamp * 1000).getHours();
+        return hour >= 14 && hour <= 21;
+      });
   
       const amAvgMinHeight =
         Math.round(amData.reduce((sum, entry) => sum + entry.surf.min, 0) / amData.length);
