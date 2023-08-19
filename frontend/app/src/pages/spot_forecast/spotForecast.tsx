@@ -49,6 +49,10 @@ export default function SpotForecast() {
           .catch(error => console.log(error))
       }, [spot]);
 
+      // Fetch rating data from API. 
+    useEffect(() => {
+        console.log(waveData)
+      }, [waveData]);
     // Functions to handle the loading of data.
     function handleTide(tide: number, time: string) {
         setTide(tide)

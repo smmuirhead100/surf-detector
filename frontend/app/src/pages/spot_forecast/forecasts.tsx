@@ -22,8 +22,7 @@ export default function Forecasts(props: any) {
             rating: matchingRating
         };
     });
-
-    console.log(combinedData)
+    
     const cards = combinedData.map((data) => (
         <ForecastCard key={`${data.date.month}-${data.date.day}`} data={data} />
     ));

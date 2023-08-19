@@ -46,6 +46,7 @@ export default function ParseWaveData(waveData) {
 
     for (const key in groupedData) {
       const dayData = groupedData[key];
+      console.log(dayData)
       const [monthStr, dayStr] = key.split('-');
       const month = parseInt(monthStr);
       const day = parseInt(dayStr);
