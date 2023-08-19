@@ -67,10 +67,10 @@
 
 .signup--form--fields .names {
     display: flex;
-    width: 100%;
+    width: 103%;
     gap: 2rem;
     flex-wrap: wrap;
-    max-width: 30rem;
+    max-width: 29rem;
 }
 
 .names .firstName {
