@@ -74,6 +74,7 @@ const AuthProvider = ({ children }) => {
       value={{
         auth,
         user,
+        isApproved,
         login,
         signOut,
         passwordReset,

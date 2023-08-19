@@ -19,7 +19,6 @@ export default function SpotForecast() {
 
     // Declare state variables. 
     const [waveData, setWaveData] = useState(null)
-    const [isWaveLoading, setIsWaveLoading] = useState(true)
     const [ratingData, setRatingData] = useState(null)
     const [tide, setTide] = useState(null)
     const [tideTime, setTideTime] = useState(null)
@@ -33,7 +32,6 @@ export default function SpotForecast() {
           .then(response => response.json())
           .then(data => {
             setWaveData(data);
-            setIsWaveLoading(false); // Set loading state to false
           })
           .catch(error => console.log(error))
       }, [spot]);
@@ -66,7 +64,6 @@ export default function SpotForecast() {
         setRefreshKey(refreshKey + 1); // Increment the refresh key
         setTideChartLoading(true)
         setWaveData(null)
-        setIsWaveLoading(true)
         navigate(`/forecast${path}`)
     }
    

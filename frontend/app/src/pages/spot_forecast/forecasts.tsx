@@ -1,7 +1,7 @@
 import ForecastCard from "./forecastCard"
 import ParseWaveData from "../../utils/parseWaveData"
 import ParseRatingData from "../../utils/parseRatingData"
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './style/forecasts.css'
 
 export default function Forecasts(props: any) {

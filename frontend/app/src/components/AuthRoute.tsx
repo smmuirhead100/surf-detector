@@ -1,8 +1,6 @@
 import { useAuth } from "../context/AuthProvider";
 import { Outlet } from "react-router-dom";
 import Home from "../pages/home/home"
-import { useState, useEffect } from 'react';
-import SignIn from "../pages/signup_signin/signin";
 
 const AuthRoute = () => {
   const user = useAuth()['user'];
