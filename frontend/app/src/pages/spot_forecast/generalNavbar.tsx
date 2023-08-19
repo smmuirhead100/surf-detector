@@ -70,7 +70,7 @@ export default function GeneralNavbar(props) {
     }
 
     function handleSpotClick(e){
-        props.changeSpot(`?spot=${revertToUnderscore(e.target.innerHTML)}`)
+        props.changeSpot(revertToUnderscore(e.target.innerHTML))
     }
 
     function handleCamsClick(){
@@ -96,7 +96,7 @@ export default function GeneralNavbar(props) {
                     <div className='navbar--dropdown--spots'>
                         {spots.map((spot) => (
                             spot == capitalizeAfterUnderscore(props.currSpot) ? 
-                            <li onClick={handleSpotClick}><strong>{spot}</strong></li> :
+                            <li onClick={handleSpotClick} className='selected--spot'>{spot}</li> :
                             <li onClick={handleSpotClick}>{spot}</li>
                         ))}
                     </div> : null

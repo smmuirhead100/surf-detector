@@ -61,6 +61,10 @@
     margin-left: 2rem;
 }
 
+.navbar--dropdown--spots .selected--spot{
+    font-weight: bold;
+}
+
 .navbar--dropdown--spots li:hover{
     cursor: default;
     background-color: #F5F6F8;

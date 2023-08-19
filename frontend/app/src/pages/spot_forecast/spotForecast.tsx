@@ -61,10 +61,19 @@ export default function SpotForecast() {
     }
 
     function changeSpot(path){
+        if (spot == path) {
+            console.log('same')
+            return;
+        }
+        else {
+        console.log('hi')
+        console.log(spot)
+        console.log(path)
         setRefreshKey(refreshKey + 1); // Increment the refresh key
         setTideChartLoading(true)
         setWaveData(null)
-        navigate(`/forecast${path}`)
+        navigate(`/forecast?spot=${path}`)
+        }
     }
    
     return (
