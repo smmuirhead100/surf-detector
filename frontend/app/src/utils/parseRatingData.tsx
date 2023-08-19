@@ -39,14 +39,18 @@ export default function ParseRatingData(ratingData){
         }, {});
     
         for (const day in groupedData) {
-        const dayData = groupedData[day];
-    
-        forecasts.push({
-            date: {month: day.split(' ')[1], day: parseInt(day.split(' ')[2])},
-            AM: dayData.AM,
-            NOON: dayData.NOON,
-            PM: dayData.PM
-        });
+            const dayData = groupedData[day];
+
+            const avgAmRating = Math.round(dayData.AM.reduce((sum, entry) => sum + entry.value, 0) / dayData.AM.length);
+            const avgNoonRating = Math.round(dayData.NOON.reduce((sum, entry) => sum + entry.value, 0) / dayData.NOON.length);
+            const avgPmRating = Math.round(dayData.NOON.reduce((sum, entry) => sum + entry.value, 0) / dayData.NOON.length);
+        
+            forecasts.push({
+                date: {month: day.split(' ')[1], day: parseInt(day.split(' ')[2])},
+                AM: avgAmRating,
+                NOON: avgNoonRating,
+                PM: avgPmRating
+            });
         }
     
         return forecasts;
@@ -54,6 +58,6 @@ export default function ParseRatingData(ratingData){
     
     const processedData = organizeData(ratingData);
     
-    console.log(processedData);
+    return processedData;
     }
   

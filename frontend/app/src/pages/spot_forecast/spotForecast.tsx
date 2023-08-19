@@ -41,7 +41,6 @@ export default function SpotForecast() {
       
     // Fetch rating data from API. 
     useEffect(() => {
-        console.log('rating data getting')
         fetch(`https://goldfish-app-qsewy.ondigitalocean.app/rating?spot=${spot}`)
           .then(response => response.json())
           .then(data => {
