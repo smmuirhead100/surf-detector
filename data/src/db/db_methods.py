@@ -92,14 +92,14 @@ class Database:
                 # Check if a row with the same timestamp and spotID already exists
                 if 'spotId' in data:
                     print('found a spotId') 
-                    query = "SELECT EXISTS(SELECT timestamp FROM " + tableName + " WHERE " + "timestamp = " + str(data['timestamp']) + " AND spotId = '" + str(data['spotId']) + "');"
+                    query = f"SELECT EXISTS(SELECT timestamp FROM {tableName} WHERE timestamp = {str(data['timestamp'])}  AND spotid = '{str(data['spotId'])}');"
                 else: 
-                    query = "SELECT EXISTS(SELECT timestamp FROM " + tableName + " WHERE " + "timestamp = " + str(data['timestamp']) + ");"
+                    query = f"SELECT EXISTS(SELECT timestamp FROM {tableName} WHERE + timestamp = {(data['timestamp'])};"
                 cur.execute(query, tuple(data.values()))
                 row_exists = cur.fetchone()[0]
                 if row_exists:
                     print("Updating row in table:", tableName)
-                    return self.updateTable(tableName, ['timestamp =' + str(data['timestamp'])], data)
+                    return self.updateTable(tableName, ['timestamp=' + str(data['timestamp']), f"spotid = '{data['spotId']}'"], data)
                 else:
                     # Insert the row if it doesn't already exist
                     columns = ', '.join(data.keys())
