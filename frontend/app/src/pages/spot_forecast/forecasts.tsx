@@ -5,7 +5,15 @@ import './style/forecasts.css'
 
 export default function Forecasts(props: any) {
     if (!props.waveData || !props.ratingData) {
-        return <p>Loading</p>
+        let loadingCards = []
+        for (let i=0; i < 10; i++) {
+            loadingCards.push(<ForecastCard data={null} isLoading={true}/>)
+        }
+        return (
+            <div className="forecasts">
+                {loadingCards}
+            </div>
+        )
     }
 
     const waveData = ParseWaveData(props.waveData);
@@ -24,7 +32,7 @@ export default function Forecasts(props: any) {
     });
     
     const cards = combinedData.map((data) => (
-        <ForecastCard key={`${data.date.month}-${data.date.day}`} data={data} />
+        <ForecastCard key={`${data.date.month}-${data.date.day}`} data={data} isLoading={false}/>
     ));
 
     return (

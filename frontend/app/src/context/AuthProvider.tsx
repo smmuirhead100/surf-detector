@@ -21,16 +21,36 @@ const updatePassword = (updatedPassword) =>
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isApproved, setIsApproved] = useState(false)
+
+  const checkUserAccess = async (userId) => {
+    const { data, error } = await supabase
+      .from("UserAccess")
+      .select("approved")
+      .eq("user_id", userId)
+      .single();
+    if (data) {
+      setIsApproved(data.approved);
+    } else {
+      console.log('User access not found:', error);
+    }
+    setIsLoading(false);
+  };
+
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     const getUser = async () => {
       const { data } = await supabase.auth.getUser();
       const { user: currentUser } = data;
       setUser(currentUser ?? null);
       setAuth(currentUser ? true : false);
-      setLoading(false);
+      
+      if (currentUser) {
+        checkUserAccess(currentUser.id);
+      }
+      setIsLoading(false)
     };
     getUser();
     const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -59,7 +79,7 @@ const AuthProvider = ({ children }) => {
         passwordReset,
         updatePassword
       }}>
-      {!loading && children}
+      {!isLoading && children}
     </AuthContext.Provider>
   );
 };
