@@ -59,7 +59,7 @@
 - [x] Add chart to represent wave height.
 - [x] Chart to represent tides and current crowd.
 - [ ] Add point to tide chart showing current time.
-- [ ] Style tide chart to better represent mouse hover position. 
+- [x] Style tide chart to better represent mouse hover position. 
 - [x] Add Icons to navbar.
 - [x] Update root README for developer setup. 
 - [ ] Handle Mobile Web Version for spot forecast.
