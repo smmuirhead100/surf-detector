@@ -7,6 +7,11 @@ interface DataPoint {
   y: number;
 }
 
+interface ArbitraryDataPoint {
+  x: number;
+  y: number;
+}
+
 
 const TideChart = (props: any) => {
   const chartRef = useRef(null);
@@ -26,15 +31,15 @@ const TideChart = (props: any) => {
     const height = 200
 
     const x = d3.scaleLinear<number>() // Add the type parameter here
-      .domain(d3.extent(tideData, d => d.x.index))
-      .range([0, innerWidth]);
+      .domain([-.2, 5.4])
+      .range([0, width]);
 
     const y = d3.scaleLinear<number>() // Add the type parameter here
-      .domain([d3.min(tideData, d => d.y), d3.max(tideData, d => d.y)])
-      .range([innerHeight, 0]);
+      .domain([-.2, 5.4])
+      .range([height, 0]);
 
-      const line = d3.line<DataPoint>() // Add the type parameter here
-      .x(d => x(d.x.index))
+      const line = d3.line<ArbitraryDataPoint>() // Add the type parameter here
+      .x(d => x(d.x))
       .y(d => y(d.y))
       .curve(d3.curveMonotoneX);
 
@@ -49,7 +54,7 @@ const TideChart = (props: any) => {
     svg.append("path")
       .datum(arbitraryData)
       .attr("class", "line")
-      .attr("d", line(tideData)) // Call the line function with the data
+      .attr("d", line) // Call the line function with the data
       .attr("fill", "none")
       .attr("stroke", "#D1D1D1")
       .attr("stroke-width", 5);

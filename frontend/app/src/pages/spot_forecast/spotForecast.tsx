@@ -116,7 +116,7 @@ export default function SpotForecast() {
 
                     {/**Tide Chart */}
                     <div className='spot--forecast--chart--wrapper'>
-                        <h3 className='tide--header'>Tide<span>Height: {tide}</span><span>Time: {tideTime?.split(' ')[1]}</span></h3>
+                        <h3 className='tide--header'>Tide<span style={!tideData ? {color: '#D1D1D1', backgroundColor: '#D1D1D1'} : null}>Height: {tide}</span><span style={!tideData ? {color: '#D1D1D1', backgroundColor: '#D1D1D1'} : null}>Time: {tideTime?.split(' ')[1]}</span></h3>
                         <div key={`tideChart_${refreshKey}`} className='spot--forecast--tide--chart'>
                             <TideChart spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
                         </div>
