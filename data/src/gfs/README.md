@@ -1,0 +1,1 @@
+This module retrieves data from the Global Forecast System (GFS). This data is publicly accessible at https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/.
