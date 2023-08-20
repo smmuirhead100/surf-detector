@@ -97,7 +97,6 @@ export default function SpotForecast() {
                 {/**Spot Title */}
                 <div className='spot--forecast--header--wrapper'>
                     <SpotHeader spot={spot} />
-                    <ProfileHeader />
                 </div>
 
                 <div className='spot--forecast--chart--wrapper'>

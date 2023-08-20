@@ -1,7 +1,9 @@
 .general--navbar {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     margin: 0px;
-    width: 20rem;
+    width: 12rem;
     height: 100vh;
 }
 
@@ -12,7 +14,6 @@
     padding-left: 1rem;
     padding: 1rem;
     padding-top: 4rem;
-
 }
 
 .general--navbar ul {
@@ -20,17 +21,19 @@
     display: flex;
     flex-direction: column;
     font-weight: bold;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     gap: 0rem;
+    margin-left: 0rem;
     height: 100%;
+    padding: 0rem;
     overflow: scroll;
 }
 
 .general--navbar li {
     display: flex; 
-    align-items: center;
-    padding: 1rem;
+    padding: .5rem;
     gap: 5px;
+    margin: 5px
 }
 
 .general--navbar li img {
