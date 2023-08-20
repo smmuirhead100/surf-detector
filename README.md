@@ -65,3 +65,5 @@
 - [ ] Handle Mobile Web Version for spot forecast.
 - [x] Landing Page
 - [ ] Supabase confirmation link page.
+- [ ] Fix bug where swell chart renders multiple times. Usually occurs when spot is spam clicked.
+- [ ] Make mobile Compatible

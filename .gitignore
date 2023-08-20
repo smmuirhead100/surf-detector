@@ -7,3 +7,6 @@ recentCaptures/
 flask_env/
 *.pyc
 frontend_env/
+extracted_bull_data/
+*.bull_tar
+*.bull
