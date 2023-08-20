@@ -52,7 +52,7 @@ export default function ParseRatingData(ratingData){
                     break;
                 }
             }
-            maxTimestamp = dayData.AM[dayData.AM.length-1]?.timestamp
+            maxTimestamp = dayData.PM[dayData.PM.length-1]?.timestamp
             const avgAmRating = Math.round(dayData.AM.reduce((sum, entry) => sum + entry.value, 0) / dayData.AM.length);
             const avgNoonRating = Math.round(dayData.NOON.reduce((sum, entry) => sum + entry.value, 0) / dayData.NOON.length);
             const avgPmRating = Math.round(dayData.NOON.reduce((sum, entry) => sum + entry.value, 0) / dayData.NOON.length);

@@ -4,9 +4,10 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
-    height: 11.5rem;
+    height: 10rem;
+    width: 12rem;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 0rem;
     padding: 5px;
 }
 
@@ -17,12 +18,12 @@
 .forecastCard .date--container {
     display: flex;
     flex-direction: column;
-    gap: .7rem;
+    gap: 0rem;
     align-items: center;
 }
 
 .forecastCard .date--container .day {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 .forecastCard .date--container .month {
     font-size: 1.3rem;
@@ -42,18 +43,23 @@
 
 .forecastCard .report--container .height{
     border: solid;
-    padding: 3px;
-    width: 5rem;
+    padding: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: 4rem;
     border-radius: 5px;
     text-align: center;
     color: white;
+    font-size: .7rem;
 }
 
 
 .forecastCard .report--container .height--loading{
     border: none;
-    padding: 3px;
-    width: 5rem;
+    padding: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: 4rem;
     border-radius: 5px;
     background-color: #D1D1D1;
     color: #D1D1D1

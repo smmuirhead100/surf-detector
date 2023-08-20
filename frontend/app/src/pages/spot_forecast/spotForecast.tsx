@@ -20,9 +20,9 @@ export default function SpotForecast() {
     // Declare state variables. 
     const [waveData, setWaveData] = useState(null)
     const [ratingData, setRatingData] = useState(null)
+    const [tideData, setTideData] = useState(null)
     const [tide, setTide] = useState(null)
     const [tideTime, setTideTime] = useState(null)
-    const [tideChartLoading, setTideChartLoading] = useState(true)
     const [crowdLoading, setCrowdLoading] = useState(true)
     const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to trigger component remount
     const [minTimestamp, setMinTimestamp] = useState(0)
@@ -48,6 +48,16 @@ export default function SpotForecast() {
           .catch(error => console.log(error))
       }, [spot]);
 
+    // Fetch tide data from API.
+    useEffect(() => {
+        fetch(`https://goldfish-app-qsewy.ondigitalocean.app/tide?spot=${spot}`)
+          .then(response => response.json())
+          .then(data => {
+            setTideData(data)
+          })
+          .catch(error => console.log(error))
+    }, [spot])
+
     function changeCurrDay(minTimestamp, maxTimestamp) {
         setMinTimestamp(minTimestamp)
         setMaxTimestamp(maxTimestamp)
@@ -57,10 +67,6 @@ export default function SpotForecast() {
     function handleTide(tide: number, time: string) {
         setTide(tide)
         setTideTime(time)
-    }
-
-    function handleTideChartLoading() {
-        setTideChartLoading(false)
     }
 
     function handleCrowdLoading() {
@@ -73,8 +79,8 @@ export default function SpotForecast() {
         }
         else {
         setRefreshKey(refreshKey + 1); // Increment the refresh key
-        setTideChartLoading(true)
         setWaveData(null)
+        setTideData(null)
         navigate(`/forecast?spot=${path}`)
         }
     }
@@ -99,23 +105,21 @@ export default function SpotForecast() {
                 </div>
 
 
-                {/**Swell Chart */}
-                <div className='spot--forecast--chart--wrapper'>
-                    <h3>Wave Height</h3>
-                    <div key={`swellChart_${refreshKey}`} className={'spot--forecast--swell--chart'}>
-                        <SwellChart spot={spot} data={waveData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp}/>
+                <div className='spot--forecast--chart--wrapper--small'>
+                    {/**Swell Chart */}
+                    <div className='spot--forecast--chart--wrapper'>
+                        <h3>Wave Height</h3>
+                        <div key={`swellChart_${refreshKey}`} className='spot--forecast--swell--chart'>
+                            <SwellChart spot={spot} data={waveData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp}/>
+                        </div>
                     </div>
-                </div>
 
-                {/**Tide Chart */}
-                <div className='spot--forecast--chart--wrapper'>
-                    <h3>Tide</h3>
-                    <div key={`tideChart_${refreshKey}`} className={tideChartLoading ? 'spot--forecast--tide--chart--loading' : 'spot--forecast--tide--chart'}>
-                        <TideChart spot={spot} handleTide={handleTide} handleLoading={handleTideChartLoading}/>
-                    </div>
-                    <div className="tide--display">
-                        <p>{tide}</p>
-                        <p>{tideTime}</p>
+                    {/**Tide Chart */}
+                    <div className='spot--forecast--chart--wrapper'>
+                        <h3 className='tide--header'>Tide<span>Height: {tide}</span><span>Time: {tideTime?.split(' ')[1]}</span></h3>
+                        <div key={`tideChart_${refreshKey}`} className='spot--forecast--tide--chart'>
+                            <TideChart spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
+                        </div>
                     </div>
                 </div>
 

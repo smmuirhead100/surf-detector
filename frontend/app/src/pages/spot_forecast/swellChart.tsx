@@ -17,8 +17,8 @@ export default function SwellChart(props: any) {
   function renderArbitraryChart() {
     // Define dimensions for the placeholder chart
     const margin = { top: 20, right: 50, bottom: 30, left: 0 };
-    const width = 1000 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const width = 400 - margin.left - margin.right;
+    const height = 200 - margin.top - margin.bottom;
   
     // Create a grayed-out SVG for the placeholder chart
     const svg = d3.select(chartRef.current)
@@ -88,8 +88,8 @@ export default function SwellChart(props: any) {
   
       // Define the dimensions of the chart
       const margin = { top: 20, right: 50, bottom: 30, left: 0 };
-      const width = 1000 - margin.left - margin.right;
-      const height = 300 - margin.top - margin.bottom;
+      const width = 400 - margin.left - margin.right;
+      const height = 200 - margin.top - margin.bottom;
   
       // Define the scales
       const x = d3.scaleBand()
