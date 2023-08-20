@@ -25,6 +25,8 @@ export default function SpotForecast() {
     const [tideChartLoading, setTideChartLoading] = useState(true)
     const [crowdLoading, setCrowdLoading] = useState(true)
     const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to trigger component remount
+    const [minTimestamp, setMinTimestamp] = useState(0)
+    const [maxTimestamp, setMaxTimestamp] = useState(0)
     
     // Fetch wave data from API.
     useEffect(() => {
@@ -46,6 +48,11 @@ export default function SpotForecast() {
           .catch(error => console.log(error))
       }, [spot]);
 
+    function changeCurrDay(minTimestamp, maxTimestamp) {
+        setMinTimestamp(minTimestamp)
+        setMaxTimestamp(maxTimestamp)
+    }
+    
     // Functions to handle the loading of data.
     function handleTide(tide: number, time: string) {
         setTide(tide)
@@ -62,13 +69,9 @@ export default function SpotForecast() {
 
     function changeSpot(path){
         if (spot == path) {
-            console.log('same')
             return;
         }
         else {
-        console.log('hi')
-        console.log(spot)
-        console.log(path)
         setRefreshKey(refreshKey + 1); // Increment the refresh key
         setTideChartLoading(true)
         setWaveData(null)
@@ -92,7 +95,7 @@ export default function SpotForecast() {
                 </div>
 
                 <div className='spot--forecast--chart--wrapper'>
-                    <Forecasts waveData={waveData} ratingData={ratingData}/>
+                    <Forecasts waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay}/>
                 </div>
 
 
@@ -100,7 +103,7 @@ export default function SpotForecast() {
                 <div className='spot--forecast--chart--wrapper'>
                     <h3>Wave Height</h3>
                     <div key={`swellChart_${refreshKey}`} className={'spot--forecast--swell--chart'}>
-                        <SwellChart spot={spot} data={waveData}/>
+                        <SwellChart spot={spot} data={waveData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp}/>
                     </div>
                 </div>
 

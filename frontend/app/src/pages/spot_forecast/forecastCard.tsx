@@ -1,14 +1,14 @@
 import './style/forecastCard.css'
 
 export default function ForecastCard(props: any) {
-  const ratingDict = {0: 'red', 1: 'red', 2:'orange', 3: 'green', 4: 'green', 5: 'purple', 6: 'purple'}
+  const ratingDict = {0: '#FF5454', 1: '#FF5454', 2:'#E7A600', 3: '#23AE00', 4: '#166D00', 5: '#4100CA', 6: '#4100CA'}
   
   function backgroundColor(val : number) {
     return ratingDict[val]
   }
 
   function handleClick(){
-      props.handleClick(props.data.date.month, props.data.date.day)
+      props.handleClick(props.data.date.month, props.data.date.day, props.data.minTimestamp, props.data.maxTimestamp)
   }
 
   return props.isLoading ? 
@@ -38,7 +38,7 @@ export default function ForecastCard(props: any) {
     )
    :
     (
-        <div className='forecastCard' onClick={handleClick} style={props.selectedCard?.month == props.data.date.month && props.selectedCard?.day == props.data.date.day ? {border: 'solid black 3px'} : {border: 'solid black 1px'}}>
+        <div className='forecastCard' onClick={handleClick} style={props.selectedCard?.month == props.data.date.month && props.selectedCard?.day == props.data.date.day ? {border: 'solid black 5px', backgroundColor: '#F5F6F8'} : {border: 'solid black 3px'}}>
             
             <div className='date--container'>
               <div className='month'>{props.data.date.month}</div>

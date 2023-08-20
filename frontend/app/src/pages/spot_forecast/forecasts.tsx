@@ -1,7 +1,7 @@
 import ForecastCard from "./forecastCard"
 import ParseWaveData from "../../utils/parseWaveData"
 import ParseRatingData from "../../utils/parseRatingData"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './style/forecasts.css'
 
 export default function Forecasts(props: any) {
@@ -20,7 +20,17 @@ export default function Forecasts(props: any) {
     }
 
     // Combine data to be fed into Cards
-    const[selectedCard, setSelectedCard] = useState(null)
+    const[selectedCard, setSelectedCard] = useState({month: '', day: 0, minTimestamp: 0, maxTimestamp: 0})
+
+    // In your useEffect for selectedCard, use optional chaining to avoid accessing properties on null
+    useEffect(() => {
+        if (selectedCard?.minTimestamp > 0) {
+            console.log('sending data to spotforecast module:');
+            console.log(selectedCard.minTimestamp, selectedCard.maxTimestamp);
+            props.changeCurrDay(selectedCard.minTimestamp, selectedCard.maxTimestamp);
+        }
+    }, [selectedCard]);
+
     const waveData = ParseWaveData(props.waveData);
     const ratingData = ParseRatingData(props.ratingData);
     const combinedData = waveData.map(wave => {
@@ -29,7 +39,9 @@ export default function Forecasts(props: any) {
         );
         return {
             ...wave,
-            rating: matchingRating
+            rating: matchingRating,
+            minTimestamp: matchingRating.date.minTimestamp,
+            maxTimestamp: matchingRating.date.maxTimestamp
         };
     });
 
@@ -38,10 +50,20 @@ export default function Forecasts(props: any) {
         <ForecastCard key={`${data.date.month}-${data.date.day}`} data={data} isLoading={false} handleClick={changeSelectedCard} selectedCard={selectedCard}/>
     ));
 
-    function changeSelectedCard(month: string, day: number) {
-        setSelectedCard({month, day})
-        console.log(selectedCard)
+    function changeSelectedCard(month: string, day: number, minTimestamp: number, maxTimestamp: number) {
+        setSelectedCard({month, day, minTimestamp, maxTimestamp})
     }
+
+    // Set initial selected card to be the first one
+    
+    useEffect(() => {
+        if (cards.length > 0) {
+            const initialData = cards[0].props.data;
+            console.log('initial data:');
+            console.log(initialData);
+            changeSelectedCard(initialData.date.month, initialData.date.day, initialData.minTimestamp, initialData.maxTimestamp);
+        }
+    }, []);
 
     return (
         <div className="forecasts">
