@@ -14,6 +14,63 @@ export default function SwellChart(props: any) {
   const waveData = props.data as ChartData[]; // Data to be used for chart.
   const chartRef = useRef(null);
 
+  function renderArbitraryChart() {
+    // Define dimensions for the placeholder chart
+    const margin = { top: 20, right: 50, bottom: 30, left: 0 };
+    const width = 1000 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
+  
+    // Create a grayed-out SVG for the placeholder chart
+    const svg = d3.select(chartRef.current)
+      .append('svg')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${margin.left + 50},${margin.top})`);
+    
+    // Example data for the placeholder chart
+    const exampleData = [
+      { time: '1', height: 2 },
+      { time: '2', height: 3 },
+      { time: '3', height: 4 },
+      { time: '4', height: 3 },
+      { time: '5', height: 3 },
+      { time: '6', height: 4 },
+      { time: '7', height: 6 },
+      { time: '8', height: 7 },
+      { time: '9', height: 9 },
+      { time: '10', height: 10 }
+    ];
+  
+    // Define scales for the placeholder chart
+    const x = d3.scaleBand()
+      .range([0, width])
+      .padding(0.1)
+      .domain(exampleData.map(d => d.time));
+  
+    const y = d3.scaleLinear()
+      .range([height, 0])
+      .domain([0, 10]);
+  
+    // Add example bars to the placeholder chart
+    svg.selectAll('.bar')
+      .data(exampleData)
+      .enter().append('rect')
+      .attr('class', 'bar')
+      .attr('x', d => x(d.time))
+      .attr('width', x.bandwidth())
+      .attr('y', d => y(d.height))
+      .attr('height', d => height - y(d.height))
+      .attr('fill', '#D1D1D1'); // Set a fixed fill color
+  
+    // Remove x-axis labels from the placeholder chart
+    svg.select('.x-axis').selectAll('.tick text').remove();
+  
+    // Remove y-axis labels from the placeholder chart
+    svg.select('.y-axis').selectAll('.tick text').remove();
+  }
+  
+  
 
   useEffect(() => {
     d3.select(chartRef.current).selectAll('svg').remove();
@@ -90,12 +147,10 @@ export default function SwellChart(props: any) {
       svg.append('g')
         .attr('class', 'y-axis')
         .call(d3.axisLeft(y));
+    } else {
+      renderArbitraryChart()
     }
   }, [waveData, props.minTimestamp, props.maxTimestamp]);
-  
-  if (!waveData) {
-    return <p>loading</p>
-  }
   
   return (
     <div>
