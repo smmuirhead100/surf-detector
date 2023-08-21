@@ -3,7 +3,6 @@ import SwellChart from './swellChart'
 import GeneralNavbar from './generalNavbar'
 import TideChart from './tideChart'
 import SpotHeader from './spotHeader'
-import ProfileHeader from './profileHeader'
 import CrowdChart from './crowdChart'
 import Forecasts from './forecasts'
 import { useState, useEffect } from 'react'
@@ -19,6 +18,7 @@ export default function SpotForecast() {
 
     // Declare state variables. 
     const [waveData, setWaveData] = useState(null)
+    const [windData, setWindData] = useState(null)
     const [ratingData, setRatingData] = useState(null)
     const [tideData, setTideData] = useState(null)
     const [tide, setTide] = useState(null)
@@ -54,6 +54,16 @@ export default function SpotForecast() {
           .then(response => response.json())
           .then(data => {
             setTideData(data)
+          })
+          .catch(error => console.log(error))
+    }, [spot])
+
+    // Fetch wind data from API.
+    useEffect(() => {
+        fetch(`https://goldfish-app-qsewy.ondigitalocean.app/wind?spot=${spot}`)
+          .then(response => response.json())
+          .then(data => {
+            setWindData(data)
           })
           .catch(error => console.log(error))
     }, [spot])
@@ -99,7 +109,7 @@ export default function SpotForecast() {
                     <SpotHeader spot={spot} />
                 </div>
 
-                <div className='spot--forecast--chart--wrapper'>
+                <div className='spot--forecast--chart--wrapper' style={{ position: 'sticky'}}>
                     <Forecasts waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay}/>
                 </div>
 
@@ -120,6 +130,8 @@ export default function SpotForecast() {
                             <TideChart spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
                         </div>
                     </div>
+
+                    {/**Wind Chart */}
                 </div>
 
                 

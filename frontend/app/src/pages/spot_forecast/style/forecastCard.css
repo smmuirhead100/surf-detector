@@ -6,8 +6,8 @@
     width: fit-content;
     height: 10rem;
     width: 12rem;
+    min-width: fit-content;
     justify-content: space-between;
-    gap: 0rem;
     padding: 5px;
 }
 
@@ -42,8 +42,8 @@
 }
 
 .forecastCard .report--container .height{
-    border: solid;
     padding: 0px;
+    margin: 2px;
     padding-top: 3px;
     padding-bottom: 3px;
     width: 4rem;
