@@ -1,23 +1,18 @@
 import { useAuth } from "../context/AuthProvider";
 import { Outlet } from "react-router-dom";
-import Home from "../pages/home/home"
+import Home from "../pages/home/home";
 
 const AuthRoute = () => {
   const user = useAuth()['user'];
-  const isApproved = useAuth()['isApproved']
   const isLoading = useAuth()['isLoading']
+  console.log(user)
 
   return isLoading ? (
     <div>Loading</div>
-  ) : user ? (
-    isApproved ? (
-      <Outlet /> // Render nested routes for approved user
-    ) : (
+  ) : user ?
       <Outlet />
-    )
-  ) : (
-    <Home />
-  );
+        :
+      <Home />
 };
 
 export default AuthRoute;

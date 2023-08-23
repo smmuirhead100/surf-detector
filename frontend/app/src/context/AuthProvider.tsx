@@ -5,8 +5,9 @@ const AuthContext = createContext({});
 
 export const useAuth = () => useContext(AuthContext);
 
-const login = (email, password) =>
+const login = (email, password) => 
   supabase.auth.signInWithPassword({ email, password });
+
 
 const signOut = () => supabase.auth.signOut();
 
@@ -22,22 +23,6 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isApproved, setIsApproved] = useState(false)
-
-  const checkUserAccess = async (userId) => {
-    const { data, error } = await supabase
-      .from("UserAccess")
-      .select("approved")
-      .eq("user_id", userId)
-      .single();
-    if (data) {
-      setIsApproved(data.approved);
-    } else {
-      console.log('User access not found:', error);
-    }
-    setIsLoading(false);
-  };
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,23 +30,23 @@ const AuthProvider = ({ children }) => {
       const { data } = await supabase.auth.getUser();
       const { user: currentUser } = data;
       setUser(currentUser ?? null);
+      console.log(auth)
       setAuth(currentUser ? true : false);
-      
-      if (currentUser) {
-        checkUserAccess(currentUser.id);
-      }
+      console.log(auth)
       setIsLoading(false)
     };
+
     getUser();
+    
     const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event == "PASSWORD_RECOVERY") {
-        setAuth(false);
+          setAuth(false);
       } else if (event === "SIGNED_IN") {
-        setUser(session.user);
-        setAuth(true);
+          setUser(session.user);
+          setAuth(true)
       } else if (event === "SIGNED_OUT") {
-        setAuth(false);
-        setUser(null);
+          setAuth(false);
+          setUser(null);
       }
     });
     return () => {
@@ -74,7 +59,6 @@ const AuthProvider = ({ children }) => {
       value={{
         auth,
         user,
-        isApproved,
         login,
         signOut,
         passwordReset,

@@ -20,7 +20,7 @@ export default function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='*' element={<Navigate to='/' replace />} />
+          <Route path='*' element={<Navigate to='/signin' replace />} />
 
           <Route element={<AuthRoute />}>
               {/* Specific routes */}

@@ -28,7 +28,6 @@ export default function SpotForecast() {
     const [minTimestamp, setMinTimestamp] = useState(0)
     const [maxTimestamp, setMaxTimestamp] = useState(0)
     
-    console.log(windData)
     // Fetch wave data from API.
     useEffect(() => {
         fetch(`https://goldfish-app-qsewy.ondigitalocean.app/wave?spot=${spot}`)
