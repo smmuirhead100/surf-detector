@@ -11,6 +11,12 @@ export default function DayForecast(props: any) {
     const[windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     useEffect(() => {
+        setRating('-')
+        setHeight('-')
+        setTime(['-'])
+    }, [props.spot])
+    
+    useEffect(() => {
         // Define a function to update the windowWidth state
         const updateWindowWidth = () => {
           setWindowWidth(window.innerWidth);
