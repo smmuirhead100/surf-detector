@@ -1,69 +1,67 @@
 .general--navbar {
     display: flex;
-    flex-direction: column;
     background-color: white;
     margin: 0px;
-    min-width: 12rem;
-    height: 100vh;
-    position: sticky;
-    top: 0;
+    justify-content: space-between;
+    border-bottom: solid;
 }
 
 .general--navbar--logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 1rem;
-    padding: 1rem;
-    padding-top: 4rem;
+    padding: 5px;
 }
 
 .general--navbar ul {
-    margin-top: 2rem;
     display: flex;
-    flex-direction: column;
-    font-weight: bold;
-    font-size: 1.1rem;
-    gap: 0rem;
-    margin-left: 0rem;
-    height: 100%;
-    padding: 0rem;
-    overflow: scroll;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .general--navbar li {
     display: flex; 
     padding: .5rem;
+    align-items: center;
     gap: 5px;
-    margin: 5px
+    margin: 5px;
+    border-radius: 10px;
 }
 
 .general--navbar li img {
     height: 1.5rem;
     color: black;
 }
+
+.general--navbar--logout {
+    display: flex;
+}
+
 .general--navbar .navbar--unselected--item:hover {
     cursor: default;
     background-color: #F5F6F8;
-    border-radius: 10px;
-    margin-right: 1rem;
 }
 
 .navbar--dropdown--spots {
+    position: absolute;
     display: flex;
     flex-direction: column;
     font-weight: normal;
+    max-height: 15rem;
     gap: 0px;
     padding-bottom: 0px;
     height: 10rem;
     overflow: scroll;
-    margin: 10px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .navbar--dropdown--spots li{
     margin: 1px;
     padding: 5px;
-    margin-left: 2rem;
 }
 
 .navbar--dropdown--spots .selected--spot{
@@ -77,20 +75,21 @@
 }
 
 .navbar--dropdown--cams {
+    position: absolute;
     display: flex;
     flex-direction: column;
     font-weight: normal;
-    gap: 0px;
-    padding-bottom: 0px;
-    height: fit-content;
+    max-height: 15rem;
     overflow: scroll;
-    margin: 10px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .navbar--dropdown--cams li{
     margin: 1px;
     padding: 5px;
-    margin-left: 2rem;
 }
 
 .navbar--selected--item {
@@ -101,11 +100,6 @@
     margin-right: 1rem;
 }
     
-.general--navbar--logout {
-    position: absolute;
-    bottom: 0px;
-    font-weight: normal;
-}
 
 .general--navbar--logout:hover {
     cursor: pointer;
