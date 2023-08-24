@@ -1,5 +1,5 @@
 import unixToTime from '../../utils/unixToTime';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const ratingDict = {
   'EPIC': <span style={{color: '#4100CA'}}>Firing</span>,
@@ -36,6 +36,7 @@ export default function SwellChart(props: any) {
   if (props.data && props.minTimestamp && props.ratingData) {
     const minTimestamp = props.minTimestamp 
     const maxTimestamp = props.maxTimestamp 
+    const [dataIndex, setDataIndex] = useState(0)
     const filteredData = props.data.filter(
         (item) => item.timestamp >= minTimestamp && item.timestamp <= maxTimestamp
     );
@@ -48,7 +49,6 @@ export default function SwellChart(props: any) {
       const averageHeight = (data.surf.rawSurf.rawMax + data.surf.rawSurf.rawMin) / 2;
       return Number(averageHeight.toFixed(2)); // Round to 2 decimal places
     });
-
     useEffect(() => {
           const hoveredValue = '-'; // Get the value of the hovered bar
           const hoveredRating = '-'
@@ -63,7 +63,16 @@ export default function SwellChart(props: any) {
           data: heights,
           backgroundColor: filteredRatingData.map(item => {
             return ratingBackgroundDict[item.rating.value]
-          })
+          }),
+          borderColor: (context) => {
+            const index = context.dataIndex;
+            return index === dataIndex ? 'black' : 'transparent';
+          },
+          borderWidth: (context) => {
+            const index = context.dataIndex;
+            return index === dataIndex ? '4' : '0';
+          },
+          
         }
       ]
     }
@@ -105,7 +114,7 @@ export default function SwellChart(props: any) {
       tooltip: {
         enabled: false,
         external: function(context) {
-          const dataIndex = context.tooltip.dataPoints[0]?.dataIndex; // Get the index of the hovered bar
+          setDataIndex(context.tooltip.dataPoints[0]?.dataIndex) // Get the index of the hovered bar
           if (dataIndex !== undefined) {
             const hoveredValue = heights[dataIndex]; // Get the value of the hovered bar
             const hoveredRating = ratingDict[filteredRatingData[dataIndex].rating.description]
