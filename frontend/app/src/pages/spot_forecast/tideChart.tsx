@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './style/tideChart.css'
 import unixToTime from '../../utils/unixToTime';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend, ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend);
 
@@ -45,7 +45,7 @@ const TideChart = (props: any) => {
     }
   }, [props.data, props.minTimestamp, props.maxTimestamp]);
 
-    const options = {
+    const options: ChartOptions<any> = {
         responsive: true,
         maintainAspectRatio: false,
         scales: {

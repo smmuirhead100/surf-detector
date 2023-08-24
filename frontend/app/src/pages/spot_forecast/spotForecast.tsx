@@ -4,7 +4,6 @@ import ForecastDays from './forecastDays'
 import DayForecast from './dayForecast'
 import GeneralNavbar from './generalNavbar'
 import TideForecast from './tideForecast'
-import TideChart from './tideChart'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,10 +22,10 @@ export default function SpotForecast() {
     const [tideData, setTideData] = useState(null)
     const [currTide, setCurrTide] = useState(null)
     const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to trigger component remount
-    const [minTimestamp, setMinTimestamp] = useState(0)
-    const [maxTimestamp, setMaxTimestamp] = useState(0)
+    const [minTimestamp, setMinTimestamp] = useState<number>(0); // Initialize with appropriate default value
+    const [maxTimestamp, setMaxTimestamp] = useState<number>(0); 
     const [maxHeight, setMaxHeight] = useState(0)
-    const [currDay, setCurrday] = useState(0)
+    const [currDay, setCurrDay] = useState<string>('');
 
     // Fetch wave data from API.
     useEffect(() => {
@@ -82,7 +81,7 @@ export default function SpotForecast() {
     function changeCurrDay(minTimestamp, maxTimestamp, month, day) {
         setMinTimestamp(minTimestamp)
         setMaxTimestamp(maxTimestamp)
-        setCurrday(`${month} ${day.toString()}`)
+        setCurrDay(`${month} ${day.toString()}`)
     }
 
     function changeSpot(path){
@@ -107,7 +106,7 @@ export default function SpotForecast() {
             <div className="content">
                 <SpotHeader spot={spot} />
                 <div className='hero'>
-                    <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay}/>
+                    <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay} windData={windData} currTide={currTide}/>
                 </div>
                 <div className='hero'>
                     <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay}/>

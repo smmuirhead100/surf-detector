@@ -21,7 +21,6 @@ export default function ForecastDays(props: any) {
 
     // Combine data to be fed into Cards
     const [selectedCard, setSelectedCard] = useState({month: '', day: 0, minTimestamp: 0, maxTimestamp: 0})
-    const [currIndex, setCurrIndex] = useState(0)
 
     // In your useEffect for selectedCard, use optional chaining to avoid accessing properties on null
     useEffect(() => {
@@ -53,10 +52,6 @@ export default function ForecastDays(props: any) {
         setSelectedCard({month, day, minTimestamp, maxTimestamp})
     }
 
-    function changeCurrIndex(index) {
-        setCurrIndex(index)
-    }
-
     // Set initial selected card to be the first one
     
     useEffect(() => {
@@ -68,7 +63,7 @@ export default function ForecastDays(props: any) {
 
     return (
         <div className="forecasts">
-            {cards.slice(currIndex).map((card) => card)}
+            {cards}
         </div>
     )
 }
