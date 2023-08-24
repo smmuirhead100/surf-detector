@@ -5,8 +5,8 @@ import { useState, useEffect } from "react"
 import InfoBox from '../../components/infoBox.tsx'
 
 export default function DayForecast(props: any) {
-    const[height, setHeight] = useState(null)
-    const[rating, setRating] = useState(null)
+    const[height, setHeight] = useState('-')
+    const[rating, setRating] = useState('-')
     const [time, setTime] = useState([null])
     const[windowWidth, setWindowWidth] = useState(window.innerWidth)
 
@@ -29,7 +29,7 @@ export default function DayForecast(props: any) {
 
     }, )
     function changeHeight(h) {
-        setHeight(h)
+        return h == '-' ? setHeight(h) : setHeight(`${h} feet`)
     }
 
     function changeRating(r) {
@@ -49,7 +49,7 @@ export default function DayForecast(props: any) {
                 </div>
             </div>
             <div className={windowWidth > 1534 ? "info" : "info--mobile"}>
-                <InfoBox title="Height" content={<div style={{ color: 'black'}}>{height} feet</div>}/>
+                <InfoBox title="Height" content={<div style={{ color: 'black'}}>{height}</div>}/>
                 <InfoBox title="Conditions" content={<div>{rating}</div>}/>
                 <InfoBox title="Time" content={<div>{convertTime(time[0])}</div>}/>
             </div>

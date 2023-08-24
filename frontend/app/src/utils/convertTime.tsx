@@ -13,6 +13,6 @@ export default function convertTime(inputTime) {
 
         return formattedTime;
     } catch (error) {
-        return "Invalid input format";
+        return "-";
     }
 }

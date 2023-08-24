@@ -50,11 +50,12 @@ export default function SwellChart(props: any) {
     });
 
     useEffect(() => {
-          const hoveredValue = heights[0]; // Get the value of the hovered bar
-          const hoveredRating = ratingDict[filteredRatingData[0].rating.description]
+          const hoveredValue = '-'; // Get the value of the hovered bar
+          const hoveredRating = '-'
           props.changeHeight(hoveredValue)
           props.changeRating(hoveredRating)
     }, [props.spot])
+
     const data = {
       labels, 
       datasets: [
