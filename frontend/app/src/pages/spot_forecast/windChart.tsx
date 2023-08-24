@@ -52,7 +52,7 @@ const WindChart = (props: any) => {
             display: false, // Hide the x-axis
           },
           y: {
-            min: -1,
+            min: 0,
             grid: {
               display: true
             },
