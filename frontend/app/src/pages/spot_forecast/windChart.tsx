@@ -7,11 +7,11 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 interface DataPoint {
   x: { index: number, value: string };
-  y: number;
+  y: any;
 }
 
-const TideChart = (props: any) => {
-  const [tideData, setTideData] = useState<DataPoint[]>([]);
+const WindChart = (props: any) => {
+  const [windData, setWindData] = useState<DataPoint[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currIndex, setCurrIndex] = useState(0)
 
@@ -30,7 +30,7 @@ const TideChart = (props: any) => {
       filteredData.forEach(item => {
         const obj: DataPoint = {
           x: { index: index, value: unixToTime(item.timestamp) },
-          y: item.height
+          y: { directionRelation: item.directiontype, speed: Math.round(item.speed * 100) / 100, direction: item.direction }
         };
         if (timestampDictionary[item.timestamp] === undefined) {
           transformedData.push(obj);
@@ -39,7 +39,7 @@ const TideChart = (props: any) => {
         }
       });
 
-      setTideData(transformedData);
+      setWindData(transformedData);
       setIsLoading(false);
     }
   }, [props.data, props.minTimestamp, props.maxTimestamp]);
@@ -82,19 +82,19 @@ const TideChart = (props: any) => {
             mode: 'index',  
             external: function(context) {
               setCurrIndex(context.tooltip.dataPoints[0]?.dataIndex) // Get the index of the hovered bar
-              props.changeTide(tideData[currIndex].y)
-              props.changeTime(tideData[currIndex].x.value)
+              props.changeWind(windData[currIndex].y)
+              props.changeTime(windData[currIndex].x.value)
             },
          },
         }
       }
 
       const data = {
-        labels: tideData.map(item => item.x.value),
+        labels: windData.map(item => item.x.value),
         datasets: [
           {
             fill: true,
-            data: tideData.map((item) => item.y),
+            data: windData.map((item) => item.y.speed),
             borderColor: 'rgba(75, 147, 255, 0.49)',
             backgroundColor: (context) => {
               const dataIndex = context.dataIndex;
@@ -114,4 +114,4 @@ const TideChart = (props: any) => {
       );
     };
 
-export default TideChart;
+export default WindChart;

@@ -27,3 +27,9 @@
     margin: 2rem;
     max-width: 30rem
 }
+
+.hero--small--container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

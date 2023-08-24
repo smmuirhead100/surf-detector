@@ -4,6 +4,7 @@ import ForecastDays from './forecastDays'
 import DayForecast from './dayForecast'
 import GeneralNavbar from './generalNavbar'
 import TideForecast from './tideForecast'
+import WindForecast from './windForecast'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -21,6 +22,7 @@ export default function SpotForecast() {
     const [ratingData, setRatingData] = useState(null)
     const [tideData, setTideData] = useState(null)
     const [currTide, setCurrTide] = useState(null)
+    const [currWind, setCurrWind] = useState(null)
     const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to trigger component remount
     const [minTimestamp, setMinTimestamp] = useState<number>(0); // Initialize with appropriate default value
     const [maxTimestamp, setMaxTimestamp] = useState<number>(0); 
@@ -100,6 +102,10 @@ export default function SpotForecast() {
         setCurrTide(t)
     }
 
+    function handleWind(w) {
+        setCurrWind(w)
+    }
+
     return (
         <div className="spot--forecast">
             <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
@@ -111,8 +117,13 @@ export default function SpotForecast() {
                 <div className='hero'>
                     <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay}/>
                 </div>
-                <div className='hero--small'>
-                    <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
+                <div className='hero--small--container'>
+                    <div className='hero--small'>
+                        <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
+                    </div>
+                    <div className='hero--small'>
+                        <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} />
+                    </div>
                 </div>
             </div>
         </div>
