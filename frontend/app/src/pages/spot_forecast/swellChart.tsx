@@ -20,6 +20,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartData
 } from 'chart.js';
 
 import { Bar } from 'react-chartjs-2';
@@ -56,7 +57,7 @@ export default function SwellChart(props: any) {
           props.changeRating(hoveredRating)
     }, [props.spot])
 
-    const data = {
+    const data: ChartData<any>= {
       labels, 
       datasets: [
         {
