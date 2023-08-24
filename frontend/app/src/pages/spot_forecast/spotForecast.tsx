@@ -1,10 +1,10 @@
 import './style/spotForecast.css'
-import SwellChart from './swellChart'
-import GeneralNavbar from './generalNavbar'
-import TideChart from './tideChart'
 import SpotHeader from './spotHeader'
-import CrowdChart from './crowdChart'
-import Forecasts from './forecasts'
+import ForecastDays from './forecastDays'
+import DayForecast from './dayForecast'
+import GeneralNavbar from './generalNavbar'
+import TideForecast from './tideForecast'
+import TideChart from './tideChart'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -21,19 +21,28 @@ export default function SpotForecast() {
     const [windData, setWindData] = useState(null)
     const [ratingData, setRatingData] = useState(null)
     const [tideData, setTideData] = useState(null)
-    const [tide, setTide] = useState(null)
-    const [tideTime, setTideTime] = useState(null)
-    const [crowdLoading, setCrowdLoading] = useState(true)
+    const [currTide, setCurrTide] = useState(null)
     const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to trigger component remount
     const [minTimestamp, setMinTimestamp] = useState(0)
     const [maxTimestamp, setMaxTimestamp] = useState(0)
-    
+    const [maxHeight, setMaxHeight] = useState(0)
+    const [currDay, setCurrday] = useState(0)
+
     // Fetch wave data from API.
     useEffect(() => {
         fetch(`https://goldfish-app-qsewy.ondigitalocean.app/wave?spot=${spot}`)
           .then(response => response.json())
           .then(data => {
             setWaveData(data);
+            // Find the maximum height and update maxHeight state.
+            let maxFoundHeight = 0;
+            for (const dataPoint of data) {
+                const currentHeight = dataPoint.surf.rawSurf.rawMax;
+                if (currentHeight > maxFoundHeight) {
+                    maxFoundHeight = currentHeight;
+                }
+            }
+            setMaxHeight(maxFoundHeight)
           })
           .catch(error => console.log(error))
       }, [spot]);
@@ -68,19 +77,12 @@ export default function SpotForecast() {
           .catch(error => console.log(error))
     }, [spot])
 
-    function changeCurrDay(minTimestamp, maxTimestamp) {
+
+
+    function changeCurrDay(minTimestamp, maxTimestamp, month, day) {
         setMinTimestamp(minTimestamp)
         setMaxTimestamp(maxTimestamp)
-    }
-    
-    // Functions to handle the loading of data.
-    function handleTide(tide: number, time: string) {
-        setTide(tide)
-        setTideTime(time)
-    }
-
-    function handleCrowdLoading() {
-        setCrowdLoading(false)
+        setCurrday(`${month} ${day.toString()}`)
     }
 
     function changeSpot(path){
@@ -95,58 +97,23 @@ export default function SpotForecast() {
         }
     }
    
+    function handleTide(t) {
+        setCurrTide(t)
+    }
+
     return (
-        <div className="spot--forecast--wrapper">
-            
-            <div className="general--navbar--wrapper">
-                <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
-            </div>
-            
-            <div className="spot--forecast--content">
-                
-                {/**Spot Title */}
-                <div className='spot--forecast--header--wrapper'>
-                    <SpotHeader spot={spot} />
+        <div className="spot--forecast">
+            <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
+            <div className="content">
+                <SpotHeader spot={spot} />
+                <div className='hero'>
+                    <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay}/>
                 </div>
-
-                <div className='spot--forecast--chart--wrapper' style={{ position: 'sticky'}}>
-                    <Forecasts waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay}/>
+                <div className='hero'>
+                    <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay}/>
                 </div>
-
-
-                <div className='spot--forecast--chart--wrapper--small'>
-                    {/**Swell Chart */}
-                    <div className='spot--forecast--chart--wrapper'>
-                        <h3>Wave Height</h3>
-                        <div key={`swellChart_${refreshKey}`} className='spot--forecast--swell--chart'>
-                            <SwellChart spot={spot} data={waveData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp}/>
-                        </div>
-                    </div>
-
-                    {/**Tide Chart */}
-                    <div className='spot--forecast--chart--wrapper'>
-                        <h3 className='tide--header'>Tide<span style={!tideData ? {color: '#D1D1D1', backgroundColor: '#D1D1D1'} : null}>Height: {tide}</span><span style={!tideData ? {color: '#D1D1D1', backgroundColor: '#D1D1D1'} : null}>Time: {tideTime?.split(' ')[1]}</span></h3>
-                        <div key={`tideChart_${refreshKey}`} className='spot--forecast--tide--chart'>
-                            <TideChart spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
-                        </div>
-                    </div>
-
-                    {/**Wind Chart */}
-                </div>
-
-                
-                
-                <div className='spot--forecast--chart--wrapper--small'>
-                   
-                    {/**Crowd Chart */}
-                    <div className='spot--forecast--chart--wrapper'>
-                        <h3>Crowd</h3>
-                        <div key={`crowdChart_${refreshKey}`} className={crowdLoading ? 'spot--forecast--crowd--loading' : 'spot--forecast--crowd--wrapper'}>
-                            <CrowdChart spot={spot} handleLoading={handleCrowdLoading}/>
-                        </div>
-                    </div>
-
-                    {/**Extended Forecast */}
+                <div className='hero'>
+                    <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
                 </div>
             </div>
         </div>

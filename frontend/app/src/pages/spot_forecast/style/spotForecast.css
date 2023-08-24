@@ -1,103 +1,19 @@
-.spot--forecast--wrapper {
-    display: flex;
+.spot--forecast {
     background-color: #F5F6F8;
-}
-
-.spot--forecast--header--wrapper {
     display: flex;
-    width: 100%;
 }
-
-.general--navbar--wrapper {
-    top: 0;
-    position: sticky;
-    height: fit-content;
-}
-
-.spot--forecast--content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 100%;
+.spot--forecast .content {
+    gap: 2rem;
+    align-items: center;
     margin: 1rem;
-    width: 100%;
     min-width: 30rem;
 }
-.spot--forecast--chart--wrapper {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    min-width: 300px;
-    height: fit-content;
-    margin: 1rem;
+
+.spot--forecast .hero {
     overflow: hidden;
-    min-width: 0px;
     background-color: white;
     border-radius: 2rem;
-    padding: 2rem;
-    padding-top: 1rem;
-}
-
-.spot--forecast--swell--chart {
-    display: flex;
-    background-color: white;
-    border-radius: 2rem;
-    overflow: scroll;
-    width: 100%;
-    justify-content: flex-start;
-}
-
-.spot--forecast--tide--chart {
-    display: flex;
-    background-color: white;
-    border-radius: 2rem;
-    overflow: scroll;
-    width: 100%;
-    justify-content: flex-start;
-}
-
-.spot--forecast--tide--chart--loading {
-    justify-content: center;
-}
-
-.spot--forecast--swell--chart--loading {
-    justify-content: center;
-}
-
-.spot--forecast--crowd--wrapper {
-    display: flex;
-    width: fit-content;
+    padding: 1rem;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin: 2rem;
-    overflow: hidden;
-    min-width: 300px;
-    background-color: white;
-    border-radius: 2rem;
-    padding: 2rem;
-    padding-top: 1rem;
-    justify-content: center;
-}
-
-.spot--forecast--crowd--loading {
-    width: 10rem;
-}
-.spot--forecast--chart--wrapper--small {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.tide--header {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.tide--header span {
-    background-color: #257CFF;
-    padding: 5px;
-    border-radius: 5px;
-    width: 8rem;
-    color: white;
-    font-size: 1rem;
 }

@@ -1,0 +1,36 @@
+.day--forecast--container {
+    min-height: 20rem;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1rem;
+}
+
+.day--forecast {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 4;
+}
+
+.day--forecast .chart {
+    height: 20rem;
+    max-width: 60rem;
+}
+
+.day--forecast .chart--mobile {
+    width: 95%;
+}
+
+.day--forecast--container .info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.day--forecast--container .info--mobile {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}

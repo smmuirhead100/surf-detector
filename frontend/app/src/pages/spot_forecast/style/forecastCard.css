@@ -1,6 +1,7 @@
 .forecastCard {
-    border: solid;
-    border-radius: 10px;
+    border: solid #A8A6A7 4px;
+    border-radius: 15px;
+    color: #A8A6A7;
     display: flex;
     flex-direction: column;
     width: fit-content;
@@ -11,37 +12,53 @@
     padding: 5px;
 }
 
+.forecastCard--selected {
+    border: solid black 4px;
+    border-radius: 15px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: 10rem;
+    width: 12rem;
+    min-width: fit-content;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.forecastCard--selected
+
 .forecastCard:hover {
     background-color: #F5F6F8;
 }
 
-.forecastCard .date--container {
+.date--container {
     display: flex;
     flex-direction: column;
     gap: 0rem;
     align-items: center;
 }
 
-.forecastCard .date--container .day {
+.date--container .day {
     font-size: 2rem;
 }
-.forecastCard .date--container .month {
+.date--container .month {
     font-size: 1.3rem;
 }
 
-.forecastCard .reports {
+.reports {
     display: flex;
     justify-content: space-evenly;
     gap: 0rem;
 }
 
-.forecastCard .report--container {
+.report--container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.forecastCard .report--container .height{
+.report--container .height{
     padding: 0px;
     margin: 2px;
     padding-top: 3px;
@@ -51,10 +68,13 @@
     text-align: center;
     color: white;
     font-size: .7rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 5px;
+
 }
 
 
-.forecastCard .report--container .height--loading{
+.report--container .height--loading{
     border: none;
     padding: 0px;
     padding-top: 3px;
@@ -65,7 +85,7 @@
     color: #D1D1D1
 }
 
-.forecastCard .report--container .time--loading{
+.report--container .time--loading{
     border-radius: 5px;
     background-color: #D1D1D1;
     color: #D1D1D1;

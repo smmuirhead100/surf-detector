@@ -38,11 +38,11 @@ export default function ForecastCard(props: any) {
     )
    :
     (
-        <div className='forecastCard' onClick={handleClick} style={props.selectedCard?.month == props.data.date.month && props.selectedCard?.day == props.data.date.day ? {border: 'solid black 5px', backgroundColor: '#F5F6F8'} : {border: 'solid black 3px'}}>
+        <div onClick={handleClick} className={props.selectedCard?.month == props.data.date.month && props.selectedCard?.day == props.data.date.day ? 'forecastCard--selected' : 'forecastCard'}>
             
             <div className='date--container'>
-              <div className='month'>{props.data.date.month}</div>
-              <div className='day'>{props.data.date.day}</div>
+              <div className='month' style={props.selectedCard?.month == props.data.date.month && props.selectedCard?.day == props.data.date.day ? {color: 'black'} : {color: '#A8A6A7'}}>{props.data.date.month}</div>
+              <div className='day'><strong>{props.data.date.day}</strong></div>
             </div>
             
             <div className='reports'>

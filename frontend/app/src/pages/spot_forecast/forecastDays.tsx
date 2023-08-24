@@ -2,9 +2,9 @@ import ForecastCard from "./forecastCard"
 import ParseWaveData from "../../utils/parseWaveData"
 import ParseRatingData from "../../utils/parseRatingData"
 import { useState, useEffect } from 'react'
-import './style/forecasts.css'
+import './style/forecastDays.css'
 
-export default function Forecasts(props: any) {
+export default function ForecastDays(props: any) {
     
     // Return arbitrary cards if there is no data yet, AKA the data is loading in the parent component. 
     if (!props.waveData || !props.ratingData) {
@@ -20,14 +20,13 @@ export default function Forecasts(props: any) {
     }
 
     // Combine data to be fed into Cards
-    const[selectedCard, setSelectedCard] = useState({month: '', day: 0, minTimestamp: 0, maxTimestamp: 0})
+    const [selectedCard, setSelectedCard] = useState({month: '', day: 0, minTimestamp: 0, maxTimestamp: 0})
+    const [currIndex, setCurrIndex] = useState(0)
 
     // In your useEffect for selectedCard, use optional chaining to avoid accessing properties on null
     useEffect(() => {
         if (selectedCard?.minTimestamp > 0) {
-            console.log('sending data to spotforecast module:');
-            console.log(selectedCard.minTimestamp, selectedCard.maxTimestamp);
-            props.changeCurrDay(selectedCard.minTimestamp, selectedCard.maxTimestamp);
+            props.changeCurrDay(selectedCard.minTimestamp, selectedCard.maxTimestamp, selectedCard.month, selectedCard.day);
         }
     }, [selectedCard]);
 
@@ -54,20 +53,22 @@ export default function Forecasts(props: any) {
         setSelectedCard({month, day, minTimestamp, maxTimestamp})
     }
 
+    function changeCurrIndex(index) {
+        setCurrIndex(index)
+    }
+
     // Set initial selected card to be the first one
     
     useEffect(() => {
         if (cards.length > 0) {
             const initialData = cards[0].props.data;
-            console.log('initial data:');
-            console.log(initialData);
             changeSelectedCard(initialData.date.month, initialData.date.day, initialData.minTimestamp, initialData.maxTimestamp);
         }
     }, []);
 
     return (
         <div className="forecasts">
-            {cards}
+            {cards.slice(currIndex).map((card) => card)}
         </div>
     )
 }
