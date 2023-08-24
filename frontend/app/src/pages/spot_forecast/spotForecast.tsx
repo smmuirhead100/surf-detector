@@ -112,7 +112,7 @@ export default function SpotForecast() {
                 <div className='hero'>
                     <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay}/>
                 </div>
-                <div className='hero'>
+                <div className='hero--small'>
                     <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
                 </div>
             </div>

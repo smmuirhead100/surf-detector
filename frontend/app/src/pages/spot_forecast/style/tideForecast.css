@@ -1,0 +1,11 @@
+.tide--forecast {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.tide--forecast .info {
+    flex-grow: 1;
+    display: flex;
+    width: fit-content;
+}

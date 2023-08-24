@@ -44,7 +44,7 @@ export default function DayForecast(props: any) {
             <div className="day--forecast">
                 <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#A8A6A7'}}>Forecast</div>
                 <div style={{ fontSize: '2rem', fontWeight: 'normal', color: '#A8A6A7'}}>{props.currDay}</div>
-                <div className={windowWidth > 1255 ? "chart" : "chart--mobile"}>
+                <div className={windowWidth > 1300 ? "chart" : "chart--mobile"}>
                     <SwellChart spot={props.spot} data={props.data} ratingData={props.ratingData} minTimestamp={props.minTimestamp} maxTimestamp={props.maxTimestamp} changeHeight={changeHeight} changeRating={changeRating} changetime={changeTime}/>
                 </div>
             </div>

@@ -1,25 +1,51 @@
 import { useEffect, useState } from 'react';
+import './style/tideChart.css'
 import unixToTime from '../../utils/unixToTime';
-import {Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-ChartJS.register( CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend );
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend);
 
 interface DataPoint {
-  x: { index: number, value: string};
+  x: { index: number, value: string };
   y: number;
 }
 
-
 const TideChart = (props: any) => {
   const [tideData, setTideData] = useState<DataPoint[]>([]);
-  const [options, setOptions] = useState(null)
-  const [data, setData] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-  
-  useEffect(() => {   // Create objects needed to build line chart.
-    if (tideData.length > 0) {
-      console.log(tideData)
-      setOptions({
+  const [isLoading, setIsLoading] = useState(true);
+  const [currIndex, setCurrIndex] = useState(0)
+
+  useEffect(() => {
+    if (props.data && props.minTimestamp && props.maxTimestamp) {
+      const timestampDictionary = {};
+      const filteredData = props.data.filter(item =>
+        item.type === 'NORMAL' &&
+        item.timestamp >= props.minTimestamp &&
+        item.timestamp <= props.maxTimestamp &&
+        !timestampDictionary[item.timestamp]
+      );
+      
+      const transformedData: DataPoint[] = [];
+      let index = 0;
+
+      filteredData.forEach(item => {
+        const obj: DataPoint = {
+          x: { index: index, value: unixToTime(item.timestamp) },
+          y: item.height
+        };
+        if (timestampDictionary[item.timestamp] === undefined) {
+          transformedData.push(obj);
+          timestampDictionary[item.timestamp] = 1;
+          index++;
+        }
+      });
+
+      setTideData(transformedData);
+      setIsLoading(false);
+    }
+  }, [props.data, props.minTimestamp, props.maxTimestamp]);
+
+    const options = {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -50,67 +76,43 @@ const TideChart = (props: any) => {
             display: false,
           },
           tooltip: {
+            enabled: false,
             interaction: {
               intersect: false, // Activate tooltip based on closest x-axis value
             }, 
             mode: 'index',  
             external: function(context) {
-              console.log(context)
-              const dataIndex = context.tooltip.dataPoints[0]?.dataIndex; // Get the index of the hovered bar
+              setCurrIndex(context.tooltip.dataPoints[0]?.dataIndex) // Get the index of the hovered bar
+              props.changeTide(tideData[currIndex].y)
+              props.changeTime(tideData[currIndex].x.value)
             },
          },
         }
-      })
+      }
 
-      let labels = tideData.map(item => item.x.value)
-      setData({
-        labels,
+      const data = {
+        labels: tideData.map(item => item.x.value),
         datasets: [
           {
             fill: true,
-            label: 'Dataset 2',
             data: tideData.map((item) => item.y),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            borderColor: 'rgba(75, 147, 255, 0.49)',
+            backgroundColor: (context) => {
+              const dataIndex = context.dataIndex;
+              return dataIndex === currIndex ? '#257CFF' : 'rgba(75, 147, 255, 0.49)';
+            },
+            pointRadius: (context) => {
+              const dataIndex = context.dataIndex;
+              return dataIndex === currIndex ? 6 : 3; // Larger radius for highlighted point
+            },
           },
         ],
-      })
-      setIsLoading(false)
-  }}, [tideData] )
-
-  useEffect(() => {     // Parse incoming tideData
-    if (props.data && props.minTimestamp) {
-
-      const timestampDictionary = {}; // to track encountered timestamps
-      const filteredData = props.data.filter(item =>
-          item.type === 'NORMAL' &&
-          item.timestamp >= props.minTimestamp &&
-          item.timestamp <= props.maxTimestamp &&
-          !timestampDictionary[item.timestamp] // Exclude duplicates
-        );
-      const transformedData: DataPoint[] = [];
-      let index = 0;
-
-      filteredData.forEach(item => {
-        const obj: DataPoint = {
-          x: { index: index, value: unixToTime(item.timestamp) },
-          y: item.height
-        };
-        if (timestampDictionary[item.timestamp] == undefined) {
-          transformedData.push(obj);
-          timestampDictionary[item.timestamp] = 1
-          index++;
-        }
-       });
-      setTideData(transformedData);
-    }
-  }, [props.data, props.minTimestamp, props.maxTimestamp]);
-
-  return (
-       <div>
-        { !isLoading ? <Line options={options} data={data} /> : <p>loading</p>}
-      </div>
-  )
-};
+      }
+      return (
+        <div className='tide--chart'>
+          {isLoading ? <p>Loading...</p> : <Line options={options} data={data} />}
+        </div>
+      );
+    };
 
 export default TideChart;
