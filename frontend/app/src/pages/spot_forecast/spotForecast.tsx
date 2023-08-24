@@ -122,7 +122,7 @@ export default function SpotForecast() {
                         <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
                     </div>
                     <div className='hero--small'>
-                        <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} />
+                        <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} currWind={currWind}/>
                     </div>
                 </div>
             </div>
