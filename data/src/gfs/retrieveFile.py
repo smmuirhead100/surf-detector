@@ -7,9 +7,12 @@ def retrieveFile():
     current_date = datetime.now().strftime("%Y%m%d")
 
     # Construct the URL using the current date
-    url = f"https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.{current_date}/06/wave/station/gfswave.t06z.bull_tar"
+    url = f"https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.{current_date}/18/wave/station/gfswave.t18z.bull_tar"
 
     local_filename = "gfswave.t06z.bull_tar"
+
+    if os.path.exists(local_filename):
+        os.remove(local_filename)  # Remove the existing file
 
     response = requests.get(url)
 
