@@ -66,4 +66,5 @@
 - [x] Landing Page
 - [ ] Supabase confirmation link page.
 - [ ] Fix bug where swell chart renders multiple times. Usually occurs when spot is spam clicked.
+- [ ] Find a way to create custom scroll bar for day forecasts.
 - [ ] Make mobile Compatible

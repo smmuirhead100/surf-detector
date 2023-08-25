@@ -1,3 +1,3 @@
 # Frontend
 
-Frontend implementation of the proje
+Frontend implementation of the project.
