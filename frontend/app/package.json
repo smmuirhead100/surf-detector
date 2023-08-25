@@ -12,8 +12,6 @@
   "dependencies": {
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/supabase-js": "^2.32.0",
-    "@vime/core": "^5.4.1",
-    "@vime/react": "^5.4.1",
     "chart.js": "^4.3.3",
     "d3": "^7.8.5",
     "dotenv": "^16.3.1",
