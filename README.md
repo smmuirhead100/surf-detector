@@ -54,17 +54,21 @@
 - [ ] Train crowd prediction model. 
 - [ ] Train swell prediction model. 
 - [x] Update root README for developer setup. 
+- [ ] Add cam URL dictionary to .env.
+- [ ] Adding data for every spot appears to not work on AWS ECS. Figure out a different way.
 
 ## TODO (Frontend)
 - [x] Add chart to represent wave height.
 - [x] Chart to represent tides and current crowd.
-- [ ] Add point to tide chart showing current time.
+- [x] Add point to tide chart showing current time.
 - [x] Style tide chart to better represent mouse hover position. 
 - [x] Add Icons to navbar.
 - [x] Update root README for developer setup. 
 - [ ] Handle Mobile Web Version for spot forecast.
 - [x] Landing Page
 - [ ] Supabase confirmation link page.
-- [ ] Fix bug where swell chart renders multiple times. Usually occurs when spot is spam clicked.
+- [x] Fix bug where swell chart renders multiple times. Usually occurs when spot is spam clicked.
 - [ ] Find a way to create custom scroll bar for day forecasts.
+- [ ] Set minimum of tide chart to -1.5 OR to the calculated minimum of all the possible datapoints (As was the height of swell chart).
 - [ ] Make mobile Compatible
+- [ ] Box that shows current tide is not centering text vertically. 
