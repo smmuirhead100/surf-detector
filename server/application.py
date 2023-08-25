@@ -31,6 +31,14 @@ nameDict = {
     '5842041f4e65fad6a7708831': 'San Onofre'
 }
 
+camDict = {
+    "malibu": "https://cams.cdn-surfline.com/cdn-wc/wc-malibu/playlist.m3u8?accessToken=a18ae743b850a958cf05de5a8f15e675013e8045", 
+    "huntington_beach": "https://cams.cdn-surfline.com/cdn-wc/wc-seventeenthst/chunklist.m3u8??accessToken=a18ae743b850a958cf05de5a8f15e675013e8045",
+    "salt_creek": "https://cams.cdn-surfline.com/cdn-wc/wc-saltcreek/chunklist.m3u8??accessToken=a18ae743b850a958cf05de5a8f15e675013e8045",
+    "san_onofre": "https://cams.cdn-surfline.com/cdn-wc/wc-thepointsanonofre/chunklist.m3u8??accessToken=a18ae743b850a958cf05de5a8f15e675013e8045",
+    "newport_beach": "https://cams.cdn-surfline.com/cdn-wc/wc-newportjetties/chunklist.m3u8??accessToken=a18ae743b850a958cf05de5a8f15e675013e8045"
+}
+
 @app.route('/')
 def hello_world():
     return 'Hello Imposter!'
@@ -276,6 +284,29 @@ def get_spots():
     
     # Convert the result into JSON format
     json_result = json.dumps(spots)
+    
+    return json_result
+
+@application.route("/cam", methods=['GET'])
+def getCamURL():
+    if 'spot' in request.args:
+        camURL = camDict[str(request.args['spot'])]
+        return json.dumps({"data": camURL})
+    else: 
+        return json.dumps({"data": False})
+    
+    print("Connecting to Supabase instance")
+    conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
+    with conn.cursor() as cur:
+        cur.execute(clause)
+        result = cur.fetchall()
+        conn.commit()
+        cur.close()
+    
+    tide_data = [{"timestamp": row[0], "utcoffset": row[1], "rating": {"description": row[2].strip("(").split(",")[0], "value": int(row[2].strip("(").split(",")[1].strip(')'))}, "spotid": row[3]} for row in result]
+    
+    # Convert the result into JSON format
+    json_result = json.dumps(tide_data)
     
     return json_result
 

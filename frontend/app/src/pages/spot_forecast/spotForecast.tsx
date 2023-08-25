@@ -28,8 +28,7 @@ export default function SpotForecast() {
     const [minTimestamp, setMinTimestamp] = useState<number>(0); // Initialize with appropriate default value
     const [maxTimestamp, setMaxTimestamp] = useState<number>(0); 
     const [maxHeight, setMaxHeight] = useState(0)
-    const camPath = JSON.parse(import.meta.env.VITE_CAMS)[spot]
-    console.log(`camPath ${camPath}`)
+    const [camPath, setCamPath] = useState('')
     const [currDay, setCurrDay] = useState<string>('');
 
     // Fetch wave data from API.
@@ -81,6 +80,15 @@ export default function SpotForecast() {
           .catch(error => console.log(error))
     }, [spot])
 
+    // Fetch cam data from API.
+    useEffect(() => {
+        fetch(`https://goldfish-app-qsewy.ondigitalocean.app/cam?spot=${spot}`)
+          .then(response => response.json())
+          .then(data => {
+            setCamPath(data);
+          })
+          .catch(error => console.log(error))
+      }, [spot]);
 
 
     function changeCurrDay(minTimestamp, maxTimestamp, month, day) {
