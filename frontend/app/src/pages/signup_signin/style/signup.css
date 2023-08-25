@@ -135,3 +135,13 @@
 .signup--footer {
     padding: 1rem;
 }
+
+.signupSubmitted div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.signupSubmitted div:hover {
+    cursor: pointer;
+}

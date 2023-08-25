@@ -1,4 +1,5 @@
 import unixToTime from '../../utils/unixToTime';
+import LoadingSwellChart from './loadingSwellChart';
 import { useEffect, useState } from 'react';
 
 const ratingDict = {
@@ -130,6 +131,10 @@ export default function SwellChart(props: any) {
 }
     return (
         <Bar options={options} data={data} />
+    )
+  } else {
+    return (
+      <LoadingSwellChart />
     )
   }
 }

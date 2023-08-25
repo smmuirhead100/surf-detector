@@ -24,6 +24,7 @@ export default function SpotForecast() {
     const [tideData, setTideData] = useState(null)
     const [currTide, setCurrTide] = useState(null)
     const [currWind, setCurrWind] = useState(null)
+    const [currTime, setCurrTime] = useState(['-'])
     const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to trigger component remount
     const [minTimestamp, setMinTimestamp] = useState<number>(0); // Initialize with appropriate default value
     const [maxTimestamp, setMaxTimestamp] = useState<number>(0); 
@@ -31,6 +32,9 @@ export default function SpotForecast() {
     const [camPath, setCamPath] = useState('')
     const [currDay, setCurrDay] = useState<string>('');
 
+    useEffect(() => {
+        setCurrTime(['-'])
+      }, [spot]);
     // Fetch wave data from API.
     useEffect(() => {
         fetch(`https://goldfish-app-qsewy.ondigitalocean.app/wave?spot=${spot}`)
@@ -97,6 +101,10 @@ export default function SpotForecast() {
         setCurrDay(`${month} ${day.toString()}`)
     }
 
+    function changeCurrTime(t) {
+        setCurrTime(t)
+    }
+
     function changeSpot(path){
         if (spot == path) {
             return;
@@ -116,24 +124,24 @@ export default function SpotForecast() {
     function handleWind(w) {
         setCurrWind(w)
     }
-
+    console.log(currTime)
     return (
         <div className="spot--forecast">
             <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
             <div className="content">
                 <SpotHeader spot={spot} />
                 <div className='hero'>
-                    <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay} windData={windData} currTide={currTide}/>
+                    <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay} windData={windData} currTide={currTide} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
                 <div className='hero'>
-                    <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay}/>
+                    <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
                 <div className='hero--small--container'>
                     <div className='hero--small'>
-                        <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} />
+                        <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
                     <div className='hero--small'>
-                        <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} currWind={currWind}/>
+                        <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} currWind={currWind} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
                     <div className='hero--small'>
                         <LiveCam path={camPath} />

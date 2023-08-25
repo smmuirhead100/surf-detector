@@ -13,6 +13,10 @@
     padding: 5px;
 }
 
+.general--navbar--logo img{
+    width: 5rem;
+}
+
 .general--navbar ul {
     display: flex;
     align-items: center;
@@ -102,5 +106,121 @@
     
 
 .general--navbar--logout:hover {
+    cursor: pointer;
+}
+
+/**---------------------------------------------**/
+/**-------------- MOBILE VERSION ---------------**/ 
+/**---------------------------------------------**/
+
+.general--navbar--mobile {
+    display: flex;
+    background-color: white;
+    margin: 0px;
+    justify-content: space-between;
+    border-bottom: solid;
+}
+
+.general--navbar--logo--mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.general--navbar--logo--mobile img{
+    width: 2rem;
+}
+
+.general--navbar--mobile ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.general--navbar--mobile li {
+    display: flex; 
+    padding: .5rem;
+    align-items: center;
+    gap: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.general--navbar--mobile li img {
+    height: 1rem;
+    color: black;
+}
+
+.general--navbar--logout--mobile {
+    display: flex;
+}
+
+.general--navbar--mobile .navbar--unselected--item:hover {
+    cursor: default;
+    background-color: #F5F6F8;
+}
+
+.navbar--dropdown--spots {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+    max-height: 15rem;
+    gap: 0px;
+    padding-bottom: 0px;
+    height: 10rem;
+    overflow: scroll;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.navbar--dropdown--spots li{
+    margin: 1px;
+    padding: 5px;
+}
+
+.navbar--dropdown--spots .selected--spot{
+    font-weight: bold;
+}
+
+.navbar--dropdown--spots li:hover{
+    cursor: default;
+    background-color: #F5F6F8;
+    border-radius: 5px;
+}
+
+.navbar--dropdown--cams {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+    max-height: 15rem;
+    overflow: scroll;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.navbar--dropdown--cams li{
+    margin: 1px;
+    padding: 5px;
+}
+
+.navbar--selected--item {
+    cursor: default;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    margin-right: 1rem;
+}
+    
+
+.general--navbar----mobile:hover {
     cursor: pointer;
 }
