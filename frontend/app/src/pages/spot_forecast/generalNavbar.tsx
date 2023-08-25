@@ -20,7 +20,6 @@ export default function GeneralNavbar(props) {
     const [spots, setSpots] = useState([])
     const [dropdownX, setDropdownX] = useState(null)
     const [dropdownY, setDropdownY] = useState(null)
-    const auth = useAuth()['auth'] 
     const signOut = useAuth()['signOut']
     const navigate = useNavigate()
     
@@ -43,13 +42,10 @@ export default function GeneralNavbar(props) {
     },[])
     
     const handleLogout = async (e) => {
-        console.log(auth)
         e.preventDefault();
-        console.log('logging out')
         try {
           const { error } = await signOut();
           console.log(error)
-          console.log('logged out');
           navigate('/signin'); // Navigate to the sign-in page
         } catch (error) {
           console.log('There was an error logging out');
@@ -64,7 +60,6 @@ export default function GeneralNavbar(props) {
         const underscoredString = words.map((word) => word.toLowerCase()).join('_');
         return underscoredString;
     };
-    console.log(dropdownX, dropdownY)
     function handleSpotsClick(e){
         setDropdownX(e.currentTarget.getBoundingClientRect().left)
         setDropdownY(e.currentTarget.getBoundingClientRect().bottom)

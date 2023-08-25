@@ -1,7 +1,9 @@
 .tide--forecast {
     display: flex;
     flex-direction: column;
+    height: 100%;
     flex-wrap: wrap;
+    overflow: scroll;
 }
 
 .tide--forecast .info {

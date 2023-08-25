@@ -5,6 +5,7 @@ import DayForecast from './dayForecast'
 import GeneralNavbar from './generalNavbar'
 import TideForecast from './tideForecast'
 import WindForecast from './windForecast'
+import LiveCam from './liveCam'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -27,6 +28,8 @@ export default function SpotForecast() {
     const [minTimestamp, setMinTimestamp] = useState<number>(0); // Initialize with appropriate default value
     const [maxTimestamp, setMaxTimestamp] = useState<number>(0); 
     const [maxHeight, setMaxHeight] = useState(0)
+    const camPath = JSON.parse(import.meta.env.VITE_CAMS)[spot]
+    console.log(`camPath ${camPath}`)
     const [currDay, setCurrDay] = useState<string>('');
 
     // Fetch wave data from API.
@@ -123,6 +126,9 @@ export default function SpotForecast() {
                     </div>
                     <div className='hero--small'>
                         <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} currWind={currWind}/>
+                    </div>
+                    <div className='hero--small'>
+                        <LiveCam path={camPath} />
                     </div>
                 </div>
             </div>

@@ -34,6 +34,7 @@ ChartJS.register(
 );
 
 export default function SwellChart(props: any) {
+  
   if (props.data && props.minTimestamp && props.ratingData) {
     const minTimestamp = props.minTimestamp 
     const maxTimestamp = props.maxTimestamp 
@@ -104,7 +105,7 @@ export default function SwellChart(props: any) {
     },
     elements: {
       bar: {
-        borderRadius:20, // Rounded edges for the bars
+        borderRadius: 20, // Rounded edges for the bars
         borderSkipped: false,
       }
     },

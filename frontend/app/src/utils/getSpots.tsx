@@ -1,5 +1,4 @@
 async function getSpots(): Promise<any[]> {
-  console.log('getting spots');
   return fetch(`https://goldfish-app-qsewy.ondigitalocean.app/spots`)
     .then(response => response.json())
     .catch(error => {
