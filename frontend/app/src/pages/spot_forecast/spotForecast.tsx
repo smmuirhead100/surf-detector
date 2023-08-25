@@ -85,7 +85,7 @@ export default function SpotForecast() {
         fetch(`https://goldfish-app-qsewy.ondigitalocean.app/cam?spot=${spot}`)
           .then(response => response.json())
           .then(data => {
-            setCamPath(data);
+            setCamPath(data.data);
           })
           .catch(error => console.log(error))
       }, [spot]);
