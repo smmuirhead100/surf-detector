@@ -13,8 +13,11 @@ export default function WindForecast(props: any) {
         setTime(t)
     }
 
-    function changeWind(w){
-        setWind(w)
+    function changeWind(w) {
+        if (w != null && typeof w.speed === 'number') {
+            w.speed = w.speed.toFixed(2);
+        }
+        setWind(w);
     }
     
     const display = <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
