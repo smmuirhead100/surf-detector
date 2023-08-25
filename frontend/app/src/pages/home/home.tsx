@@ -13,7 +13,6 @@ export default function Home() {
     const [isMobile, setIsMobile] = useState(false)
     const auth = (useAuth()['auth'])
     const [src, { blur }] = useProgressiveImg("homeImageLowQuality.png", "homeImage.jpg")
-    console.log(src)
     function navigateSignUp(){
         let path = '/signup'
         navigate(path)

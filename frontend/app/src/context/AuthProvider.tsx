@@ -30,9 +30,7 @@ const AuthProvider = ({ children }) => {
       const { data } = await supabase.auth.getUser();
       const { user: currentUser } = data;
       setUser(currentUser ?? null);
-      console.log(auth)
       setAuth(currentUser ? true : false);
-      console.log(auth)
       setIsLoading(false)
     };
 
