@@ -20,7 +20,7 @@ export default function TideForecast(props: any) {
         <div className='tide--forecast'>
             <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#A8A6A7'}}>Tide</div>
             <div className='info'>
-                <InfoBox title={convertTime(time)} content={`${tide} feet`}/>
+                <InfoBox title={convertTime(time)} content={<div> {tide} feet</div>}/>
             </div>
           {props.spot && props.minTimestamp && props.maxTimestamp && props.data && props.spot ?
                 <TideChart spot={props.spot} changeTide={changeTide} minTimestamp={props.minTimestamp} maxTimestamp={props.maxTimestamp} data={props.data} changeTime={changeTime}/> :

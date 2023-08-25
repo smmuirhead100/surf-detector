@@ -20,10 +20,19 @@ export default function GeneralNavbar(props) {
     const [spots, setSpots] = useState([])
     const [dropdownX, setDropdownX] = useState(null)
     const [dropdownY, setDropdownY] = useState(null)
-    const auth = useAuth()['auth'] 
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const [isMobile, setIsMobile] = useState(false)
     const signOut = useAuth()['signOut']
     const navigate = useNavigate()
-    
+
+    useEffect(() => {
+        function handleResize() {
+          setWindowWidth(window.innerWidth);
+        }
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+      }, [windowWidth]);
+
     useEffect(() => {
         const handleWindowResize = () => {
             setCamsOpen(false);
@@ -36,6 +45,10 @@ export default function GeneralNavbar(props) {
             window.removeEventListener('resize', handleWindowResize);
         };
     }, []);
+    useEffect(() => {
+        console.log(windowWidth)
+        windowWidth < 770 ? setIsMobile(true) : setIsMobile(false)
+    }, [windowWidth])
 
     useEffect(() => {
         getSpots()
@@ -43,13 +56,10 @@ export default function GeneralNavbar(props) {
     },[])
     
     const handleLogout = async (e) => {
-        console.log(auth)
         e.preventDefault();
-        console.log('logging out')
         try {
           const { error } = await signOut();
           console.log(error)
-          console.log('logged out');
           navigate('/signin'); // Navigate to the sign-in page
         } catch (error) {
           console.log('There was an error logging out');
@@ -64,7 +74,6 @@ export default function GeneralNavbar(props) {
         const underscoredString = words.map((word) => word.toLowerCase()).join('_');
         return underscoredString;
     };
-    console.log(dropdownX, dropdownY)
     function handleSpotsClick(e){
         setDropdownX(e.currentTarget.getBoundingClientRect().left)
         setDropdownY(e.currentTarget.getBoundingClientRect().bottom)
@@ -94,11 +103,63 @@ export default function GeneralNavbar(props) {
         setCamsOpen(false)
     }
 
-    return (
-        <div className="general--navbar">
+    return ( 
+        <>
+        {isMobile ? 
+        <div className="general--navbar--mobile">
+            <div className="general--navbar--logo--mobile">
+                <img src={logo} alt="logo"/>
+            </div>
+
+            <ul className="navbar--list--mobile">
+                <li className={spotsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onMouseEnter={handleSpotsClick} onMouseLeave={handleLeave}>
+                    {spotsOpen ? 
+                        <img src={spotsIconWhite} alt='Spots Icon'/> 
+                        : 
+                        <img src={spotsIconBlack} alt='Spots Icon'/>}
+                    Spots
+                    {spotsOpen ?                                        // Render Spots if is open
+                    <div className='navbar--dropdown--spots' style={{ top: `${dropdownY}px`, left: `${dropdownX}px`, color: 'black'}}>
+                        {spots.map((spot) => (
+                            spot == capitalizeAfterUnderscore(props.currSpot) ? 
+                            <li onClick={handleSpotClick} className='selected--spot'>{spot}</li> :
+                            <li onClick={handleSpotClick}>{spot}</li>
+                        ))}
+                    </div> : null
+                }
+                </li>
+                
+                <li className={camsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onMouseEnter={handleCamsClick} onMouseLeave={handleLeave}>
+                    {camsOpen ? 
+                        <img src={cameraIconWhite} alt='Camera Icon'/>
+                        :
+                        <img src={cameraIconBlack} alt='Camera Icon'/>
+                        }
+                    Cams
+                    {camsOpen ?                                        // Render Cams if is open
+                    <div className='navbar--dropdown--cams' style={{ top: `${dropdownY}px`, left: `${dropdownX}px`, color: 'black'}}>
+                        <li>Coming soon!</li>
+                    </div> : null
+                }
+                </li>
+
+            </ul>
+
+                <div className='general--navbar--logout--mobile'>
+                    <li onClick={handleLogout}>
+                        <img src={logoutIcon} alt='Logout Icon'/>
+                        Logout
+                    </li>
+                </div>
             
+
+        </div>
+        
+        : 
+
+        <div className="general--navbar">
             <div className="general--navbar--logo">
-                <img src={logo} alt="logo" style={{ width: '5rem' }}/>
+                <img src={logo} alt="logo"/>
             </div>
 
             <ul className="navbar--list">
@@ -158,5 +219,7 @@ export default function GeneralNavbar(props) {
             
 
         </div>
+            }
+    </>
     )
 }

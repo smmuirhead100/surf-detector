@@ -22,5 +22,7 @@
 .info--box--content {
     font-size: 2rem;
     font-weight: bold;
-    margin: 2rem
+    margin: 2rem;
+    display: flex;
+    align-items: center;
 }

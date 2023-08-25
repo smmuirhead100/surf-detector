@@ -279,6 +279,20 @@ def get_spots():
     
     return json_result
 
+@application.route("/cam", methods=['GET'])
+def getCamURL():
+    if 'spot' in request.args:
+        spot_name = str(request.args['spot'])
+        try:
+            with open('camURLs.json', 'r') as file:
+                file_content = file.read()  # Read the raw content of the file
+                cam_urls = json.loads(file_content)
+                cam_url = os.environ.get(cam_urls[spot_name])
+                return json.dumps({"data": cam_url})
+        except FileNotFoundError:
+            return "camURLs.json not found."
+        except json.JSONDecodeError as e:
+            return f"JSON Decode Error: {e}"
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.

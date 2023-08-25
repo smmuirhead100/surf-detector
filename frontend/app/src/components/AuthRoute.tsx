@@ -5,7 +5,6 @@ import Home from "../pages/home/home";
 const AuthRoute = () => {
   const user = useAuth()['user'];
   const isLoading = useAuth()['isLoading']
-  console.log(user)
 
   return isLoading ? (
     <div>Loading</div>

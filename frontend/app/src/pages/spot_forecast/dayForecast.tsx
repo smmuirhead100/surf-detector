@@ -7,13 +7,12 @@ import InfoBox from '../../components/infoBox.tsx'
 export default function DayForecast(props: any) {
     const[height, setHeight] = useState('-')
     const[rating, setRating] = useState('-')
-    const [time, setTime] = useState([null])
     const[windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     useEffect(() => {
         setRating('-')
         setHeight('-')
-        setTime(['-'])
+        props.currTime ? null : props.setCurrTime(['-'])
     }, [props.spot])
     
     useEffect(() => {
@@ -21,19 +20,12 @@ export default function DayForecast(props: any) {
         const updateWindowWidth = () => {
           setWindowWidth(window.innerWidth);
         };
-    
-        // Attach the event listener when the component mounts
         window.addEventListener('resize', updateWindowWidth);
-    
-        // Clean up the event listener when the component unmounts
         return () => {
           window.removeEventListener('resize', updateWindowWidth);
         };
       }, []); 
 
-    useEffect(() => {
-
-    }, )
     function changeHeight(h) {
         return h == '-' ? setHeight(h) : setHeight(`${h} feet`)
     }
@@ -43,8 +35,9 @@ export default function DayForecast(props: any) {
     }
 
     function changeTime(t) {
-        setTime(t)
+        props.changeCurrTime(t)
     }
+
     return (
         <div className="day--forecast--container">
             <div className="day--forecast">
@@ -57,7 +50,7 @@ export default function DayForecast(props: any) {
             <div className={windowWidth > 1534 ? "info" : "info--mobile"}>
                 <InfoBox title="Height" content={<div style={{ color: 'black'}}>{height}</div>}/>
                 <InfoBox title="Conditions" content={<div>{rating}</div>}/>
-                <InfoBox title="Time" content={<div>{convertTime(time[0])}</div>}/>
+                <InfoBox title="Time" content={<div>{convertTime(props.currTime[0])}</div>}/>
             </div>
         </div>
     )
