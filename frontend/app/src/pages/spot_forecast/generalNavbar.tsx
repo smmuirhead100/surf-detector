@@ -83,6 +83,12 @@ export default function GeneralNavbar(props) {
         setCamsOpen(prev => !prev)
     }
 
+    function handleAboutClick() {
+        setSpotsOpen(false); 
+        setCamsOpen(false);  
+        navigate('/about');
+    }
+
     function handleLeave(){
         setSpotsOpen(false)
         setCamsOpen(false)
@@ -127,7 +133,7 @@ export default function GeneralNavbar(props) {
                 }
                     </li>
 
-                <li className='navbar--unselected--item'>
+                <li className='navbar--unselected--item' onClick={handleAboutClick}>
                     <img src={aboutIconBlack} alt='About Icon'/>
                     About
                 </li>
