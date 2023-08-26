@@ -5,7 +5,8 @@ import os
 import time
 import json
 from dotenv import load_dotenv
-from datetime import datetime, timedelta
+from datetime import datetime
+from utilities.tide_station import TideStation
 
 load_dotenv()
 
@@ -31,35 +32,26 @@ nameDict = {
     '5842041f4e65fad6a7708831': 'San Onofre'
 }
 
+stationIdDict = {
+    'malibu': '9410660',
+    'huntington_beach': '9410680',
+    'newport_beach': '9410580',
+    'salt_creek': '9410580',
+    'san_onofre': '9410580'
+}
+
 @app.route('/')
 def hello_world():
     return 'Hello Imposter!'
 
 @application.route("/tide", methods=['GET'])
 def get_tide_data():
+    
     if 'spot' in request.args:
-        spot_id = spotDict[str(request.args['spot'])]
-        print(spot_id)
-        print(type(spot_id))
-        clause = f"SELECT * FROM tide WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
-        
-    else: 
-        clause = f"SELECT * FROM tide WHERE timestamp > {beginning_of_today} ORDER BY timestamp;"
-    print("Connecting to Supabase instance")
-    conn = psycopg2.connect(os.environ.get('SUPABASE_URL'))
-    with conn.cursor() as cur:
-        cur.execute(clause)
-        result = cur.fetchall()
-        conn.commit()
-        cur.close()
-    
-    tide_data = [{"timestamp": row[0], "utcoffset": row[1], "type": row[2], "height": row[3], "spotid": row[4]} for row in result]
-    
-    # Convert the result into JSON format
-    json_result = json.dumps(tide_data)
-    
-    print('Done Executing')
-    return json_result
+            spot = (request.args['spot'])
+            print(spot)  
+    station = TideStation(stationIdDict[spot])
+    return (station.fetch_tide_data())
 
 @application.route("/wave", methods=['GET'])
 def waves():
