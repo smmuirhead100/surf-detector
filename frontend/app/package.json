@@ -16,6 +16,7 @@
     "d3": "^7.8.5",
     "dotenv": "^16.3.1",
     "react": "^18.2.0",
+    "react-bootstrap-icons": "^1.10.3",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-hls-player": "^3.0.7",

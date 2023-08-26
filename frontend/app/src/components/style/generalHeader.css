@@ -1,0 +1,23 @@
+.header--container {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    background-color: white;
+    margin: 20px 70px;
+}
+
+
+.back-button-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.back--button {
+    margin-left: 5px;
+}
+
+.header--name {
+    flex-grow: 1; /* This allows the header name to take up remaining space */
+    text-align: right; /* Adjust as needed */
+}
