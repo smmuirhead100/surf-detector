@@ -124,7 +124,7 @@ export default function SpotForecast() {
     function handleWind(w) {
         setCurrWind(w)
     }
-    console.log(currTime)
+
     return (
         <div className="spot--forecast">
             <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>

@@ -12,10 +12,20 @@ export default function TideForecast(props: any) {
         setTime(t)
     }
 
-    function changeTide(t){
-        setTide(t)
+    function changeTide(t) {
+        if (t) {
+            let num = parseFloat(t);
+            let roundedNum = num.toFixed(2); // Convert to string with 2 decimal places
+    
+            // Ensure there are always two digits after the decimal point
+            let formattedNum = roundedNum.includes('.') ? roundedNum : roundedNum + '.00';
+    
+            setTide(parseFloat(formattedNum));
+        }
     }
     
+    
+
     return (
         <div className='tide--forecast'>
             <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#A8A6A7'}}>Tide</div>
