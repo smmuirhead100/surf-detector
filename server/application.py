@@ -32,6 +32,9 @@ nameDict = {
     '5842041f4e65fad6a7708831': 'San Onofre'
 }
 
+testDict = {
+    'hello': 'world'
+}
 stationIdDict = {
     'malibu': '9410660',
     'huntington_beach': '9410680',
