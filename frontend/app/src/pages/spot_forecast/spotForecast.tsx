@@ -25,7 +25,6 @@ export default function SpotForecast() {
     const [currTide, setCurrTide] = useState(null)
     const [currWind, setCurrWind] = useState(null)
     const [currTime, setCurrTime] = useState(['-'])
-    const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to trigger component remount
     const [minTimestamp, setMinTimestamp] = useState<number>(0); // Initialize with appropriate default value
     const [maxTimestamp, setMaxTimestamp] = useState<number>(0); 
     const [maxHeight, setMaxHeight] = useState(0)
@@ -110,7 +109,6 @@ export default function SpotForecast() {
             return;
         }
         else {
-        setRefreshKey(refreshKey + 1); // Increment the refresh key
         setWaveData(null)
         setTideData(null)
         navigate(`/forecast?spot=${path}`)
@@ -130,7 +128,7 @@ export default function SpotForecast() {
             <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
             <div className="content">
                 <SpotHeader spot={spot} />
-                <div className='hero'>
+                <div className='hero--sticky'>
                     <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay} windData={windData} currTide={currTide} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
                 <div className='hero'>

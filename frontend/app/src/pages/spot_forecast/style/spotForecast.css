@@ -7,16 +7,26 @@
     align-items: center;
     margin: 1rem;
     min-width: 30rem;
-    overflow: hidden;
 }
 
 .spot--forecast .hero {
+    background-color: white;
+    border-radius: 2rem;
+    padding: 1rem;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 2rem;
+}
+
+.spot--forecast .hero--sticky {
     overflow: hidden;
     background-color: white;
     border-radius: 2rem;
     padding: 1rem;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .spot--forecast .hero--small {
@@ -35,3 +45,6 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
+/** Scroll Animations **/
+
