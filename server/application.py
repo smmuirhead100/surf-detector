@@ -52,7 +52,7 @@ def get_tide_data():
     
     if 'spot' in request.args:
             spot = (request.args['spot'])
-            print(spot)  
+            
     station = TideStation(stationIdDict[spot])
     return (station.fetch_tide_data())
 
@@ -85,8 +85,6 @@ def waves():
         
     if 'spot' in request.args:
         spot_id = spotDict[str(request.args['spot'])]
-        print(spot_id)
-        print(type(spot_id))
         clause = f"SELECT * FROM wave WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
         
     else: 
@@ -113,8 +111,6 @@ def get_wind_data():
     
     if 'spot' in request.args:
         spot_id = spotDict[str(request.args['spot'])]
-        print(spot_id)
-        print(type(spot_id))
         clause = f"SELECT * FROM wind WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
         
     else: 
@@ -139,8 +135,6 @@ def get_wind_data():
 def get_weather_data():
     if 'spot' in request.args:
         spot_id = spotDict[str(request.args['spot'])]
-        print(spot_id)
-        print(type(spot_id))
         clause = f"SELECT * FROM weather WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
         
     else: 
@@ -167,8 +161,6 @@ def get_rating_data():
     beginning_of_today = int(time.mktime(datetime.now().date().timetuple()))
     if 'spot' in request.args:
         spot_id = spotDict[str(request.args['spot'])]
-        print(spot_id)
-        print(type(spot_id))
         clause = f"SELECT * FROM rating WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
         
     else: 
@@ -193,8 +185,6 @@ def get_rating_data():
 def get_crowd_data():
     if 'spot' in request.args:
         spot_id = spotDict[str(request.args['spot'])]
-        print(spot_id)
-        print(type(spot_id))
         clause = "SELECT * FROM crowd WHERE spotid = '" + spot_id + "'ORDER BY timestamp;"
         
     else: 
