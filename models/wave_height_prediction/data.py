@@ -1,5 +1,9 @@
 import requests
-import datetime, timedelta
+from datetime import datetime
+from datetime import timedelta
+import sys, os
+sys.path.append('../../data/src/db')
+from db_methods import Database
 
 class HistoricalData:
     def __init__(self, spotId, days, intervalHours, start, accessToken):
@@ -18,7 +22,8 @@ class HistoricalData:
             
             if response.status_code == 200:
                 data = response.json()
-                return data
+                for window in data["data"]["wave"]:
+                    self.allData.append(window)
             else:
                 print(f"Failed to retrieve data. Status code: {response.status_code}")
                 return None
@@ -26,9 +31,48 @@ class HistoricalData:
             print(f"An error occurred: {e}")
             return None
         
-    def saveSwellData(self, obj):
-        for window in obj["data"]["wave"]:
-            self.allData.append(window)
+    def addToDb(self):
+        db = Database('local')
+        
+        try:
+            for obj in self.allData:
+                timestamp = obj.get('timestamp')
+                if timestamp:
+                    # Check if the timestamp already exists in the table
+                    count = db.customQuery(f"SELECT COUNT(*) FROM historical_surf.surf_conditions WHERE timestamp = '{timestamp}'")
+                    count = count[0][0]  # Extract the count value
+                    
+                    if count == 0:
+                        swell_data = obj.get('swells')
+                        swell_values = []
+                        for swell in swell_data:
+                            if swell['height'] > 0: # Sometimes there were excess data with all zero's, this eliminates that because they were always tagged at the end of the array. 
+                                swell_values.append(f"({timestamp}, {swell['height']}, {swell['period']}, {swell['impact']}, {swell['power']}, {swell['direction']}, {swell['directionMin']}, {swell['optimalScore']})")
+
+                        # Insert the data into the table
+                        db.customQuery(f"INSERT INTO historical_surf.surf_conditions (timestamp, probability, utc_offset, surf_min, surf_max, optimal_score, plus, human_relation, raw_min, raw_max, power) "
+                                    f"VALUES ('{timestamp}', {1}, {obj['utcOffset']}, {obj['surf']['min']}, {obj['surf']['max']}, {obj['surf']['optimalScore']}, {obj['surf']['plus']}, '{obj['surf']['humanRelation']}', {obj['surf']['raw']['min']}, {obj['surf']['raw']['max']}, {obj['power']});")
+                        
+                if timestamp: 
+                    count = db.customQuery(f"SELECT COUNT(*) FROM historical_surf.swells WHERE timestamp = '{timestamp}'")
+                    count = count[0][0]  # Extract the count value
+                    
+                    if count == 0:
+                        swell_data = obj.get('swells')
+                        swell_values = []
+                        for swell in swell_data:
+                            if swell['height'] > 0: # Sometimes there were excess data with all zero's, this eliminates that because they were always tagged at the end of the array. 
+                                swell_values.append(f"({timestamp}, {swell['height']}, {swell['period']}, {swell['impact']}, {swell['power']}, {swell['direction']}, {swell['directionMin']}, {swell['optimalScore']})")
+                                
+                    for values in swell_values:
+                            db.customQuery(f"INSERT INTO historical_surf.swells (timestamp, height, period, impact, power, direction, directionMin, optimalScore) "
+                                           f"VALUES {values};")
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        finally:
+            db.close()
+
         
     def collectSwellData(self):
         # Calculate the date range
@@ -39,9 +83,10 @@ class HistoricalData:
         current_date = start_date
         while current_date <= end_date:
             formatted_date = current_date.strftime('%Y-%m-%d')
-            data = self.retrieveData(formatted_date)
-            self.saveSwellData(data)
-            current_date += timedelta(days=1)
+            self.start = formatted_date  # Update the start date
+            self.retrieveData()  # Retrieve data using the updated start date
+            current_date += timedelta(days=self.days)
+        return self.allData
 
 # Create an instance of HistoricalData and retrieve data
 historical_data = HistoricalData(
@@ -51,9 +96,6 @@ historical_data = HistoricalData(
     start='2020-08-01',
     accessToken='0eca8312f8ff88f3d828286d695167e5a93d0bb9'
 )
-data = historical_data.retrieveData()
+historical_data.retrieveData()
+historical_data.addToDb()
 
-if data:
-    print("Retrieved data:")
-    
-print(historical_data.saveSwellData(data))
