@@ -183,13 +183,21 @@ class Database:
             return True
         
     # Custom query!
-    def customQuery(self, query):
+    def customQueryFetch(self, query):
         with self.conn.cursor() as cur:
             cur.execute(query)
             self.conn.commit()
             res = cur.fetchall()
             cur.close()
             return res
+        
+    # Custom query!
+    def customQuery(self, query):
+        with self.conn.cursor() as cur:
+            cur.execute(query)
+            self.conn.commit()
+            cur.close()
+            return True
         
     # Helper function to flatten nested types
     def flatten(self, data: dict) -> list:
