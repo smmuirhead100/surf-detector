@@ -2,6 +2,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import sys, os
+import joblib
 sys.path.append('../../data/src/db')
 from db_methods import Database
 
@@ -57,6 +58,10 @@ max_height_model.fit(X_train, y_max_train)
 # Predict minimum and maximum heights using the models
 y_min_pred = min_height_model.predict(X_test)
 y_max_pred = max_height_model.predict(X_test)
+
+# Save the trained models using joblib
+joblib.dump(min_height_model, 'min_height_model.joblib')
+joblib.dump(max_height_model, 'max_height_model.joblib')
 
 # Print predicted and actual values for comparison
 for i in range(len(y_min_test)):
