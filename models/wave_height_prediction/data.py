@@ -18,7 +18,7 @@ class HistoricalData:
     
     def retrieveData(self):
         url = f"{os.environ.get('BASE_URL')}spotId={self.spotId}&days={self.days}&intervalHours={self.intervalHours}&start={self.start}&cacheEnabled=true&units%5BswellHeight%5D=FT&units%5BwaveHeight%5D=FT&accesstoken={self.accessToken}"
-
+        print(f"retrieving data from {self.start}")
         try:
             response = requests.get(url)
             
@@ -88,7 +88,7 @@ historical_data = HistoricalData(
     spotId='5842041f4e65fad6a77088ea',
     days=16,
     intervalHours=1,
-    start='2020-08-01',
+    start='2020-01-01',
     accessToken=os.environ.get('ACCESS_TOKEN')
 )
 
