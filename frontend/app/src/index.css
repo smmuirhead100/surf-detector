@@ -18,8 +18,29 @@ ul {
     border: 0;
   }
   
-  /* Apply the box sizing globally */
-  .home--wrapper {
+/* Apply the box sizing globally */
+.home--wrapper {
     box-sizing: border-box;
-  }
+}
+
+/* Scroll bar styling */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3d3d3d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0a0a0a;
+}
+
+
   
