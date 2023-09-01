@@ -11,7 +11,7 @@ def predict_heights(features):
     return min_height, max_height
 
 # Example usage
-sample_features = [2.2, 13, 195, 0.85, 7.2, 270, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] # Replace with your actual feature values
+sample_features = [1, 19, 271, 1.9, 5, 271, .59, 9.0, 181, 0, 0, 0, 0, 0, 0, 0, 0, 0] # Replace with your actual feature values
 predicted_min_height, predicted_max_height = predict_heights(sample_features)
 print(f"Predicted Min Height: {predicted_min_height}")
 print(f"Predicted Max Height: {predicted_max_height}")

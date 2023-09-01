@@ -48,6 +48,7 @@ def parseBullFile2(file):
 
                 # Swell Data
                 swellArray = []
+                significantHeight = (line[10:15])
                 swellsDetected = min(int(line[16:18]), 6) # Max it can go is 6                    
                 heightIndex = 24
                 periodIndex = 29
@@ -61,9 +62,23 @@ def parseBullFile2(file):
                     periodIndex += 18
                     directionIndex += 18
                 
+                max_product = float('-inf')
+                max_index = -1
+                # Find the index of the object with the maximum height * period product
+                for i, obj in enumerate(swellArray):
+                    product = obj['height'] * obj['period']
+                    if product > max_product:
+                        max_product = product
+                        max_index = i
+
+                if max_index != -1:
+                    # Replace the object with zero height
+                    swellArray[max_index]['height'] = significantHeight
+                
                 returnObject['data'].append({'buoyId': buoyId,'timestamp': timestamp, 'swellArray': swellArray})
         elif lines[i][1] == '+':
             plus += 1
+    return returnObject
 
 def parseFiles(folder_path):
     # List all files in the directory
@@ -80,4 +95,4 @@ def parseFiles(folder_path):
         # Do something with the result if needed
 
 if __name__ == "__main__":
-    parseFiles('extracted_bull_data')
+    print(parseBullFile2('extracted_bull_data/gfswave.46222.bull')['data'][120])
