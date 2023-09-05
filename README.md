@@ -54,7 +54,7 @@
 - [ ] Train crowd prediction model. 
 - [ ] Train swell prediction model. 
 - [x] Update root README for developer setup. 
-- [ ] Add cam URL dictionary to .env.
+- [x] Add cam URL dictionary to .env.
 - [ ] Adding data for every spot appears to not work on AWS ECS. Figure out a different way.
 
 ## TODO (Frontend)
@@ -71,4 +71,4 @@
 - [ ] Find a way to create custom scroll bar for day forecasts.
 - [ ] Set minimum of tide chart to -1.5 OR to the calculated minimum of all the possible datapoints (As was the height of swell chart).
 - [ ] Make mobile Compatible
-- [ ] Box that shows current tide is not centering text vertically. 
+- [x] Box that shows current tide is not centering text vertically. 
