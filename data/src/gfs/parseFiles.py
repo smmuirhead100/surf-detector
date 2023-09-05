@@ -25,6 +25,7 @@ def parseBullFile2(file):
     # Initialize the return object
     returnObject = {}
     returnObject['data'] = []
+    returnObject['buoyId'] = buoyId
 
     # Skip lines until reaching the data rows
     plus = 0
@@ -93,6 +94,9 @@ def parseFiles(folder_path):
         file_path = os.path.join(folder_path, bull_file)
         result.append(parseBullFile2(file_path))
         # Do something with the result if needed
+    return result
 
 if __name__ == "__main__":
-    print(parseBullFile2('extracted_bull_data/gfswave.46222.bull')['data'][120])
+    result = parseFiles('extracted_bull_data')
+    res = [i for i in result if i['buoyId'] == '46222']
+    print(res)
