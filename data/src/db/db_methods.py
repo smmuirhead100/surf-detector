@@ -182,7 +182,7 @@ class Database:
             print("Dropped table " + tableName)
             return True
         
-    # Custom query!
+    # Custom query that returns something!
     def customQueryFetch(self, query):
         with self.conn.cursor() as cur:
             cur.execute(query)
