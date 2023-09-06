@@ -1,5 +1,5 @@
 import './style/dropdown.css'
-import React, { useState } from 'react';
+import { useState } from 'react';
 import caret from '../../assets/caret-down-solid.svg' 
 
 export default function Dropdown({question, hiddenText}) {
