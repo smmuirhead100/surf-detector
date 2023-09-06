@@ -1,0 +1,56 @@
+.contact--wrapper {
+    display: grid;
+    background-color: white;
+}
+
+.contact--logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+}
+
+.contact--logo img{
+    width: 5rem;
+}
+
+.bold--header {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    max-width: 40%;
+    font-size: 30px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact--cards--wrapper {
+    display: flex; /* Use flexbox to arrange cards in a row */
+    flex-direction: row;
+    justify-content: space-around; /* Space them evenly on the row */
+    max-width: 100%; /* Set a maximum width for the container */
+    margin: 0 auto;
+}
+
+.contact--questions {
+    display: grid;
+    justify-self: center;
+}
+
+.contact--questions--header{
+   margin: 10px;
+   margin-bottom: 2px;
+}
+
+.dropdown--wrapper {
+    margin: 10px;
+    margin-top: 5px;
+    padding: 20px;
+    padding-top: 5px;
+}
+
+.other--questions {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}

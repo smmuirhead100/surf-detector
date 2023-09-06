@@ -104,6 +104,12 @@ export default function GeneralNavbar(props) {
         window.location.href = 'https://github.com/smmuirhead100/surf-detector';
     }
 
+    function handleContactClick() {
+        setSpotsOpen(false);
+        setCamsOpen(false);
+        navigate('/contact');
+    }
+
     function handleLeave(){
         setSpotsOpen(false)
         setCamsOpen(false)
@@ -205,7 +211,7 @@ export default function GeneralNavbar(props) {
                     About
                 </li>
 
-                <li className='navbar--unselected--item'>
+                <li className='navbar--unselected--item' onClick={handleContactClick}>
                     <img src={contactIconBlack} alt='Contact Icon'/>
                     Contact
                 </li>

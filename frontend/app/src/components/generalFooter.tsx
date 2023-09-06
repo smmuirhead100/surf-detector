@@ -7,12 +7,16 @@ export default function GeneralFooter() {
     function handleClick(e) {
         navigate(`/${e.target.innerHTML}`)
     }
+
+    function handleContributeClick() {
+        window.location.href = 'https://github.com/smmuirhead100/surf-detector';
+    }
     
     return (
         <div className="footer--container">
             <div onClick={handleClick}>About</div>
             <div onClick={handleClick}>Contact</div>
-            <div>Contribute</div>
+            <div onClick={handleContributeClick}>Contribute</div>
         </div>
     )
 }
