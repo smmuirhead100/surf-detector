@@ -151,7 +151,6 @@ sniffio==1.3.0
 sortedcontainers==2.4.0
 sqlparse==0.4.4
 supervision==0.11.1
-surfpy @ file:///Users/seanmuirhead/Desktop/test/surfpy
 tensorboard==2.12.3
 tensorboard-data-server==0.7.1
 tensorflow==2.12.0
