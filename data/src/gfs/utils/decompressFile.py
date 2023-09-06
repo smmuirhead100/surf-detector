@@ -1,7 +1,7 @@
 import tarfile
 import gzip
 
-def decompressFile():
+def decompressFile(file_name, out_file):
     # Extract data from a tarball archive
     def extract_tarball(file_path, destination_folder):
         with tarfile.open(file_path, 'r') as tar:
@@ -14,7 +14,4 @@ def decompressFile():
                 out_file.write(gz.read())
 
     # Example usage
-    extract_tarball('gfswave.t06z.bull_tar', 'extracted_bull_data/')
-
-if __name__ == "__main__":
-    decompressFile()
+    extract_tarball(file_name, out_file)
