@@ -1,4 +1,5 @@
 import requests
+import pytz
 from datetime import datetime, timedelta
 
 class TideStation(): 
@@ -6,7 +7,18 @@ class TideStation():
     def __init__(self, stationId):
         self.BASE_URL = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter"
         self.stationId = stationId
-        self.begin_date = datetime.now().date()
+        
+        # Get the current UTC time
+        utc_now = datetime.utcnow()
+        
+        # Create a timezone with the specific offset (7 hours behind)
+        tz = pytz.timezone('Etc/GMT+7')
+        
+        # Convert the UTC time to the desired time zone
+        local_now = utc_now.replace(tzinfo=pytz.utc).astimezone(tz)
+        
+        # Set begin_date and end_date using local time
+        self.begin_date = local_now.date()
         self.end_date = self.begin_date + timedelta(days=20)
         
     def fetch_tide_data(self):
