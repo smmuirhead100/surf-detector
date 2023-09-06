@@ -93,9 +93,21 @@ export default function GeneralNavbar(props) {
     }
 
     function handleAboutClick() {
+        setSpotsOpen(false);
+        setCamsOpen(false);
+        navigate('/about');
+    }
+
+    function handleContributeClick() {
         setSpotsOpen(false); 
         setCamsOpen(false);  
-        navigate('/about');
+        window.location.href = 'https://github.com/smmuirhead100/surf-detector';
+    }
+
+    function handleContactClick() {
+        setSpotsOpen(false);
+        setCamsOpen(false);
+        navigate('/contact');
     }
 
     function handleLeave(){
@@ -199,12 +211,12 @@ export default function GeneralNavbar(props) {
                     About
                 </li>
 
-                <li className='navbar--unselected--item'>
+                <li className='navbar--unselected--item' onClick={handleContactClick}>
                     <img src={contactIconBlack} alt='Contact Icon'/>
                     Contact
                 </li>
 
-                <li className='navbar--unselected--item'>
+                <li className='navbar--unselected--item' onClick={(handleContributeClick)}>
                     <img src={githubIconBlack} alt='Github Icon'/>
                     Contribute
                 </li>

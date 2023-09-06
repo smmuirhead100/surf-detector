@@ -1,0 +1,32 @@
+.dropdown--container {
+    text-align: center;
+    margin-top: 0px;
+  }
+
+.dropdown--question {
+    font-weight: bold;
+}
+  
+.dropdown--button {
+background-color: white;
+border: none;
+cursor: pointer;
+}
+
+.dropdown--button img {
+width: 20px;
+height: 20px;
+}
+
+.dropdown--hidden--text {
+display: block;
+position: absolute;
+left: 20%;
+background-color: white;
+padding: 20px;
+z-index: 1;
+text-align: left;
+}
+
+
+ 
