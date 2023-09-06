@@ -2,16 +2,21 @@ import time
 from datetime import datetime, timedelta
 
 def beginning_of_today_unix():
-    # Get the current UTC time
-    current_utc_time = datetime.utcnow()
+    # Your offset from GMT in hours. E.g., -7 for GMT-7
+    offset_hours = -7
+    
+    # Current time in GMT
+    current_gmt_time = datetime.utcfromtimestamp(time.time())
+    
+    # Convert to local time
+    local_time = current_gmt_time + timedelta(hours=offset_hours)
+    
+    # Truncate to start of day
+    start_of_local_day = local_time.replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    # Convert back to UNIX timestamp
+    start_of_local_day_unix = (start_of_local_day - datetime(1970, 1, 1)).total_seconds() - offset_hours * 3600
+    
+    return int(start_of_local_day_unix)
 
-    # Calculate the time difference for PST (8 hours behind UTC)
-    pst_time_difference = timedelta(hours=8)
-
-    # Calculate the beginning of today in PST
-    beginning_of_today_pst = datetime(current_utc_time.year, current_utc_time.month, current_utc_time.day) - pst_time_difference
-
-    # Convert the datetime object to a Unix timestamp
-    beginning_of_today_pst_timestamp = int(time.mktime(beginning_of_today_pst.timetuple()))
-
-    return beginning_of_today_pst_timestamp
+print(beginning_of_today_unix())

@@ -60,7 +60,7 @@ def get_tide_data():
 @application.route("/wave", methods=['GET'])
 def waves():
      # Calculate the beginning of today in the desired timezone (7 hours behind UTC)
-    beginning_of_today_timestamp = beginning_of_today_unix() + (3600 * 7)
+    beginning_of_today_timestamp = beginning_of_today_unix()
     # Helper function to parse the swell string into a dictionary
     def parse_swell(swell_str: str):
         # Assuming swell_str is in the format: "(2,3,0,f,\"Thigh to waist\",\"(1.44357,2.42782)\")"
@@ -111,7 +111,7 @@ def waves():
 @application.route("/wind", methods=['GET'])
 def get_wind_data():
     # Calculate the beginning of today in the desired timezone (7 hours behind UTC)
-    beginning_of_today = beginning_of_today_unix() + (3600 * 7)
+    beginning_of_today = beginning_of_today_unix()
     if 'spot' in request.args:
         spot_id = spotDict[str(request.args['spot'])]
         clause = f"SELECT * FROM wind WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
@@ -136,7 +136,7 @@ def get_wind_data():
 
 @application.route("/weather", methods=['GET'])
 def get_weather_data():
-    beginning_of_today = beginning_of_today_unix() + (3600 * 7)
+    beginning_of_today = beginning_of_today_unix()
     if 'spot' in request.args:
         spot_id = spotDict[str(request.args['spot'])]
         clause = f"SELECT * FROM weather WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
@@ -162,7 +162,7 @@ def get_weather_data():
 
 @application.route("/rating", methods=['GET'])
 def get_rating_data():
-    beginning_of_today = beginning_of_today_unix() + (3600 * 7)
+    beginning_of_today = beginning_of_today_unix()
     if 'spot' in request.args:
         spot_id = spotDict[str(request.args['spot'])]
         clause = f"SELECT * FROM rating WHERE timestamp > {beginning_of_today} AND spotid = '{spot_id}' ORDER BY timestamp;"
