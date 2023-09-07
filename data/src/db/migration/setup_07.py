@@ -2,25 +2,25 @@ import sys
 sys.path.append('../')
 from db_methods import Database
 
-db = Database('local')
+db = Database('supabase')
 
 db.customQuery("""
-DROP SCHEMA IF EXISTS historical_buoy CASCADE;
+DROP SCHEMA IF EXISTS gfs_stations CASCADE;
 
-CREATE SCHEMA IF NOT EXISTS historical_buoy;
+CREATE SCHEMA IF NOT EXISTS gfs_stations;
 
-SET search_path TO historical_buoy, public;
+SET search_path TO gfs_stations, public;
 
-CREATE TABLE IF NOT EXISTS historical_buoy.buoy (
+CREATE TABLE IF NOT EXISTS gfs_stations.buoy (
     id SERIAL PRIMARY KEY,
     timestamp NUMERIC,
     buoyid TEXT,
     UNIQUE (timestamp, buoyid)
 );
 
-CREATE TABLE IF NOT EXISTS historical_buoy.swell (
+CREATE TABLE IF NOT EXISTS gfs_stations.swell (
     id SERIAL PRIMARY KEY,
-    main_id INT REFERENCES historical_buoy.buoy(id),
+    main_id INT REFERENCES gfs_stations.buoy(id),
     height DECIMAL,
     period DECIMAL,
     direction DECIMAL
