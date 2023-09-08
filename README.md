@@ -68,7 +68,7 @@
 - [x] Landing Page
 - [ ] Supabase confirmation link page.
 - [x] Fix bug where swell chart renders multiple times. Usually occurs when spot is spam clicked.
-- [ ] Find a way to create custom scroll bar for day forecasts.
+- [x] Find a way to create custom scroll bar for day forecasts.
 - [ ] Set minimum of tide chart to -1.5 OR to the calculated minimum of all the possible datapoints (As was the height of swell chart).
 - [ ] Make mobile Compatible
 - [x] Box that shows current tide is not centering text vertically. 
