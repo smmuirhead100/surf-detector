@@ -39,8 +39,8 @@ export default function DayForecast(props: any) {
     }
 
     return (
-        <div className="flex flex-wrap p-3">
-            <div className="flex flex-col">
+        <div className="flex flex-wrap p-3 border-solid border-2 border-black">
+            <div className="flex flex-col lg:flex-1">
                 <div className="text-2xl text-gray-600">Forecast</div>
                 <div className="text-gray-400">{props.currDay}</div>
                 <div className="flex">

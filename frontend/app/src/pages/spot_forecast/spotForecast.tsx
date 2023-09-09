@@ -126,7 +126,7 @@ export default function SpotForecast() {
     return (
         <div className="w-screen">
             <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
-            <div className="flex flex-col gap-5">s
+            <div className="flex flex-col gap-5">
                 <SpotHeader spot={spot} />
                 <div className='flex mx-3 p-1 rounded-lg sticky top-1 bg-white drop-shadow-lg z-10'>
                     <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay} windData={windData} currTide={currTide} currTime={currTime} changeCurrTime={changeCurrTime}/>
@@ -135,13 +135,13 @@ export default function SpotForecast() {
                     <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
                 <div className='flex flex-wrap justify-center'>
-                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg'>
+                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg max-w-md md:w-screen'>
                         <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
-                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg w-fit'>
+                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg w-fit md:w-screen max-w-lg'>
                         <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} currWind={currWind} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
-                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg w-fit'>
+                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg w-fit md:w-screen max-w-md'>
                         <LiveCam path={camPath} />
                     </div>
                 </div>
