@@ -28,7 +28,7 @@ export default function TideForecast(props: any) {
 
     return (
         <div className='tide--forecast'>
-            <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#A8A6A7'}}>Tide</div>
+            <div className="text-4xl">Tide</div>
             <div className='info'>
                 <InfoBox title={convertTime(time)} content={<div> {tide} feet</div>}/>
             </div>

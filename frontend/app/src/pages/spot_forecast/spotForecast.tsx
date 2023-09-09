@@ -128,14 +128,14 @@ export default function SpotForecast() {
             <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
             <div className="flex flex-col gap-5">s
                 <SpotHeader spot={spot} />
-                <div className='border-solid border-2 border-black flex mx-3'>
+                <div className='flex mx-3 p-1 rounded-lg sticky top-1 bg-white drop-shadow-lg z-10'>
                     <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay} windData={windData} currTide={currTide} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
-                <div className='border-solid border-2 border-black m-3'>
+                <div className='mx-3 p-1 rounded-lg bg-white drop-shadow-lg'>
                     <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
-                <div className='hflex flex-wrap'>
-                    <div className='border-solid border-2 border-black m-3'>
+                <div className='mx-3 p-1 rounded-lg bg-white drop-shadow-lg'>
+                    <div className=''>
                         <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
                     <div className='border-solid border-2 border-black m-3'>
