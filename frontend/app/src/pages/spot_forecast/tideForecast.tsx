@@ -27,15 +27,15 @@ export default function TideForecast(props: any) {
     
 
     return (
-        <div className='tide--forecast'>
-            <div className="text-4xl">Tide</div>
+        <div className='flex flex-col p-3'>
+            <div className="text-2xl text-gray-600">Tide</div>
             <div className='info'>
                 <InfoBox title={convertTime(time)} content={<div> {tide} feet</div>}/>
             </div>
-          {props.spot && props.minTimestamp && props.maxTimestamp && props.data && props.spot ?
+            {props.spot && props.minTimestamp && props.maxTimestamp && props.data && props.spot ?
                 <TideChart spot={props.spot} changeTide={changeTide} minTimestamp={props.minTimestamp} maxTimestamp={props.maxTimestamp} data={props.data} changeTime={changeTime}/> :
                 <p>loading</p>
-        }
+             }
       </div>
     )
 }
