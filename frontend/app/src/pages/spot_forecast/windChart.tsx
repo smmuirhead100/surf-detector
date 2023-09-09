@@ -108,7 +108,7 @@ const WindChart = (props: any) => {
         ],
       }
       return (
-        <div className='tide--chart'>
+        <div className='-translate-x-5'>
           {isLoading ? <p>Loading...</p> : <Line options={options} data={data} />}
         </div>
       );

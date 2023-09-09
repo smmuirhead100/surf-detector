@@ -134,14 +134,14 @@ export default function SpotForecast() {
                 <div className='mx-3 p-1 rounded-lg bg-white drop-shadow-lg'>
                     <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
-                <div className='mx-3 p-1 rounded-lg bg-white drop-shadow-lg'>
-                    <div className=''>
+                <div className='flex flex-wrap justify-center'>
+                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg'>
                         <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
-                    <div className='border-solid border-2 border-black m-3'>
+                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg w-fit'>
                         <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} currWind={currWind} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
-                    <div className='border-solid border-2 border-black m-3'>
+                    <div className=' m-3'>
                         <LiveCam path={camPath} />
                     </div>
                 </div>

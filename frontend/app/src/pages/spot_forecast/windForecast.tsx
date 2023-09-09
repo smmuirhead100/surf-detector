@@ -28,15 +28,15 @@ export default function WindForecast(props: any) {
                         <div style={{ fontSize: '1.5rem', fontWeight: 'normal'}}>{wind.directionRelation}</div>
                     </div>
     return (
-        <div className='tide--forecast'>
-            <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#A8A6A7'}}>Wind</div>
+        <div className='flex flex-col p-3'>
+            <div className="text-2xl text-gray-600">Wind</div>
             <div className='info'>
                 <InfoBox title={convertTime(time)} content={display}/>
             </div>
-          {props.spot && props.minTimestamp && props.maxTimestamp && props.data && props.spot ?
+            {props.spot && props.minTimestamp && props.maxTimestamp && props.data && props.spot ?
                 <WindChart spot={props.spot} changeWind={changeWind} minTimestamp={props.minTimestamp} maxTimestamp={props.maxTimestamp} data={props.data} changeTime={changeTime}/> :
                 <p>loading</p>
-        }
+            }
       </div>
     )
 }

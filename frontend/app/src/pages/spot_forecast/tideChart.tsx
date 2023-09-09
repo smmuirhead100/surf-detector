@@ -49,7 +49,7 @@ const TideChart = (props: any) => {
             display: false, // Hide the x-axis
           },
           y: {
-            min: -1.5,
+            min: -2.0,
             grid: {
               display: true
             },
@@ -107,7 +107,7 @@ const TideChart = (props: any) => {
         ],
       }
       return (
-        <div className='border-solid border-2 m-0 p-0'>
+        <div className='-translate-x-5'>
           {isLoading ? <p>Loading...</p> : <Line options={options} data={data} />}
         </div>
       );
