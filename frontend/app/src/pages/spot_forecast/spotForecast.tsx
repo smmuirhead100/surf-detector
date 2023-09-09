@@ -141,7 +141,7 @@ export default function SpotForecast() {
                     <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg w-fit'>
                         <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} currWind={currWind} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
-                    <div className=' m-3'>
+                    <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg w-fit'>
                         <LiveCam path={camPath} />
                     </div>
                 </div>

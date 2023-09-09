@@ -7,7 +7,7 @@ export default function Stream(props: any) {
   const playerRef = useRef<HTMLVideoElement>(null);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="relative my-2">
       <HlsPlayer
         src={hlsStreamUrl}
         autoPlay={true}

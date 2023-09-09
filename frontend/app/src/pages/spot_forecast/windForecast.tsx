@@ -20,12 +20,12 @@ export default function WindForecast(props: any) {
         setWind(w);
     }
     
-    const display = <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                        <div style={{ display: 'flex', alignItems: 'center'}}>
-                            <img src={windArrow} style={{ width: '3rem', padding: '5px', borderRadius: '2rem', transform: `rotate(${rotationAngle}deg)`}}/>
+    const display = <div className="flex flex-col items-center">
+                        <div className="flex items-center">
+                            <img src={windArrow} className="w-7" style={{ transform: `rotate(${rotationAngle}deg)`}}/>
                             {wind.speed} mph
                         </div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 'normal'}}>{wind.directionRelation}</div>
+                        <div className="text-10">{wind.directionRelation}</div>
                     </div>
     return (
         <div className='flex flex-col p-3'>
