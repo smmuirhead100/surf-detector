@@ -124,24 +124,24 @@ export default function SpotForecast() {
     }
 
     return (
-        <div className="spot--forecast">
+        <div className="w-screen">
             <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
-            <div className="content">
+            <div className="flex flex-col gap-5">s
                 <SpotHeader spot={spot} />
-                <div className='hero--sticky'>
+                <div className='border-solid border-2 border-black flex mx-3'>
                     <ForecastDays waveData={waveData} ratingData={ratingData} changeCurrDay={changeCurrDay} windData={windData} currTide={currTide} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
-                <div className='hero'>
+                <div className='border-solid border-2 border-black m-3'>
                     <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
-                <div className='hero--small--container'>
-                    <div className='hero--small'>
+                <div className='hflex flex-wrap'>
+                    <div className='border-solid border-2 border-black m-3'>
                         <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
-                    <div className='hero--small'>
+                    <div className='border-solid border-2 border-black m-3'>
                         <WindForecast spot={spot} handleWind={handleWind} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={windData} currWind={currWind} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
-                    <div className='hero--small'>
+                    <div className='border-solid border-2 border-black m-3'>
                         <LiveCam path={camPath} />
                     </div>
                 </div>

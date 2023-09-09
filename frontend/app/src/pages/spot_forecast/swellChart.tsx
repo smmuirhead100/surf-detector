@@ -73,7 +73,7 @@ export default function SwellChart(props: any) {
           },
           borderWidth: (context) => {
             const index = context.dataIndex;
-            return index === dataIndex ? '4' : '0';
+            return index === dataIndex ? '2' : '0';
           },
           
         }

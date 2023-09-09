@@ -2,8 +2,6 @@ import './style/generalNavbar.css'
 import logo from '../../assets/logo.svg'
 import spotsIconBlack from '../../assets/spotsIconBlack.svg'
 import spotsIconWhite from '../../assets/spotsIconWhite.svg'
-import cameraIconBlack from '../../assets/cameraIconBlack.svg'
-import cameraIconWhite from '../../assets/cameraIconWhite.svg'
 import contactIconBlack from '../../assets/contactIconBlack.svg'
 import aboutIconBlack from '../../assets/aboutIconBlack.svg'
 import githubIconBlack from '../../assets/githubIcon.png'
@@ -16,7 +14,6 @@ import capitalizeAfterUnderscore from '../../utils/capitalizeAfterUnderscore'
 
 export default function GeneralNavbar(props) {
     const [spotsOpen, setSpotsOpen] = useState(false)
-    const [camsOpen, setCamsOpen] = useState(false)
     const [spots, setSpots] = useState([])
     const [dropdownX, setDropdownX] = useState(null)
     const [dropdownY, setDropdownY] = useState(null)
@@ -24,32 +21,7 @@ export default function GeneralNavbar(props) {
     const [isMobile, setIsMobile] = useState(false)
     const signOut = useAuth()['signOut']
     const navigate = useNavigate()
-
-    useEffect(() => {
-        function handleResize() {
-          setWindowWidth(window.innerWidth);
-        }
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-      }, [windowWidth]);
-
-    useEffect(() => {
-        const handleWindowResize = () => {
-            setCamsOpen(false);
-            setSpotsOpen(false);
-        };
-        
-        window.addEventListener('resize', handleWindowResize);
     
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-    useEffect(() => {
-        console.log(windowWidth)
-        windowWidth < 770 ? setIsMobile(true) : setIsMobile(false)
-    }, [windowWidth])
-
     useEffect(() => {
         getSpots()
         .then(data => setSpots(data))
@@ -77,7 +49,6 @@ export default function GeneralNavbar(props) {
     function handleSpotsClick(e){
         setDropdownX(e.currentTarget.getBoundingClientRect().left)
         setDropdownY(e.currentTarget.getBoundingClientRect().bottom)
-        setCamsOpen(false)
         setSpotsOpen(prev => !prev)
     }
 
@@ -85,97 +56,35 @@ export default function GeneralNavbar(props) {
         props.changeSpot(revertToUnderscore(e.target.innerHTML))
     }
 
-    function handleCamsClick(e){
-        setDropdownX(e.currentTarget.getBoundingClientRect().left)
-        setDropdownY(e.currentTarget.getBoundingClientRect().bottom)
-        setSpotsOpen(false)
-        setCamsOpen(prev => !prev)
-    }
-
     function handleAboutClick() {
         setSpotsOpen(false);
-        setCamsOpen(false);
         navigate('/about');
     }
 
     function handleContributeClick() {
         setSpotsOpen(false); 
-        setCamsOpen(false);  
         window.location.href = 'https://github.com/smmuirhead100/surf-detector';
     }
 
     function handleContactClick() {
         setSpotsOpen(false);
-        setCamsOpen(false);
         navigate('/contact');
     }
 
     function handleLeave(){
         setSpotsOpen(false)
-        setCamsOpen(false)
     }
 
     return ( 
         <>
-        {isMobile ? 
-        <div className="general--navbar--mobile">
-            <div className="general--navbar--logo--mobile">
-                <img src={logo} alt="logo"/>
-            </div>
-
-            <ul className="navbar--list--mobile">
-                <li className={spotsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onMouseEnter={handleSpotsClick} onMouseLeave={handleLeave}>
-                    {spotsOpen ? 
-                        <img src={spotsIconWhite} alt='Spots Icon'/> 
-                        : 
-                        <img src={spotsIconBlack} alt='Spots Icon'/>}
-                    Spots
-                    {spotsOpen ?                                        // Render Spots if is open
-                    <div className='navbar--dropdown--spots' style={{ top: `${dropdownY}px`, left: `${dropdownX}px`, color: 'black'}}>
-                        {spots.map((spot) => (
-                            spot == capitalizeAfterUnderscore(props.currSpot) ? 
-                            <li onClick={handleSpotClick} className='selected--spot'>{spot}</li> :
-                            <li onClick={handleSpotClick}>{spot}</li>
-                        ))}
-                    </div> : null
-                }
-                </li>
-                
-                <li className={camsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onMouseEnter={handleCamsClick} onMouseLeave={handleLeave}>
-                    {camsOpen ? 
-                        <img src={cameraIconWhite} alt='Camera Icon'/>
-                        :
-                        <img src={cameraIconBlack} alt='Camera Icon'/>
-                        }
-                    Cams
-                    {camsOpen ?                                        // Render Cams if is open
-                    <div className='navbar--dropdown--cams' style={{ top: `${dropdownY}px`, left: `${dropdownX}px`, color: 'black'}}>
-                        <li>Coming soon!</li>
-                    </div> : null
-                }
-                </li>
-
-            </ul>
-
-                <div className='general--navbar--logout--mobile'>
-                    <li onClick={handleLogout}>
-                        <img src={logoutIcon} alt='Logout Icon'/>
-                        Logout
-                    </li>
-                </div>
+        <div className="flex bg-white border-solid border-b-2 border-black justify-between">
             
-
-        </div>
-        
-        : 
-
-        <div className="general--navbar">
-            <div className="general--navbar--logo">
-                <img src={logo} alt="logo"/>
+            <div className="max-w-3 flex px-4 flex-5">
+                <img src={logo} alt="logo" className="w-20"/>
             </div>
 
-            <ul className="navbar--list">
-                <li className={spotsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onMouseEnter={handleSpotsClick} onMouseLeave={handleLeave}>
+            <ul className="flex flex-1 items-center justify-start overflow-hidden">
+                <li className={spotsOpen ? 'flex cursor-default bg-black rounded-lg px-4 py-2 text-white gap-1' : 'gap-1 flex cursor-default rounded-lg px-4 py-2'} onMouseEnter={handleSpotsClick} onMouseLeave={handleLeave}>
                     {spotsOpen ? 
                         <img src={spotsIconWhite} alt='Spots Icon'/> 
                         : 
@@ -191,47 +100,30 @@ export default function GeneralNavbar(props) {
                     </div> : null
                 }
                 </li>
-                
-                <li className={camsOpen ? 'navbar--selected--item' : 'navbar--unselected--item'} onMouseEnter={handleCamsClick} onMouseLeave={handleLeave}>
-                    {camsOpen ? 
-                        <img src={cameraIconWhite} alt='Camera Icon'/>
-                        :
-                        <img src={cameraIconBlack} alt='Camera Icon'/>
-                        }
-                    Cams
-                    {camsOpen ?                                        // Render Cams if is open
-                    <div className='navbar--dropdown--cams' style={{ top: `${dropdownY}px`, left: `${dropdownX}px`, color: 'black'}}>
-                        <li>Coming soon!</li>
-                    </div> : null
-                }
-                    </li>
 
-                <li className='navbar--unselected--item' onClick={handleAboutClick}>
+                <li className='flex gap-1 cursor-default rounded-lg px-4 py-2 hover:bg-gray-200' onClick={handleAboutClick}>
                     <img src={aboutIconBlack} alt='About Icon'/>
                     About
                 </li>
 
-                <li className='navbar--unselected--item' onClick={handleContactClick}>
+                <li className='flex transform ease-in-out gap-1 cursor-default rounded-lg px-4 py-2 hover:bg-gray-200 translate-y-16 sm:translate-y-0 duration-150' onClick={handleContactClick}>
                     <img src={contactIconBlack} alt='Contact Icon'/>
                     Contact
                 </li>
 
-                <li className='navbar--unselected--item' onClick={(handleContributeClick)}>
-                    <img src={githubIconBlack} alt='Github Icon'/>
+                <li className='flex transform ease-in-out gap-1 cursor-default rounded-lg px-4 py-2 hover:bg-gray-200 translate-y-16 sm:translate-y-0 duration-150' onClick={handleContributeClick}>
+                    <img src={githubIconBlack} alt="Github Icon" className="w-auto max-h-6"/>
                     Contribute
                 </li>
             </ul>
 
-                <div className='general--navbar--logout'>
-                    <li onClick={handleLogout}>
+                <div className='flex border-solid items-center gap-2 px-3' onClick={handleLogout}>
                         <img src={logoutIcon} alt='Logout Icon'/>
-                        Logout
-                    </li>
+                        <div className="hidden md:block">Logout</div>
                 </div>
             
 
         </div>
-            }
     </>
     )
 }
