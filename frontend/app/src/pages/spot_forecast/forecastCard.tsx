@@ -13,22 +13,22 @@ export default function ForecastCard(props: any) {
 
   return props.isLoading ? 
     (
-        <div className='flex flex-col gap-5 border-solid border-2 border-black'>
+        <div className='flex flex-col px-5 lg:gap-3 border-solid border-2 rounded-md border-gray-400'>
             
             <div className='flex flex-col justify-center items-center gap-1 p-2'>
-              <div className='bg-gray-400 rounded-md w-28 text-gray-400 h-10'></div>
-              <div className='bg-gray-400 rounded-md w-10 text-gray-400 h-7'></div>
+              <div className='bg-gray-400 rounded-md w-28 text-gray-400 h-7 lg:h-7'></div>
+              <div className='bg-gray-400 rounded-md w-10 text-gray-400 h-7 lg:h-7'></div>
             </div>
             
             <div className='flex justify-evenly gap-1 p-1'>
               <div className='flex flex-col items-center gap-1'>
-                <div className='bg-gray-400 rounded-md w-12 text-gray-400 h-10'></div>
+                <div className='bg-gray-400 rounded-md w-12 text-gray-400 h-5 lg:h-7'></div>
               </div>
               <div className='flex flex-col items-center gap-1'>
-                <div className='bg-gray-400 rounded-md w-12 text-gray-400 h-10'></div>
+                <div className='bg-gray-400 rounded-md w-12 text-gray-400 h-5 lg:h-7'></div>
               </div>
               <div className='flex flex-col items-center gap-1'>
-                <div className='bg-gray-400 rounded-md w-12 text-gray-400 h-10'></div>
+                <div className='bg-gray-400 rounded-md w-12 text-gray-400 h-5 lg:h-7'></div>
               </div>
             </div>
         </div>

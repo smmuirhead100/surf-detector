@@ -13,7 +13,7 @@ export default function ForecastDays(props: any) {
             loadingCards.push(<ForecastCard data={null} isLoading={true}/>)
         }
         return (
-            <div className="flex overflow-scroll h-30">
+            <div className="flex overflow-scroll h-30 gap-5">
                 {loadingCards}
             </div>
         )
