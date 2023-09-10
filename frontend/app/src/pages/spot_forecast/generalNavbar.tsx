@@ -17,8 +17,6 @@ export default function GeneralNavbar(props) {
     const [spots, setSpots] = useState([])
     const [dropdownX, setDropdownX] = useState(null)
     const [dropdownY, setDropdownY] = useState(null)
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-    const [isMobile, setIsMobile] = useState(false)
     const signOut = useAuth()['signOut']
     const navigate = useNavigate()
     

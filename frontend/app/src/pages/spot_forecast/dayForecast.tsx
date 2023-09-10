@@ -7,24 +7,12 @@ import InfoBox from '../../components/infoBox.tsx'
 export default function DayForecast(props: any) {
     const[height, setHeight] = useState('-')
     const[rating, setRating] = useState('-')
-    const[windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     useEffect(() => {
         setRating('-')
         setHeight('-')
         props.currTime ? null : props.setCurrTime(['-'])
     }, [props.spot])
-    
-    useEffect(() => {
-        // Define a function to update the windowWidth state
-        const updateWindowWidth = () => {
-          setWindowWidth(window.innerWidth);
-        };
-        window.addEventListener('resize', updateWindowWidth);
-        return () => {
-          window.removeEventListener('resize', updateWindowWidth);
-        };
-      }, []); 
 
     function changeHeight(h) {
         return h == '-' ? setHeight(h) : setHeight(`${h} feet`)
