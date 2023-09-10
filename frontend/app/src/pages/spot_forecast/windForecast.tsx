@@ -21,11 +21,11 @@ export default function WindForecast(props: any) {
     }
     
     const display = <div className="flex flex-col items-center">
-                        <div className="flex items-center">
+                        <div className="flex items-center gap-1 lg:text-2xl">
                             <img src={windArrow} className="w-7" style={{ transform: `rotate(${rotationAngle}deg)`}}/>
                             {wind.speed} mph
                         </div>
-                        <div className="text-10">{wind.directionRelation}</div>
+                        <div className="text-10 lg:text-2xl">{wind.directionRelation}</div>
                     </div>
     return (
         <div className='flex flex-col p-3'>

@@ -31,14 +31,14 @@ export default function DayForecast(props: any) {
             <div className="flex flex-col lg:flex-1">
                 <div className="text-2xl text-gray-600 lg:text-4xl">Forecast</div>
                 <div className="text-gray-400">{props.currDay}</div>
-                <div className="flex">
+                <div className="flex lg:h-80">
                     <SwellChart spot={props.spot} data={props.data} ratingData={props.ratingData} minTimestamp={props.minTimestamp} maxTimestamp={props.maxTimestamp} changeHeight={changeHeight} changeRating={changeRating} changetime={changeTime}/>
                 </div>
             </div>
             <div className="flex flex-wrap">
-                <InfoBox title="Height" content={<div style={{ color: 'black'}}>{height}</div>}/>
-                <InfoBox title="Conditions" content={<div>{rating}</div>}/>
-                <InfoBox title="Time" content={<div>{convertTime(props.currTime[0])}</div>}/>
+                <InfoBox title="Height" content={<div className="lg:text-2xl" style={{ color: 'black'}}>{height}</div>}/>
+                <InfoBox title="Conditions" content={<div className="lg:text-2xl">{rating}</div>}/>
+                <InfoBox title="Time" content={<div className="lg:text-2xl">{convertTime(props.currTime[0])}</div>}/>
             </div>
         </div>
     )

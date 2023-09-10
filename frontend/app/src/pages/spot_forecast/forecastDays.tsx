@@ -62,7 +62,7 @@ export default function ForecastDays(props: any) {
     }, []);
 
     return (
-        <div className="flex overflow-scroll gap-3">
+        <div className="flex overflow-scroll gap-3 p-3">
             {cards}
         </div>
     )

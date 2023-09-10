@@ -75,14 +75,14 @@ export default function GeneralNavbar(props) {
 
     return ( 
         <>
-        <div className="flex bg-white border-solid border-b-2 border-black justify-between">
+        <div className="flex bg-gray-100 border-b-solid border-b-2 border-b-black justify-between">
             
             <div className="max-w-3 flex px-4 flex-5">
-                <img src={logo} alt="logo" className="w-20"/>
+                <img src={logo} alt="logo" className="w-14 sm:w-20"/>
             </div>
 
-            <ul className="flex flex-1 items-center justify-start overflow-hidden">
-                <li className={spotsOpen ? 'flex cursor-default bg-black rounded-lg px-4 py-2 text-white gap-1' : 'gap-1 flex cursor-default rounded-lg px-4 py-2'} onMouseEnter={handleSpotsClick} onMouseLeave={handleLeave}>
+            <ul className="flex flex-1 items-center overflow-hidden justify-center sm:justify-start">
+                <li className={spotsOpen ? 'text-sm flex cursor-default bg-black rounded-lg px-4 py-2 text-white gap-1 items-center' : 'items-center text-sm gap-1 flex cursor-default rounded-lg px-4 py-2'} onMouseEnter={handleSpotsClick} onMouseLeave={handleLeave}>
                     {spotsOpen ? 
                         <img src={spotsIconWhite} alt='Spots Icon'/> 
                         : 
@@ -99,19 +99,19 @@ export default function GeneralNavbar(props) {
                 }
                 </li>
 
-                <li className='flex gap-1 cursor-default rounded-lg px-4 py-2 hover:bg-gray-200' onClick={handleAboutClick}>
+                <li className='flex items-center gap-1 cursor-default rounded-lg text-sm px-4 py-2 hover:bg-gray-200' onClick={handleAboutClick}>
                     <img src={aboutIconBlack} alt='About Icon'/>
-                    About
+                    <div>About</div>
                 </li>
 
-                <li className='flex transform ease-in-out gap-1 cursor-default rounded-lg px-4 py-2 hover:bg-gray-200 translate-y-16 sm:translate-y-0 duration-150' onClick={handleContactClick}>
+                <li className='items-center sm:flex transform ease-in-out gap-1 text-sm hidden lg:text-md cursor-default rounded-lg px-4 py-2 hover:bg-gray-200 translate-y-16 sm:translate-y-0 duration-150' onClick={handleContactClick}>
                     <img src={contactIconBlack} alt='Contact Icon'/>
-                    Contact
+                    <div>Contact</div>
                 </li>
 
-                <li className='flex transform ease-in-out gap-1 cursor-default rounded-lg px-4 py-2 hover:bg-gray-200 translate-y-16 sm:translate-y-0 duration-150' onClick={handleContributeClick}>
+                <li className='hidden items-center sm:flex transform ease-in-out gap-1 cursor-default rounded-lg px-4 py-2 hover:bg-gray-200 translate-y-16 sm:translate-y-0 duration-150' onClick={handleContributeClick}>
                     <img src={githubIconBlack} alt="Github Icon" className="w-auto max-h-6"/>
-                    Contribute
+                    <div>Contribute</div>
                 </li>
             </ul>
 

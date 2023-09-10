@@ -124,7 +124,7 @@ export default function SpotForecast() {
     }
 
     return (
-        <div className="w-screen">
+        <div className="w-screen bg-gray-100 px-5">
             <GeneralNavbar changeSpot={changeSpot} currSpot={spot}/>
             <div className="flex flex-col gap-5">
                 <SpotHeader spot={spot} />
