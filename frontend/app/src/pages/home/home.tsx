@@ -40,17 +40,17 @@ export default function Home() {
     } else {
         return (
             <div>
-            <div className={isMobile ? "home--wrapper--mobile" : "home--wrapper"}>
+            <div className="flex flex-col p-5" >
                 
-                <div className={isMobile ? "home--left--mobile" : "home--left"} style={{ backgroundImage: 'url(' + src + ')',  
+                <div className="flex" style={{ backgroundImage: 'url(' + src + ')',  
                                                                                             filter: blur ? "blur 20px" : "none",
                                                                                             transition: blur ? "none" : "filter 0.3s ease-out"
                                                                                         }}>
                 </div>
 
-                <div className={isMobile ? "home--right--mobile" : "home--right"}>
+                <div className={isMobile ? "flex flex-col" : "home--right"}>
 
-                    <div className="content">
+                    <div className="flex">
                         <img src={logo}/>
                         <h2>SCORE MORE BARRELS.</h2>
                     </div>
@@ -63,7 +63,7 @@ export default function Home() {
             </div>
             <HomeInfo />
 
-            <div className='general--footer--wrapper'>
+            <div className='flex'>
                 <GeneralFooter />
             </div>
             </div>
