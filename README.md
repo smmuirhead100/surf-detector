@@ -48,11 +48,12 @@
 - [x] Define db methods. 
 - [x] Add NOAA buoy data (SCRIPPS) to the db.
 - [x] Deploy scheduled tasks using AWS ECS and ECR. 
-- [ ] Grab historical NOAA and SL data to train prediction models more quickly. 
+- [x] Grab historical NOAA and SL data to train prediction models more quickly. 
 - [ ] Create AI forecast using GPT API (3 day forecast and 14 day forecast).
 - [ ] Configure data collection from bouys other than SCRIPPS.
 - [ ] Train crowd prediction model. 
-- [ ] Train swell prediction model. 
+- [x] Train height prediction model. (given actual buoy reading, predict wave height)
+- [ ] Train buoy prediction model (given gfs reading, predict actual buoy reading)
 - [x] Update root README for developer setup. 
 - [x] Add cam URL dictionary to .env.
 - [ ] Adding data for every spot appears to not work on AWS ECS. Figure out a different way.
@@ -64,11 +65,13 @@
 - [x] Style tide chart to better represent mouse hover position. 
 - [x] Add Icons to navbar.
 - [x] Update root README for developer setup. 
-- [ ] Handle Mobile Web Version for spot forecast.
+- [x] Handle Mobile Web Version for spot forecast.
 - [x] Landing Page
-- [ ] Supabase confirmation link page.
+- [ ] Supabase confirmation link page. 
 - [x] Fix bug where swell chart renders multiple times. Usually occurs when spot is spam clicked.
 - [x] Find a way to create custom scroll bar for day forecasts.
-- [ ] Set minimum of tide chart to -1.5 OR to the calculated minimum of all the possible datapoints (As was the height of swell chart).
+- [x] Set minimum of tide chart to -1.5 OR to the calculated minimum of all the possible datapoints (As was the height of swell chart).
 - [ ] Make mobile Compatible
 - [x] Box that shows current tide is not centering text vertically. 
+- [ ] Change style of nabvbar on mobile screens (design is on figma).
+- [ ] Migrate vanilla css to Tailwind (low priority).
