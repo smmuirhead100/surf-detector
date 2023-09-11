@@ -1,6 +1,8 @@
 # Open Source Surf Report
 
 ## Developer Setup (Backend)
+### Disclaimer: You're likely going to need some env variables to get things running correctly. Feel free to contact me at smmuirhead100@berkeley.edu and I'd be more than happy to help you get setup. 
+
 1. Fork the repo.
 2. Clone the forked repo:
     ```git clone git@github.com:<your_github_username>/surf-detector.git```
@@ -31,6 +33,7 @@
 
 
 ## Developer Setup (Frontend)
+### Disclaimer: You're likely going to need some env variables to get things running correctly. Feel free to contact me at smmuirhead100@berkeley.edu and I'd be more than happy to help you get setup. 
 1. Fork the repo.
 2. Clone the forked repo:
     ```git clone git@github.com:<your_github_username>/surf-detector.git```
@@ -57,6 +60,7 @@
 - [x] Update root README for developer setup. 
 - [x] Add cam URL dictionary to .env.
 - [ ] Adding data for every spot appears to not work on AWS ECS. Figure out a different way.
+- [ ] Configure a local setup that works without the need for env variables.
 
 ## TODO (Frontend)
 - [x] Add chart to represent wave height.
@@ -75,3 +79,4 @@
 - [x] Box that shows current tide is not centering text vertically. 
 - [ ] Change style of nabvbar on mobile screens (design is on figma).
 - [ ] Migrate vanilla css to Tailwind (low priority).
+- [ ] Configure a local setup that works without the need for env variables.
