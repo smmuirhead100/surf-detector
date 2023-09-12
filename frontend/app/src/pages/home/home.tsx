@@ -1,6 +1,5 @@
 import './style/home.css'
 import logo from '../../assets/logo.svg'
-import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import homeImage from '../../assets/homeImage.jpg'
 import login from '../../assets/login.svg'
