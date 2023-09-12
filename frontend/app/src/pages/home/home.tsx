@@ -33,7 +33,7 @@ export default function Home() {
     } else {
         return (
             <div className="flex flex-col">
-                <div className="flex p-2 bg-white justify-center stick top-0">
+                <div className="flex p-2 bg-white justify-center sticky top-0">
                     <div>
                         <img src={logo} className="w-10"/>
                     </div>
