@@ -9,6 +9,9 @@ export default {
       colors: {
         'twosurfblue': '#257CFF',
         'twosurflightblue': '#5BE2FF'
+      },
+      height: {
+        '1/2screen': '50vh'
       }
     },
   },
