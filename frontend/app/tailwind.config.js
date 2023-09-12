@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {},
+    colors: {
+      'twosurfblue': '#257CFF'
+    }
   },
   plugins: [],
 }
