@@ -5,14 +5,11 @@ import { useNavigate } from 'react-router-dom'
 import homeImage from '../../assets/homeImage.jpg'
 import exampleDashboard from '../../assets/exampleDashboard.png'
 import { useAuth } from '../../context/AuthProvider'
-import useProgressiveImg from '../../utils/progressiveImg'
 
 export default function Home() {
     let navigate = useNavigate()
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-    const [isMobile, setIsMobile] = useState(false)
     const auth = (useAuth()['auth'])
-    const [src, { blur }] = useProgressiveImg("homeImageLowQuality.png", "homeImage.jpg")
     
     function handleSignUp(){
         let path = '/signup'
@@ -56,7 +53,7 @@ export default function Home() {
                     <div className="border-solid border-2 border-transparent border-b-solid border-b-3 border-b-black w-1/2"></div>
                     <img src={exampleDashboard} className="width-30 my-5"/>
                     <div className="text-center px-10 text-gray-600">As an early user, we’ll give you the ability to request the addition of new spots!</div>
-                    <div className="bg-twosurfblue py-2 px-3 text-white font-bold rounded-lg hover:cursor-default" onClick={handleSignUp}>Get started</div>
+                    <div className="bg-twosurfblue py-2 px-3 text-white font-bold rounded-lg hover:cursor-default" onClick={handleSignIn}>Get started</div>
                 </div>
             </div>
     )
