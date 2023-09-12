@@ -13,7 +13,8 @@ export default function Home() {
     const [isMobile, setIsMobile] = useState(false)
     const auth = (useAuth()['auth'])
     const [src, { blur }] = useProgressiveImg("homeImageLowQuality.png", "homeImage.jpg")
-    function navigateSignUp(){
+    
+    function handleSignUp(){
         let path = '/signup'
         navigate(path)
     }
@@ -26,11 +27,6 @@ export default function Home() {
         return () => window.removeEventListener("resize", handleResize);
       }, [windowWidth]);
 
-
-    useEffect(() => {
-        windowWidth < 950 ? setIsMobile(true) : setIsMobile(false)
-    }, [windowWidth])
-
     function handleSignIn(){
         let path='/signin'
         navigate(path)
@@ -40,7 +36,7 @@ export default function Home() {
     } else {
         return (
             <div className="flex flex-col">
-                <div className="flex p-2 bg-white">
+                <div className="flex p-2 bg-white justify-center">
                     <div>
                         <img src={logo} className="w-10"/>
                     </div>
@@ -48,9 +44,9 @@ export default function Home() {
                 <div className="bg-cover bg-center bg-no-repeat h-80 flex justify-center items-center flex-col gap-6"style={{backgroundImage: `url(${homeImage})`}}>
                     <div className="flex h-fit text-2xl font-bold text-white p-1 text-opacity-90">SCORE MORE BARRELS</div>
                     <div className="flex">
-                        <div className="flex justify-between items-center w-60 p-2 bg-white bg-opacity-50 rounded-md mx-3">
-                            <div className="text-opacity-70 text-black px-2">Email</div>
-                            <div className="bg-black py-1 px-2 rounded-md text-white text-xs text-opacity-80">Sign up</div>
+                        <div className="flex justify-between items-center w-70 p-2 bg-white bg-opacity-50 rounded-md mx-3">
+                            <input type='email' className=" text-black p-1 bg-transparent placeholder:text-black placeholder:text-opacity-70 focus:outline-none" placeholder='Email'></input>
+                            <div className="bg-black py-2 px-2 rounded-md text-white text-xs text-opacity-80 hover:cursor-default" onClick={handleSignUp}>Sign up</div>
                         </div>
                     </div>
                 </div>
@@ -60,7 +56,7 @@ export default function Home() {
                     <div className="border-solid border-2 border-transparent border-b-solid border-b-3 border-b-black w-1/2"></div>
                     <img src={exampleDashboard} className="width-30 my-5"/>
                     <div className="text-center px-10 text-gray-600">As an early user, we’ll give you the ability to request the addition of new spots!</div>
-                    <div className="bg-twosurfblue p-3 text-white font-bold">Get started</div>
+                    <div className="bg-twosurfblue py-2 px-3 text-white font-bold rounded-lg hover:cursor-default" onClick={handleSignUp}>Get started</div>
                 </div>
             </div>
     )
