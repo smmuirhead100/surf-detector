@@ -41,7 +41,7 @@ export default function Home() {
                 <div className="bg-cover bg-center bg-no-repeat h-80 flex justify-center items-center flex-col gap-6"style={{backgroundImage: `url(${homeImage})`}}>
                     <div className="flex h-fit text-2xl font-bold text-white p-1 text-opacity-90">SCORE MORE BARRELS</div>
                     <div className="flex">
-                        <div className="flex justify-between items-center w-70 p-2 bg-white bg-opacity-50 rounded-md mx-3">
+                        <div className="flex justify-between items-center w-70 p-2 bg-white bg-opacity-50 rounded-md mx-3 border-transparent border-2 focus-within:border-twosurfblue">
                             <input type='email' className=" text-black p-1 bg-transparent placeholder:text-black placeholder:text-opacity-70 focus:outline-none" placeholder='Email'></input>
                             <div className="bg-black py-2 px-2 rounded-md text-white text-xs text-opacity-80 hover:cursor-default" onClick={handleSignUp}>Sign up</div>
                         </div>

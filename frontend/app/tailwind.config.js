@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'twosurfblue': '#257CFF'
+        'twosurfblue': '#257CFF',
+        'twosurflightblue': '#5BE2FF'
       }
     },
   },
