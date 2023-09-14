@@ -80,3 +80,5 @@
 - [ ] Change style of nabvbar on mobile screens (design is on figma).
 - [ ] Migrate vanilla css to Tailwind (low priority).
 - [ ] Configure a local setup that works without the need for env variables.
+- [ ] Make Home page footer work
+- [ ] Home page login on hover should be pointer
