@@ -71,7 +71,7 @@
 - [x] Update root README for developer setup. 
 - [x] Handle Mobile Web Version for spot forecast.
 - [x] Landing Page
-- [ ] Supabase confirmation link page. 
+- [x] Supabase confirmation link page. 
 - [x] Fix bug where swell chart renders multiple times. Usually occurs when spot is spam clicked.
 - [x] Find a way to create custom scroll bar for day forecasts.
 - [x] Set minimum of tide chart to -1.5 OR to the calculated minimum of all the possible datapoints (As was the height of swell chart).
