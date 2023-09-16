@@ -7,14 +7,15 @@ load_dotenv()
 sys.path.append('../../data/src/db')
 from db_methods import Database
 
-class HistoricalData:
-    def __init__(self, spotId, days, intervalHours, start, accessToken):
+class HistoricalSLData:
+    def __init__(self, spotId, days, intervalHours, start, accessToken, db='local'):
         self.spotId = spotId
         self.days = days
         self.intervalHours = intervalHours
         self.start = start
         self.accessToken = accessToken
         self.allData = []
+        self.db = Database(db)
     
     def retrieveData(self):
         url = f"{os.environ.get('BASE_URL')}spotId={self.spotId}&days={self.days}&intervalHours={self.intervalHours}&start={self.start}&cacheEnabled=true&units%5BswellHeight%5D=FT&units%5BwaveHeight%5D=FT&accesstoken={self.accessToken}"
@@ -34,22 +35,21 @@ class HistoricalData:
             return None
         
     def addToDb(self):
-        db = Database('local')
         
         try:
             for obj in self.allData:
                 timestamp = obj.get('timestamp')
                 if timestamp:
                     # Check if the timestamp already exists in the table
-                    count = db.customQueryFetch(f"SELECT COUNT(*) FROM historical_surf.surf_conditions WHERE timestamp = '{timestamp}'")
+                    count = self.db.customQueryFetch(f"SELECT COUNT(*) FROM historical_surf.surf_conditions WHERE timestamp = '{timestamp}'")
                     count = count[0][0]  # Extract the count value
                     # Insert the data into the table
                     if count == 0:
-                        db.customQuery(f"INSERT INTO historical_surf.surf_conditions (timestamp, probability, utc_offset, surf_min, surf_max, optimal_score, plus, human_relation, raw_min, raw_max, power) "
+                        self.db.customQuery(f"INSERT INTO historical_surf.surf_conditions (timestamp, probability, utc_offset, surf_min, surf_max, optimal_score, plus, human_relation, raw_min, raw_max, power) "
                                     f"VALUES ('{timestamp}', {1}, {obj['utcOffset']}, {obj['surf']['min']}, {obj['surf']['max']}, {obj['surf']['optimalScore']}, {obj['surf']['plus']}, '{obj['surf']['humanRelation']}', {obj['surf']['raw']['min']}, {obj['surf']['raw']['max']}, {obj['power']});")
                         
                 if timestamp: 
-                    count = db.customQueryFetch(f"SELECT COUNT(*) FROM historical_surf.swells WHERE timestamp = '{timestamp}'")
+                    count = self.db.customQueryFetch(f"SELECT COUNT(*) FROM historical_surf.swells WHERE timestamp = '{timestamp}'")
                     count = count[0][0]  # Extract the count value
                     
                     if count == 0:
@@ -66,7 +66,7 @@ class HistoricalData:
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:
-            db.close()
+            self.db.close()
 
         
     def collectSwellData(self):
@@ -84,7 +84,7 @@ class HistoricalData:
         return self.allData
 
 # Create an instance of HistoricalData and retrieve data
-historical_data = HistoricalData(
+historical_data = HistoricalSLData(
     spotId='5842041f4e65fad6a77088ea',
     days=16,
     intervalHours=1,
