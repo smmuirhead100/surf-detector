@@ -118,15 +118,15 @@ class GFSStationDataParser:
         return self.data
 
     def add_to_db(self):
-        db = Database('local')
         for file in self.data:
+            print(f"adding file to db")
             buoy_id = file['buoyId']
-            if buoy_id in self.stations or self.all:
+            if self.all or self.stations and buoy_id in self.stations:
                 for timepoint in file['data']:
                     timestamp = timepoint['timestamp']['unix']
                     try:
                         # Check if the timestamp and buoy combination already exists
-                        main_id = self.get_main_id_by_timestamp_buoyid(db, timestamp, buoy_id)
+                        main_id = self.get_main_id_by_timestamp_buoyid(self.db, timestamp, buoy_id)
                         if main_id:
                             for swell in timepoint['swellArray']:
                                 query_update_child = f"""
@@ -165,11 +165,11 @@ class GFSStationDataParser:
             return None
                         
     def parse_and_add_to_db(self):
-        self.retrieveFile()
+        self.retrieveFileName()
         self.parseFiles()
         self.add_to_db()
 
-    def retrieveFile(self):
+    def retrieveFileName(self):
         file_name = retrieveFile()
         if file_name:
             decompressFile(file_name, self.folder_path)
@@ -182,6 +182,6 @@ class GFSStationDataParser:
 
 #----------EXAMPLE USAGE-----------#
 # This will add all the current data for station 46222 to you local postgres instance. 
-    # test = GFSStationDataParser(stations=['46222'])
-    # test.parse_and_add_to_db()
+test = GFSStationDataParser(all=True, db="local")
+test.parse_and_add_to_db()
         
