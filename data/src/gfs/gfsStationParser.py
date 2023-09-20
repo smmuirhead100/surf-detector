@@ -182,6 +182,6 @@ class GFSStationDataParser:
 
 #----------EXAMPLE USAGE-----------#
 # This will add all the current data for station 46222 to you local postgres instance. 
-test = GFSStationDataParser(all=True, db="local")
+test = GFSStationDataParser(stations=['46222'], db="local")
 test.parse_and_add_to_db()
         
