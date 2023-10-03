@@ -134,7 +134,7 @@ export default function SpotForecast() {
                 <div className='mx-3 p-1 rounded-lg bg-white drop-shadow-lg'>
                     <DayForecast spot={spot} data={waveData} ratingData={ratingData} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} maxHeight={maxHeight} currDay={currDay} currTime={currTime} changeCurrTime={changeCurrTime}/>
                 </div>
-                <div className='flex flex-wrap justify-center'>
+                <div className='flex flex-wrap lg:justify-center justify-left'>
                     <div className='m-3 p-1 rounded-lg bg-white drop-shadow-lg max-w-md md:w-screen'>
                         <TideForecast spot={spot} handleTide={handleTide} minTimestamp={minTimestamp} maxTimestamp={maxTimestamp} data={tideData} currTime={currTime} changeCurrTime={changeCurrTime}/>
                     </div>
